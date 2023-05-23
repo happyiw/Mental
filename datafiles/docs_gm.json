@@ -1,0 +1,64 @@
+{
+	"name": "Princeoflight Avoidance Engine",
+	"output": {
+		"template": "basic",
+		"scriptPages": true,
+		"folderPages": true,
+		"outputFolder": "./docs/",
+		"templatesFolder": ""
+	},
+	"pattern": "**/*",
+	"root": "scripts",
+	"parser": {
+		"warnUnrecognizedTags": true,
+		"mergeDuplicateParams": false
+	},
+	"scripts": {
+		"markUnderscoreScriptsAsPrivate": true,
+		"ignorePrivate": true,
+		"undocumented": {
+			"ignore": true,
+			"warn": true
+		},
+		"mismatchingFunctionName": {
+			"ignore": false,
+			"warn": true
+		},
+		"noDescription": {
+			"ignore": false,
+			"warn": true
+		},
+		"undocumentedArguments": {
+			"ignore": false,
+			"warn": true
+		},
+		"mismatchingArguments": {
+			"ignore": false,
+			"warn": true
+		},
+		"noParamDescription": {
+			"ignore": false,
+			"warn": true
+		},
+		"noParamType": {
+			"ignore": false,
+			"warn": true
+		},
+		"functionSignatureInDescription": {
+			"ignore": false,
+			"warn": true
+		},
+		"noReturnDescription": {
+			"ignore": false,
+			"warn": true
+		},
+		"noReturnType": {
+			"ignore": false,
+			"warn": true
+		},
+		"duplicatedParams": {
+			"ignore": false,
+			"warn": true
+		}
+	}
+}
