@@ -5622,6 +5622,209 @@ if t&gt;4130 and t&lt;4940 and t mod 4 == 0 {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Segment 5 backup 1, current useless
+/*
+    if t&lt;4233 {
+        if s5_side==-1 {
+            edge_x1=EaseOutSine(t-4130,view_xview[0]+64,view_xview[0]+view_wview[0]/2+32,4233-4130-1);
+            edge_x2=EaseOutSine(t-4130,view_xview[0]-128,view_xview[0],4233-4130-1);//view_xview[0]
+        }
+        if s5_side==1 {
+            edge_x1=EaseOutSine(t-4130,view_xview[0]+view_wview[0]-64,view_xview[0]+view_wview[0]/2,4233-4130-1);
+            edge_x2=EaseOutSine(t-4130,view_xview[0]+view_wview[0]+128,view_xview[0]+view_wview[0],4233-4130-1);//view_xview[0]+view_wview[0]
+        }
+    }
+    if t&gt;=4233 and t&lt;4313 {
+        if s5_side==-1 {
+            edge_x1=EaseOutExpo(t-4233,view_xview[0]+view_wview[0]/2+32,view_xview[0]+64,4313-4233);
+            edge_x2=EaseOutExpo(t-4233,view_xview[0],view_xview[0]-128+32,4313-4233);//view_xview[0]
+            
+            edge_x3=EaseOutSine(t-4233,view_xview[0]+view_wview[0],view_xview[0]+view_wview[0]/2,4313-4233);
+            edge_x4=EaseOutSine(t-4233,view_xview[0]+view_wview[0]+128,view_xview[0]+view_wview[0],4313-4233);//view_xview[0]+view_wview[0]
+        }
+        if s5_side==1 {
+            edge_x1=EaseOutExpo(t-4233,view_xview[0]+view_wview[0]/2,view_xview[0]+view_wview[0]-64,4313-4233);
+            edge_x2=EaseOutExpo(t-4233,view_xview[0]+view_wview[0],view_xview[0]+view_wview[0]+128,4233-4130-1);
+            
+            edge_x3=EaseOutSine(t-4233,view_xview[0],view_xview[0]+view_wview[0]/2,4313-4233);
+            edge_x4=EaseOutSine(t-4233,view_xview[0]-128,view_xview[0],4233-4130-1);
+        }
+    }
+    if t&gt;=4313 and t&lt;4430 {
+        if s5_side==-1 {
+            edge_x1=view_xview[0]+64-EaseOutCubic(t-4313,0,32,4430-4313)
+            edge_x2=view_xview[0]-128+32-EaseOutCubic(t-4313,0,32,4430-4313)
+            
+            edge_x3=EaseOutCubic(t-4313,view_xview[0]+view_wview[0]/2,view_xview[0]+view_wview[0]-32,4430-4313);
+            edge_x4=EaseOutCubic(t-4313,view_xview[0]+view_wview[0],view_xview[0]+view_wview[0]+160,4430-4313);
+        }
+        if s5_side==1 {
+            edge_x1=view_xview[0]+view_wview[0]-64+EaseOutCubic(t-4313,0,32,4430-4313)
+            edge_x2=view_xview[0]+view_wview[0]+128+EaseOutCubic(t-4313,0,32,4430-4313)
+            
+            edge_x3=EaseOutCubic(t-4313,view_xview[0]+view_wview[0]/2,view_xview[0]+32,4430-4313);
+            edge_x4=EaseOutCubic(t-4313,view_xview[0],view_xview[0]-160,4430-4313);
+        }
+    }
+    if t&lt;4430 {
+        if t mod 3 == 0 {//repeat(2) {
+            xx=random_range(edge_x1,edge_x2)
+            var a = instance_create(xx,view_yview[0]-6,objHappy_Bullet_01);
+            a.sprite_index=sprHappy_MayuCherry;
+            a.image_xscale=random_range(0.4,0.7);
+            a.image_yscale=a.image_xscale;
+            a.direction=270+random_range(-10,10);
+            a.speed=random_range(1,6);
+            a.gravity=0.15;
+            a.tag='s5_wall'
+            xx=random_range(edge_x1,edge_x2)
+            var a2 = instance_create(xx,view_yview[0]+view_hview[0]+6,objHappy_Bullet_01);
+            a2.sprite_index=sprHappy_MayuCherry;
+            a2.image_xscale=random_range(0.4,0.7);
+            a2.image_yscale=a.image_xscale;
+            a2.direction=90+random_range(-10,10);
+            a2.speed=random_range(1,6);
+            a2.gravity=-0.15;
+            a2.tag='s5_wall'
+        }
+        if t mod 5 == 0 {
+            xx=random_range(edge_x1,edge_x2);
+            var a = instance_create(-400,-304,objHappy_Bullet_trig); 
+            a.cen_x=xx;
+            a.cen_y=view_yview[0];
+            a.dir=270+random_range(-7,7);
+            a.subtag=random_range(32,64);
+            a.sprite_index=sprHappy_WBCherry;
+            a.image_xscale=0;
+            a.image_yscale=0;
+            a.tag='s5_spawner1'
+            
+        }
+        if t mod 5 == 3 {
+            xx=random_range(edge_x1,edge_x2);
+            var a = instance_create(-400,-304,objHappy_Bullet_trig); 
+            a.cen_x=xx;
+            a.cen_y=view_yview[0]+view_hview[0];
+            a.dir=90+random_range(-7,7);
+            a.subtag=random_range(32,64);
+            a.sprite_index=sprHappy_WBCherry;
+            a.image_xscale=0;
+            a.image_yscale=0;
+            a.tag='s5_spawner2'
+        }
+        if t&gt;4233 {
+            if t mod 3 == 0 {//repeat(2) {
+                xx=random_range(edge_x3,edge_x4)
+                var a = instance_create(xx,view_yview[0]-6,objHappy_Bullet_01);
+                a.sprite_index=sprHappy_MayuCherry;
+                a.image_xscale=random_range(0.6,0.7);
+                a.image_yscale=a.image_xscale;
+                a.direction=270+random_range(-10,10);
+                a.speed=random_range(1,6);
+                a.gravity=0.15;
+                a.tag='s5_wall'
+                xx=random_range(edge_x3,edge_x4)
+                var a2 = instance_create(xx,view_yview[0]+view_hview[0]+6,objHappy_Bullet_01);
+                a2.sprite_index=sprHappy_MayuCherry;
+                a2.image_xscale=random_range(0.6,0.7);
+                a2.image_yscale=a.image_xscale;
+                a2.direction=90+random_range(-10,10);
+                a2.speed=random_range(1,6);
+                a2.gravity=-0.15;
+                a2.tag='s5_wall'
+            }
+            if t mod 5 == 0 {
+                xx=random_range(edge_x3,edge_x4);
+                var a = instance_create(-400,-304,objHappy_Bullet_trig); 
+                a.cen_x=xx;
+                a.cen_y=view_yview[0];
+                a.dir=270+random_range(-7,7);
+                a.subtag=random_range(32,64);
+                a.sprite_index=sprHappy_WBCherry;
+                a.image_xscale=0;
+                a.image_yscale=0;
+                a.tag='s5_spawner1'
+                
+            }
+            if t mod 5 == 3 {
+                xx=random_range(edge_x3,edge_x4);
+                var a = instance_create(-400,-304,objHappy_Bullet_trig); 
+                a.cen_x=xx;
+                a.cen_y=view_yview[0]+view_hview[0];
+                a.dir=90+random_range(-7,7);
+                a.subtag=random_range(32,64);
+                a.sprite_index=sprHappy_WBCherry;
+                a.image_xscale=0;
+                a.image_yscale=0;
+                a.tag='s5_spawner2'
+            }
+        }
+    }
+    with(objHappy_Bullet_trig) {
+        if tag=='s5_spawner1' or tag=='s5_spawner2' or tag=='s5_spawner3' or tag=='s5_spawner4' or tag=='s5_spawner5' {
+        
+        
+        //spawner1 and spawner2 - 90 and 270;
+        //spawner3 and spawner4 - 0 and 180;
+        //spawner5 - point_direction(x,y,400,304);
+        
+        
+        
+            if t&lt;5 {
+                len=EaseOutSine(t,0,subtag,5);
+            }
+            if t==6 {
+                if tag=='s5_spawner1' or tag=='s5_spawner2' {
+                    if tag=='s5_spawner1' { distance_to_block=point_distance(x,y,x,312); }
+                    if tag=='s5_spawner2' { distance_to_block=point_distance(x,y,x,320+40) }
+                    for (var distance=random_range(-16,16); distance&lt;distance_to_block; distance+=16) {
+                    //made it so it gets close to drawn lines but doesnt touch them
+                    
+                        var rotated_distance=distance/dsin(dir);
+                        if tag=='s5_spawner1' { flip=1; }
+                        else { flip=-1; }
+                        var rotated_line = instance_create(x-dcos(dir)*rotated_distance,y+flip*dsin(dir)*rotated_distance,objHappy_Bullet_01);
+                        rotated_line.tag='s5_fade_out';
+                        rotated_line.image_xscale=random_range(0.5,0.75);
+                        rotated_line.image_yscale=rotated_line.image_xscale;
+                        rotated_line.image_tag=rotated_line.image_xscale;
+                        rotated_line.image_alpha=image_alpha;
+                        rotated_line.killer=killer;
+                        instance_destroy();
+                    }
+                }
+            }
+        }
+    }
+    with(objHappy_Bullet_01) {
+        if tag=='s5_fade_out' {
+            if t&lt;50 {
+                image_xscale=EaseLinear(t,image_tag,0,50);
+                image_yscale=image_xscale;
+            }
+            if t==50 { instance_destroy(); }
+        }
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Segment №6: 1:41 - 1:58 (frames: 4940 - 5835)
 
 if instance_exists(objPlayer) {
@@ -6256,209 +6459,6 @@ if t&gt;5835 {
 }
 
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>///Segment 5 backup 1
-/*
-    if t&lt;4233 {
-        if s5_side==-1 {
-            edge_x1=EaseOutSine(t-4130,view_xview[0]+64,view_xview[0]+view_wview[0]/2+32,4233-4130-1);
-            edge_x2=EaseOutSine(t-4130,view_xview[0]-128,view_xview[0],4233-4130-1);//view_xview[0]
-        }
-        if s5_side==1 {
-            edge_x1=EaseOutSine(t-4130,view_xview[0]+view_wview[0]-64,view_xview[0]+view_wview[0]/2,4233-4130-1);
-            edge_x2=EaseOutSine(t-4130,view_xview[0]+view_wview[0]+128,view_xview[0]+view_wview[0],4233-4130-1);//view_xview[0]+view_wview[0]
-        }
-    }
-    if t&gt;=4233 and t&lt;4313 {
-        if s5_side==-1 {
-            edge_x1=EaseOutExpo(t-4233,view_xview[0]+view_wview[0]/2+32,view_xview[0]+64,4313-4233);
-            edge_x2=EaseOutExpo(t-4233,view_xview[0],view_xview[0]-128+32,4313-4233);//view_xview[0]
-            
-            edge_x3=EaseOutSine(t-4233,view_xview[0]+view_wview[0],view_xview[0]+view_wview[0]/2,4313-4233);
-            edge_x4=EaseOutSine(t-4233,view_xview[0]+view_wview[0]+128,view_xview[0]+view_wview[0],4313-4233);//view_xview[0]+view_wview[0]
-        }
-        if s5_side==1 {
-            edge_x1=EaseOutExpo(t-4233,view_xview[0]+view_wview[0]/2,view_xview[0]+view_wview[0]-64,4313-4233);
-            edge_x2=EaseOutExpo(t-4233,view_xview[0]+view_wview[0],view_xview[0]+view_wview[0]+128,4233-4130-1);
-            
-            edge_x3=EaseOutSine(t-4233,view_xview[0],view_xview[0]+view_wview[0]/2,4313-4233);
-            edge_x4=EaseOutSine(t-4233,view_xview[0]-128,view_xview[0],4233-4130-1);
-        }
-    }
-    if t&gt;=4313 and t&lt;4430 {
-        if s5_side==-1 {
-            edge_x1=view_xview[0]+64-EaseOutCubic(t-4313,0,32,4430-4313)
-            edge_x2=view_xview[0]-128+32-EaseOutCubic(t-4313,0,32,4430-4313)
-            
-            edge_x3=EaseOutCubic(t-4313,view_xview[0]+view_wview[0]/2,view_xview[0]+view_wview[0]-32,4430-4313);
-            edge_x4=EaseOutCubic(t-4313,view_xview[0]+view_wview[0],view_xview[0]+view_wview[0]+160,4430-4313);
-        }
-        if s5_side==1 {
-            edge_x1=view_xview[0]+view_wview[0]-64+EaseOutCubic(t-4313,0,32,4430-4313)
-            edge_x2=view_xview[0]+view_wview[0]+128+EaseOutCubic(t-4313,0,32,4430-4313)
-            
-            edge_x3=EaseOutCubic(t-4313,view_xview[0]+view_wview[0]/2,view_xview[0]+32,4430-4313);
-            edge_x4=EaseOutCubic(t-4313,view_xview[0],view_xview[0]-160,4430-4313);
-        }
-    }
-    if t&lt;4430 {
-        if t mod 3 == 0 {//repeat(2) {
-            xx=random_range(edge_x1,edge_x2)
-            var a = instance_create(xx,view_yview[0]-6,objHappy_Bullet_01);
-            a.sprite_index=sprHappy_MayuCherry;
-            a.image_xscale=random_range(0.4,0.7);
-            a.image_yscale=a.image_xscale;
-            a.direction=270+random_range(-10,10);
-            a.speed=random_range(1,6);
-            a.gravity=0.15;
-            a.tag='s5_wall'
-            xx=random_range(edge_x1,edge_x2)
-            var a2 = instance_create(xx,view_yview[0]+view_hview[0]+6,objHappy_Bullet_01);
-            a2.sprite_index=sprHappy_MayuCherry;
-            a2.image_xscale=random_range(0.4,0.7);
-            a2.image_yscale=a.image_xscale;
-            a2.direction=90+random_range(-10,10);
-            a2.speed=random_range(1,6);
-            a2.gravity=-0.15;
-            a2.tag='s5_wall'
-        }
-        if t mod 5 == 0 {
-            xx=random_range(edge_x1,edge_x2);
-            var a = instance_create(-400,-304,objHappy_Bullet_trig); 
-            a.cen_x=xx;
-            a.cen_y=view_yview[0];
-            a.dir=270+random_range(-7,7);
-            a.subtag=random_range(32,64);
-            a.sprite_index=sprHappy_WBCherry;
-            a.image_xscale=0;
-            a.image_yscale=0;
-            a.tag='s5_spawner1'
-            
-        }
-        if t mod 5 == 3 {
-            xx=random_range(edge_x1,edge_x2);
-            var a = instance_create(-400,-304,objHappy_Bullet_trig); 
-            a.cen_x=xx;
-            a.cen_y=view_yview[0]+view_hview[0];
-            a.dir=90+random_range(-7,7);
-            a.subtag=random_range(32,64);
-            a.sprite_index=sprHappy_WBCherry;
-            a.image_xscale=0;
-            a.image_yscale=0;
-            a.tag='s5_spawner2'
-        }
-        if t&gt;4233 {
-            if t mod 3 == 0 {//repeat(2) {
-                xx=random_range(edge_x3,edge_x4)
-                var a = instance_create(xx,view_yview[0]-6,objHappy_Bullet_01);
-                a.sprite_index=sprHappy_MayuCherry;
-                a.image_xscale=random_range(0.6,0.7);
-                a.image_yscale=a.image_xscale;
-                a.direction=270+random_range(-10,10);
-                a.speed=random_range(1,6);
-                a.gravity=0.15;
-                a.tag='s5_wall'
-                xx=random_range(edge_x3,edge_x4)
-                var a2 = instance_create(xx,view_yview[0]+view_hview[0]+6,objHappy_Bullet_01);
-                a2.sprite_index=sprHappy_MayuCherry;
-                a2.image_xscale=random_range(0.6,0.7);
-                a2.image_yscale=a.image_xscale;
-                a2.direction=90+random_range(-10,10);
-                a2.speed=random_range(1,6);
-                a2.gravity=-0.15;
-                a2.tag='s5_wall'
-            }
-            if t mod 5 == 0 {
-                xx=random_range(edge_x3,edge_x4);
-                var a = instance_create(-400,-304,objHappy_Bullet_trig); 
-                a.cen_x=xx;
-                a.cen_y=view_yview[0];
-                a.dir=270+random_range(-7,7);
-                a.subtag=random_range(32,64);
-                a.sprite_index=sprHappy_WBCherry;
-                a.image_xscale=0;
-                a.image_yscale=0;
-                a.tag='s5_spawner1'
-                
-            }
-            if t mod 5 == 3 {
-                xx=random_range(edge_x3,edge_x4);
-                var a = instance_create(-400,-304,objHappy_Bullet_trig); 
-                a.cen_x=xx;
-                a.cen_y=view_yview[0]+view_hview[0];
-                a.dir=90+random_range(-7,7);
-                a.subtag=random_range(32,64);
-                a.sprite_index=sprHappy_WBCherry;
-                a.image_xscale=0;
-                a.image_yscale=0;
-                a.tag='s5_spawner2'
-            }
-        }
-    }
-    with(objHappy_Bullet_trig) {
-        if tag=='s5_spawner1' or tag=='s5_spawner2' or tag=='s5_spawner3' or tag=='s5_spawner4' or tag=='s5_spawner5' {
-        
-        
-        //spawner1 and spawner2 - 90 and 270;
-        //spawner3 and spawner4 - 0 and 180;
-        //spawner5 - point_direction(x,y,400,304);
-        
-        
-        
-            if t&lt;5 {
-                len=EaseOutSine(t,0,subtag,5);
-            }
-            if t==6 {
-                if tag=='s5_spawner1' or tag=='s5_spawner2' {
-                    if tag=='s5_spawner1' { distance_to_block=point_distance(x,y,x,312); }
-                    if tag=='s5_spawner2' { distance_to_block=point_distance(x,y,x,320+40) }
-                    for (var distance=random_range(-16,16); distance&lt;distance_to_block; distance+=16) {
-                    //made it so it gets close to drawn lines but doesnt touch them
-                    
-                        var rotated_distance=distance/dsin(dir);
-                        if tag=='s5_spawner1' { flip=1; }
-                        else { flip=-1; }
-                        var rotated_line = instance_create(x-dcos(dir)*rotated_distance,y+flip*dsin(dir)*rotated_distance,objHappy_Bullet_01);
-                        rotated_line.tag='s5_fade_out';
-                        rotated_line.image_xscale=random_range(0.5,0.75);
-                        rotated_line.image_yscale=rotated_line.image_xscale;
-                        rotated_line.image_tag=rotated_line.image_xscale;
-                        rotated_line.image_alpha=image_alpha;
-                        rotated_line.killer=killer;
-                        instance_destroy();
-                    }
-                }
-            }
-        }
-    }
-    with(objHappy_Bullet_01) {
-        if tag=='s5_fade_out' {
-            if t&lt;50 {
-                image_xscale=EaseLinear(t,image_tag,0,50);
-                image_yscale=image_xscale;
-            }
-            if t==50 { instance_destroy(); }
-        }
-    }
 </string>
           </argument>
         </arguments>
