@@ -5,13 +5,13 @@ if(instance_exists(objAvoidanceMarker)) return -2; //if an avoidance is set, the
 
 switch (room)
 {
-    case rTitle:            //Add rooms here, if you have several rooms that play the same song they can be put together
+    /*case rTitle: i dont like it            //Add rooms here, if you have several rooms that play the same song they can be put together
     case rMenu:
     case rOptions:
     case rDifficultySelect:
     case rSample:                                                                                                            
         return "GuyRock";
-        
+    */    
     case rCherryBoss:
         return "Megaman";
         

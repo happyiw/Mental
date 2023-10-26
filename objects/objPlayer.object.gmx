@@ -185,7 +185,7 @@ if (killer != noone)
 
 if ((bbox_right &lt; 0 || bbox_left &gt; room_width || bbox_bottom &lt; 0 || bbox_top &gt; room_height) &amp;&amp; global.edgeDeath)
 {
-    player_kill();
+    kill_player();
 }
 
 
@@ -328,8 +328,8 @@ if (!frozen)
         player_try_jump();
     if (input_check_released(KEY.JUMP))
         player_release_jump();
-    if (input_check_pressed(KEY.SUICIDE))
-        player_kill();
+    //if (input_check_pressed(KEY.SUICIDE))
+    //    player_kill();
 }
 
 if (global.adAlign &amp;&amp; !place_free(x, y + (global.grav)) &amp;&amp; !frozen)

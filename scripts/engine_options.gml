@@ -16,8 +16,8 @@ global.menuSound = sndJump;         //Sets what sound to use for navigating the 
 
 //World
 global.startRoom = rPreAvoidance;         //Sets which room to begin with
-global.roomCaptionDef = "Anti Avoidance Engine";  //Sets default window caption (only works with the Professional version of Studio)
-global.deathMusicMode = 0;          //Sets whether or not to play death music when the player dies (0 = no death music, 1 = instantly pause current music, 2 = fade out current music)
+global.roomCaptionDef = "I wanna keep my mental";  //Sets default window caption (only works with the Professional version of Studio)
+global.deathMusicMode = 2;          //Sets whether or not to play death music when the player dies (0 = no death music, 1 = instantly pause current music, 2 = fade out current music)
 global.pauseDelayLength = 40;       //Sets the delay in frames in which the player can pause/unpause the game (can be set to 0 to disable pause delay)
 global.timeWhenDead = true;         //Sets whether or not to count the in-game timer when the player is dead
 global.timeWhenCleared = false;     //Increment the timer after the save file is considered finished
@@ -52,5 +52,6 @@ global.difficultyNames[4] = "Impossible";
 global.md5StrAdd = "Put something here"; //sets what to add to the end of md5 input string to make the save harder to mess with, can be changed to anything, should be set to something unique and hard to predict (like setting a password)
 
 //Anti Avoidance
-global.scoreVisible = true; //set whether the score is always visible, or only on the end screen
+global.scoreVisible = false; //set whether the score is always visible, or only on the end screen
+global.BLCscoreVisible = false;
 global.seeded = false; //set whether to seed the fight or not

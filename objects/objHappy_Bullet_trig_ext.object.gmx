@@ -43,10 +43,11 @@ kill=true;
 t=0;
 t_inc=1;
 
-finlen=0;    //length at it's final position, actually useless
+finlen=0;  
+findir=0;
 lendeg=0;
 tag=0;
-subtag=0;    //useless addiction to tag
+subtag=0;    
 
 cen_cen_x=0;
 cen_cen_y=0;
@@ -143,35 +144,6 @@ y=cen_y+len*sin(degtorad(dir))/deg_y;
             <string>if (!persist) {
     instance_destroy();
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/*draw_line(cen_cen_x,cen_cen_y,400,304);
-draw_line(cen_cen_x,cen_cen_y,cen_x,cen_y);
-draw_line(x,y,cen_x,cen_y);
-draw_self();*/
-draw_set_blend_mode(bm_add);
-draw_self();
-draw_set_blend_mode(bm_normal);
 </string>
           </argument>
         </arguments>

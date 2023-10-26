@@ -71,7 +71,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>repeat(4)
+            <string>/*repeat(4)
     { instance_create(x, y, objBlood); }
 </string>
           </argument>

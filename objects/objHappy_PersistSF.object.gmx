@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1000000</depth>
+  <depth>-1000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -30,7 +30,7 @@ for(i=0; i&lt;sn; i+=1){
 sf[i]=-1;
 }
 num=0;
-ds_o=ds_list_create();
+//ds_o=ds_list_create();
 
 /*cre=instance_create(400,304,objCircle);
 cre.num=num;
@@ -43,6 +43,8 @@ affect_killer=true;
 affect_block=true;
 affect_player=true;
 affect_platform=true;
+
+color=c_red;
 //affect_transition=true;
 /*
 margin=64;
@@ -78,7 +80,7 @@ cre.image_angle=random(360);
             <string>for(i=0; i&lt;sn; i+=1){
     surface_free(sf[i]);
 }
-ds_list_destroy(ds_o);
+//ds_list_destroy(ds_o);
 </string>
           </argument>
         </arguments>
@@ -186,7 +188,7 @@ ds_list_add(ds_o,cre);
             <string>for(i=0; i&lt;sn; i+=1){
     surface_free(sf[i]);
 }
-ds_list_destroy(ds_o);
+//ds_list_destroy(ds_o);
 </string>
           </argument>
         </arguments>
@@ -212,7 +214,7 @@ ds_list_destroy(ds_o);
             <string>for(i=0; i&lt;sn; i+=1){
     surface_free(sf[i]);
 }
-ds_list_destroy(ds_o);
+//ds_list_destroy(ds_o);
 </string>
           </argument>
         </arguments>
@@ -282,7 +284,7 @@ surface_reset_target();
 
 surface_set_target(sf[1]);
 
-draw_clear_alpha(c_red,1);
+draw_clear_alpha(color,1);
 
 shader_set(shd_Black);
 
@@ -362,8 +364,8 @@ draw_surface(sf[1],__vx,__vy);
             <string>for(i=0; i&lt;sn; i+=1){
     surface_free(sf[i]);
 }
-ds_list_destroy(ds_o);
-room_restart();
+//ds_list_destroy(ds_o);
+//room_restart();
 </string>
           </argument>
         </arguments>
@@ -389,8 +391,8 @@ room_restart();
             <string>for(i=0; i&lt;sn; i+=1){
     surface_free(sf[i]);
 }
-ds_list_destroy(ds_o);
-game_end();
+//ds_list_destroy(ds_o);
+//game_end();
 </string>
           </argument>
         </arguments>

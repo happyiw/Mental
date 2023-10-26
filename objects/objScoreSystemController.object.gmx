@@ -68,6 +68,9 @@ global.maxCombo = 0;
 global.unstuckX=400;
 global.unstuckY=608-64;
 
+global.freeze=false;
+
+alpha=1;
 
 unstuckBoundary=32;
 </string>
@@ -95,7 +98,7 @@ unstuckBoundary=32;
 // -------- Particle System --------
 // Run this code at the beginning of your game
 global.scorebarpsys = part_system_create();
-part_system_depth(global.scorebarpsys, -100);
+part_system_depth(global.scorebarpsys, -100000);
 
 
 // -------- Particle Type --------
@@ -135,16 +138,18 @@ part_type_blend(global.scorebarptyp, true);
           <argument>
             <kind>1</kind>
             <string>///Increment combo
-if(comboTimer&gt;0) comboTimer-=global.comboDropRate;
-else{
-    global.combo = 0;
-    comboTimer = 0;
+if (global.freeze==false) {
+    if(comboTimer&gt;0) comboTimer-=global.comboDropRate;
+    else{
+        global.combo = 0;
+        comboTimer = 0;
+    }
+    
+    
+    global.comboMultiplier = 1 + sqrt(global.combo)/2;
+    show_debug_message(global.comboMultiplier);
+    if(global.combo&gt;global.maxCombo) global.maxCombo = global.combo;
 }
-
-
-global.comboMultiplier = 1 + sqrt(global.combo)/2;
-show_debug_message(global.comboMultiplier);
-if(global.combo&gt;global.maxCombo) global.maxCombo = global.combo;
 </string>
           </argument>
         </arguments>
@@ -168,9 +173,9 @@ if(global.combo&gt;global.maxCombo) global.maxCombo = global.combo;
             <string>///Display the scorebar using the particles
 
 
-repeat(floor(20*comboTimer)){
-    partX = room_width - 32 - random(128*comboTimer);
-    partY = room_height - 16 + random_range(-12,12);
+/*repeat(floor(20*comboTimer)){
+    partX = view_xview[0] + view_wview[0] - 32*(view_wview/800) - random(128*comboTimer*(view_wview[0]/800));
+    partY = view_yview[0] + view_hview[0] - 16*(view_hview/608) + random_range(-12,12)*(view_hview[0]/608);
     part_particles_create(global.scorebarpsys, partX , partY, global.scorebarptyp, 1);
 }
 </string>
@@ -196,16 +201,25 @@ repeat(floor(20*comboTimer)){
             <string>///implement unstuck protection
 
 if(instance_exists(objPlayer)){
-    if(
-    objPlayer.x&gt;800+unstuckBoundary+view_xview[0]||
-    objPlayer.x&lt;-unstuckBoundary||
-    objPlayer.y&gt;608+unstuckBoundary+view_xview[0]||
-    objPlayer.y&lt;-unstuckBoundary
-    ){
-        objPlayer.x=global.unstuckX;
-        objPlayer.y=global.unstuckY;
+    if(objPlayer.x&gt;view_wview[0]+unstuckBoundary+view_xview[0]) {
+        kill_player();
+    }
+    if(objPlayer.x&lt;view_xview[0]-unstuckBoundary) {
+        kill_player();
+    }
+    if(objPlayer.y&gt;view_hview[0]+unstuckBoundary+view_xview[0]) {
+        kill_player();
+    }
+    if(objPlayer.y&lt;view_yview[0]-unstuckBoundary) {
+        kill_player();
     }
 }
+
+/*
+||
+    objPlayer.x&lt;view_xview[0]-unstuckBoundary||
+    objPlayer.y&gt;view_hview[0]+unstuckBoundary+view_xview[0]||
+    objPlayer.y&lt;view_yview[0]-unstuckBoundary
 </string>
           </argument>
         </arguments>
@@ -256,11 +270,15 @@ if(global.scoreVisible){
     draw_set_font(fScore);
     draw_set_align(1,1);
     draw_set_colour(c_white);
-    draw_text(room_width-32,room_height-32,string(floor(global.hitScore)));
-    draw_text(room_width-32,room_height-64,"x"+string(global.comboMultiplier));
+    draw_set_alpha(alpha);
+    //draw_text(room_width-32,room_height-32,string(floor(global.hitScore)));
+    //draw_text(room_width-32,room_height-64,"x"+string(global.comboMultiplier));
+    draw_text_transformed(view_xview+view_wview-32*(view_wview/800),view_yview+view_hview-32*(view_hview/608),string(floor(global.hitScore)),view_wview/800,view_hview/608,0);
+    draw_text_transformed(view_xview+view_wview-32*(view_wview/800),view_yview+view_hview-64*(view_hview/608),"x"+string(global.comboMultiplier),view_wview/800,view_hview/608,0);
     draw_set_font(fDefault12);
     draw_set_align(1,1);
 }
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>

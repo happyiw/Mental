@@ -62,7 +62,7 @@ exScale=image_xscale;
 curveSpeed=0;
 followDirection=0;
 
-
+penalty_hold=false;
 
 
 </string>
@@ -146,20 +146,62 @@ if(followDirection) image_angle=direction;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Pushes timer to its limit
+if(killer){
+    switch(Type){
+        case "Low_damage":
+            player_BLC_kill(1/250);
+            break;
+        case "Hold":
+            player_BLC_kill(1/8);
+            break;
+        default:
+        case "Collect":
+            player_BLC_kill(1/4);
+            break;
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Add score depending on the type
 if(killer){
     switch(Type){
         case "Hold":
-            player_kill(Score/5,Combo/5);
+            //player_kill(Score/5,Combo/5);
+            break;
+        case "Low_alpha":
+            killer=false;
+            image_alpha=0.2;
+            //player_kill(Score,Combo);
+            break;
+        case "Low_damage":
             break;
         case "Penalty":
             global.combo = 0;
             comboTimer = 0;
-            instance_destroy();
+            if !(penalty_hold) instance_destroy();
             break;
         default:
         case "Collect":
-            player_kill(Score,Combo);
+            //player_kill(Score,Combo);
             image_alpha=0.5;
             killer=false;
     }

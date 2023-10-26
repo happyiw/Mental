@@ -42,7 +42,6 @@ xx=0;
 yy=0;
 
 persist=true;
-kill=true;
 t=0;
 t_inc=1;
 

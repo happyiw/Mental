@@ -36,12 +36,14 @@ tag = 0;
 subtag = 0;
 trail = false;
 rad = 0;
-aimlock=true;
+aimlock=false;
 
 t=0;
 
 xx=0;
 yy=0;
+
+image_tag=0;
 
 alarm[0] = -1;
 alarm[2] = 1;
@@ -175,16 +177,17 @@ if (sign(speed) == -1) {
     direction = -direction;
     speed = -speed;
 }*/
-
+t++;
 if (trail == true) {
-    a = instance_create(x,y,objBulletTrail);
+    a = instance_create(x,y,objHappyBulletTrail);
     a.image_xscale=image_xscale;
     a.image_yscale=image_yscale;
     a.sprite_index = sprite_index;
     a.image_index=image_index;
     a.image_speed=0;
     a.direction = direction;
-    a.image_alpha = image_alpha/2;
+    a.image_alpha = image_alpha/4;
+    a.aimlock = aimlock;
     a.depth=depth+1;
 }
 </string>

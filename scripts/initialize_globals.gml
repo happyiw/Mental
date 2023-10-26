@@ -4,6 +4,7 @@
 engine_options();
 
 global.debugAvoidanceStartTime=0;
+global.s5_side=choose(-1,1)
 
 global.debugOverlay = false;    //Enables showing the debug text overlay (shows player location, align, etc.)
 global.debugNoDeath = true;    //Enables god mode (toggle with Home key)
@@ -79,6 +80,8 @@ global.numDebugSnaps=0;
 
 //create the score and seed controllers
 
-instance_create(0,0,objScoreSystemController);
-instance_create(0,0,objSeedController);
+//instance_create(0,0,objScoreSystemController);
+instance_create(0,0,objBLCSystemController);
+//instance_create(0,0,objSeedController);
 
+global.seqBlood=scrSeededSeqInit(200,1);

@@ -13,7 +13,7 @@ global.grav = -global.grav;
 with (objPlayer)
 {
     airJumps = maxAirJumps;
-    vspeed = 0;
+    vspeed *= -1;
     
     jumpSpeed = abs(jumpSpeed) * global.grav;
     djumpSpeed = abs(djumpSpeed) * global.grav;

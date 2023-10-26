@@ -75,6 +75,7 @@
       <sound>sound\sndCherry</sound>
       <sound>sound\sndGlass</sound>
       <sound>sound\sndSpikeTrap</sound>
+      <sound>sound\sndBossHit2</sound>
     </sounds>
     <sounds name="Music">
       <sound>sound\musMainAvoidance</sound>
@@ -82,6 +83,8 @@
       <sound>sound\musOnDeath</sound>
     </sounds>
     <sound>sound\musKeepMyMental</sound>
+    <sound>sound\sndItsNotOver</sound>
+    <sound>sound\sndText</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="World">
@@ -211,10 +214,43 @@
         <sprite>sprites\sprHappy_Border</sprite>
         <sprite>sprites\sprHappy_MayuCherry</sprite>
         <sprite>sprites\sprHappy_WBCherry</sprite>
+        <sprite>sprites\sprHappy_GlowCherry</sprite>
         <sprite>sprites\sprHappy_Platform</sprite>
         <sprite>sprites\sprHappy_BloodSpike</sprite>
+        <sprite>sprites\sprHappy_KMMTitleLogo</sprite>
+        <sprite>sprites\sprHappy_KMMTitleLogoGlow</sprite>
+        <sprite>sprites\sprHappy_Glitch</sprite>
+        <sprite>sprites\sprHappy_KMMLogo</sprite>
+        <sprite>sprites\sprHappy_KMMLogoGlow</sprite>
+        <sprite>sprites\sprHappy_Hand</sprite>
+        <sprite>sprites\sprHappy_Ugly</sprite>
+        <sprite>sprites\sprHappy_Ugly2</sprite>
+        <sprite>sprites\sprHappy_Miku</sprite>
+        <sprite>sprites\sprHappy_FuckingLine</sprite>
+        <sprite>sprites\sprGravitySwitcherLine</sprite>
+        <sprite>sprites\sprHappy_BlackSquare</sprite>
+        <sprite>sprites\sprHappy_ArrowUp</sprite>
+        <sprites name="sprHappy_Tail">
+          <sprite>sprites\sprHappy_Tail1</sprite>
+          <sprite>sprites\sprHappy_Tail2</sprite>
+          <sprite>sprites\sprHappy_Tail3</sprite>
+          <sprite>sprites\sprHappy_Tail4</sprite>
+          <sprite>sprites\sprHappy_Tail5</sprite>
+          <sprite>sprites\sprHappy_Tail6</sprite>
+        </sprites>
+        <sprite>sprites\sprHappy_Funny</sprite>
       </sprites>
     </sprites>
+    <sprite>sprites\sprHitCountFrameNew</sprite>
+    <sprite>sprites\sprHitCountFrameNewCell</sprite>
+    <sprite>sprites\sprNumber_new</sprite>
+    <sprite>sprites\sprNumberBright_new</sprite>
+    <sprite>sprites\sprAvatarFM</sprite>
+    <sprite>sprites\sprAvatarHappy</sprite>
+    <sprite>sprites\sprItsNotOver</sprite>
+    <sprite>sprites\sprBlood_new</sprite>
+    <sprite>sprites\sprCircleEffect</sprite>
+    <sprite>sprites\sprMarenolBullet</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bAllTiles</background>
@@ -300,6 +336,8 @@
       <script>scripts\player_set_mask.gml</script>
       <script>scripts\player_kill.gml</script>
       <script>scripts\player_flip.gml</script>
+      <script>scripts\player_BLC_kill.gml</script>
+      <script>scripts\kill_player.gml</script>
     </scripts>
     <scripts name="Trigger">
       <script>scripts\make_trigger.gml</script>
@@ -440,6 +478,11 @@
       <script>scripts\TUTORIAL_YourFirstAvoidance.gml</script>
     </scripts>
     <script>scripts\EaseLinear.gml</script>
+    <script>scripts\random1.gml</script>
+    <script>scripts\random1_range.gml</script>
+    <script>scripts\scrSeededSeqInit.gml</script>
+    <script>scripts\scrMakeShapes.gml</script>
+    <script>scripts\scrMakeStar.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shAurora.shader</shader>
@@ -451,6 +494,7 @@
     <shader type="GLSLES">shaders\shExponential.shader</shader>
     <shader type="GLSLES">shaders\shGodRays.shader</shader>
     <shader type="GLSLES">shaders\shd_Black.shader</shader>
+    <shader type="GLSLES">shaders\shdGlowTest.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\fDefault30</font>
@@ -458,6 +502,13 @@
     <font>fonts\fDefault18</font>
     <font>fonts\fScore</font>
     <font>fonts\fDefault12</font>
+    <font>fonts\fKMM</font>
+    <font>fonts\fKMMItalic</font>
+    <font>fonts\fKMMBold</font>
+    <font>fonts\fKMMItalicBold</font>
+    <font>fonts\fDefault30_new</font>
+    <font>fonts\fDefault24_new</font>
+    <font>fonts\fDefault18_new</font>
   </fonts>
   <objects name="objects">
     <objects name="World">
@@ -599,7 +650,6 @@
       <object>objects\objAvoidanceEntity</object>
     </objects>
     <objects name="Anti Avoidance">
-      <object>objects\objMainAvoidance</object>
       <object>objects\objSeedController</object>
       <object>objects\objScoreSystemController</object>
     </objects>
@@ -615,29 +665,62 @@
       <object>objects\objAvoidance3DCircle</object>
       <object>objects\objAvoidance3DShape</object>
     </objects>
+    <objects name="Bullet Limit Core (BLC)">
+      <object>objects\objBLCSystemController</object>
+      <object>objects\objBLCCircle</object>
+    </objects>
+    <object>objects\objMainAvoidance</object>
+    <object>objects\objPracticeController</object>
     <objects name="KMM">
       <objects name="happy">
         <objects name="Particles">
           <object>objects\objHappy_Darkness</object>
           <object>objects\objHappy_Spotlight</object>
+          <object>objects\objHappy_Logo</object>
+          <object>objects\objHappy_Glitch</object>
+          <object>objects\objHappy_Hand</object>
+          <object>objects\objHappy_ErrorRectangle</object>
+          <object>objects\objHappy_ItsNotOver</object>
+          <object>objects\objHappy</object>
+          <object>objects\objHappy_Line</object>
+          <objects name="Tails">
+            <object>objects\objHappy_TailParent</object>
+            <object>objects\objHappy_Tail1</object>
+            <object>objects\objHappy_Tail2</object>
+            <object>objects\objHappy_Tail3</object>
+            <object>objects\objHappy_Tail4</object>
+            <object>objects\objHappy_Tail5</object>
+            <object>objects\objHappy_Tail6</object>
+          </objects>
         </objects>
         <objects name="Bullets">
           <object>objects\objHappy_ParentBullet</object>
+          <object>objects\objHappyBulletTrail</object>
           <object>objects\objHappy_Bullet_01</object>
           <object>objects\objHappy_Penalty_bullet</object>
           <object>objects\objHappy_Bullet_trig</object>
           <object>objects\objHappy_Bullet_trig_deco</object>
           <object>objects\objHappy_Bullet_trig_ext</object>
+          <object>objects\objHappy_R2d_Bullet</object>
         </objects>
         <objects name="stuff">
           <object>objects\objHappy_Platform</object>
+          <object>objects\objHappy_Miku</object>
+          <object>objects\objHappy_BlackBox</object>
+          <object>objects\objHappy_Arrow</object>
         </objects>
         <objects name="Surface">
           <object>objects\objHappy_PersistSF</object>
           <object>objects\objHappy_SFArea</object>
+          <object>objects\objGlowTest</object>
+          <object>objects\objHappy_new</object>
         </objects>
       </objects>
     </objects>
+    <object>objects\objHitCount_new</object>
+    <object>objects\objSeededRNGSeq</object>
+    <object>objects\objBloodEmitterNew</object>
+    <object>objects\objBloodNew</object>
   </objects>
   <rooms name="rooms">
     <rooms name="Init">
@@ -660,6 +743,7 @@
       <room>rooms\rAvoidanceTemplate</room>
       <room>rooms\rMikuTemplate</room>
     </rooms>
+    <room>rooms\rDrawTest</room>
     <room>rooms\rResults</room>
   </rooms>
   <help>

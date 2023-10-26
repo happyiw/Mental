@@ -10,7 +10,9 @@ if(argument_count>1) opt_comboIncrement=argument[1];
 
 if (instance_exists(objPlayer) && (!global.noDeath && !global.debugNoDeath))
 {
-    global.deathSound = audio_play_sound(sndBossHit, 0, false);
+    //audio_stop_sound(sndBossHit2)
+    //global.deathSound = audio_play_sound(sndBossHit2, 0, false);
+    //audio_sound_gain(global.deathSound,0.8,0);
     with (objPlayer)
     {
         instance_create(x, y, objBloodEmitter);

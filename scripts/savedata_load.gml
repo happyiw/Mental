@@ -34,4 +34,6 @@ if savedata_get("saved") {
     }
 }
 
+with(objBLCSystemController) { comboTimer=0; }
+
 room_goto(asset_get_index(savedata_get("room")));

@@ -42,11 +42,12 @@ xx=0;
 yy=0;
 
 persist=true;
-kill=true;
 t=0;
 t_inc=1;
+tt=0;
 
 finlen=0;    //length at it's final position, actually useless
+findir=0;    //direction at it's final position
 lendeg=0;
 tag=0;
 subtag=0;    //useless addiction to tag

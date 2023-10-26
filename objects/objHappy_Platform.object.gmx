@@ -62,28 +62,19 @@ if (y -+ speed &lt; 0 - 16) and (replace) {
     obj = instance_create(x,y+624,objHappy_Platform);
     obj.speed = speed
     obj.direction = direction
-    obj_cherry = instance_create(x + 16 ,y - 18 + 624,objHappy_Bullet_01);
-    obj_cherry.speed = obj.speed;
-    obj_cherry.direction = obj.direction;
-    obj_cherry.sprite_index=choose(sprHappy_MayuCherry,sprHappy_WBCherry);
-    obj_cherry.image_xscale=random_range(1.25,1.75);
-    obj_cherry.image_yscale=obj_cherry.image_xscale;
-    obj_cherry.tag='S6_follow_platform';
-    obj_cherry.aimlock=false;
-    obj_cherry.persist=true;
-    //obj_cherry.destroyOutside=false;
-    if line_cherry_case == 1 {
-        obj_cherry.killer = false;
-        obj_cherry.image_alpha = 0.4;
-    }
-    if line_cherry_case == 5 or line_cherry_case == 6 { obj_cherry.Type = "Hold" }
-    if line_cherry_case == 7 { 
-        obj_cherry.Type = "Penalty"; 
-        obj_cherry.sprite_index=sprHappy_MayuCherry;
-        obj_cherry.image_blend=merge_color(c_white,c_red,0.5);
+    if line_cherry_case &gt; 2 and line_cherry_case &lt; 8 {
+        obj_cherry = instance_create(x + 16 ,y - 18 + 624,objHappy_Bullet_01);
+        obj_cherry.speed = obj.speed;
+        obj_cherry.direction = obj.direction;
+        obj_cherry.sprite_index=choose(sprHappy_MayuCherry,sprHappy_WBCherry);
+        obj_cherry.image_xscale=random_range(1.25,1.75);
+        obj_cherry.image_yscale=obj_cherry.image_xscale;
+        obj_cherry.tag='S6_follow_platform';
+        obj_cherry.aimlock=false;
+        obj_cherry.persist=true;
+        if line_cherry_case == 5 or line_cherry_case == 6 { obj_cherry.Type = "Hold" }
     }
     instance_destroy();
-    //y -= 624;
 }
 </string>
           </argument>

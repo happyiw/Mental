@@ -429,9 +429,9 @@ if (Id == global.httpUpdateCheck)
             <string>///Fade current music out
 global.musicFading = true;
 global.currentGain = audio_sound_get_gain(global.currentMusic);
-audio_sound_gain(global.currentMusic, 0, 1000);    //Fade out music over 1 second
+audio_sound_gain(global.currentMusic, 0, 3000);    //Fade out music over 1 second
 
-alarm[0] = 50;  //Pause music when it's done fading
+alarm[0] = 150;  //Pause music when it's done fading
 </string>
           </argument>
         </arguments>
@@ -605,6 +605,7 @@ else if (global.debugOverlay)
     draw_text_outline(20, 140, "Infinite jump: "+string(global.debugInfJump), c_black, c_white);
     draw_text_outline(20, 160, "FPS: "+string(fps), c_black, c_white);
     draw_text_outline(20, 180, "Real FPS: "+string(fps_real), c_black, c_white);
+    draw_text_outline(20, 200, "Instance count: "+string(instance_count), c_black, c_white);
 }
 </string>
           </argument>
