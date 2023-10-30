@@ -497,6 +497,7 @@
     <shader type="GLSLES">shaders\shExponential.shader</shader>
     <shader type="GLSLES">shaders\shGodRays.shader</shader>
     <shader type="GLSLES">shaders\shd_Black.shader</shader>
+    <shader type="GLSLES">shaders\shGreyscale.shader</shader>
     <shader type="GLSLES">shaders\shdGlowTest.shader</shader>
   </shaders>
   <fonts name="fonts">
