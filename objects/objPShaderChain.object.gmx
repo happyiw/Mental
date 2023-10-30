@@ -31,14 +31,11 @@ surf2=surface_create(800,608);
 
 
 t=0;
-intensity[0]=1;
-intensity[1]=1;
-
-
-shader[0]=shSepia;
-shader[1]=shSepia;
 
 numShaders=2;
+
+chain[0] = instance_create(0,0,objPShaderChainElement);
+chain[1] = instance_create(0,0,objPShaderChainElement);
 
 </string>
           </argument>
@@ -138,6 +135,7 @@ if(surface_exists(surf2)) surface_free(surf2);
             <string>
 
 for(var i=0;i&lt;numShaders;i++){
+    if(!instance_exists(chain[i])) exit;
     
     var currSurf=surf1;
     var targetSurf=surf2;
@@ -158,12 +156,11 @@ for(var i=0;i&lt;numShaders;i++){
     surface_set_target(targetSurf); 
     draw_clear_alpha(c_black,0);
 
-    var shaderTimerHandle=shader_get_uniform(shader[i],"time");
-    var shaderIntensityHandle=shader_get_uniform(shader[i],"intensity");
-    shader_set(shader[i]);
+    var shaderTimerHandle=shader_get_uniform(chain[i].shader,"time");
+    var shaderIntensityHandle=shader_get_uniform(chain[i].shader,"intensity");
+    shader_set(chain[i].shader);
     shader_set_uniform_f(shaderTimerHandle,t/50);
-    show_debug_message(intensity[1]);
-    shader_set_uniform_f(shaderIntensityHandle,intensity[i]);
+    shader_set_uniform_f(shaderIntensityHandle,chain[i].intensity);
     
     draw_surface(currSurf,0,0);
     

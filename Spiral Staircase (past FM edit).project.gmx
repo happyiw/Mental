@@ -471,6 +471,9 @@
     </scripts>
     <scripts name="Shader Manipulation">
       <script>scripts\scrClearShaders.gml</script>
+      <script>scripts\shader_pop.gml</script>
+      <script>scripts\shader_push.gml</script>
+      <script>scripts\shader_insert.gml</script>
       <script>scripts\scrApplyShaderEffect.gml</script>
     </scripts>
     <scripts name="Tutorials">
@@ -639,8 +642,9 @@
       <object>objects\objBrokenTile</object>
     </objects>
     <objects name="Shader Manipulation">
-      <object>objects\objPShaderChain</object>
       <object>objects\objPShaderEffect</object>
+      <object>objects\objPShaderChainElement</object>
+      <object>objects\objPShaderChain</object>
       <object>objects\objPShaderRectangle</object>
     </objects>
     <objects name="Avoidance Core">
