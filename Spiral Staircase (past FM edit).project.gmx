@@ -697,6 +697,7 @@
             <object>objects\objHappy_Tail5</object>
             <object>objects\objHappy_Tail6</object>
           </objects>
+          <object>objects\objHappy_PartDraw</object>
         </objects>
         <objects name="Bullets">
           <object>objects\objHappy_ParentBullet</object>

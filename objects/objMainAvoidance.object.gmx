@@ -2749,6 +2749,27 @@ if t==1709 {
     //shader turned off while working on attack
     shader_chromatic = shader_push(shChromaticAberration2,0);
     shader_transition = shader_push(shEasyShaderExample,0);
+    
+    with(objHappy_Darkness) {
+        if tag=='s1_ugly' {
+            x_inc=32;
+            y_inc=32;
+            for (var xx=0;xx&lt;800;xx+=x_inc) {
+                for (var yy=0;yy&lt;608;yy+=y_inc) {
+                    var a = instance_create(xx,yy,objHappy_PartDraw);
+                    a.sprite_index=sprite_index;
+                    a.image_blend=image_blend;
+                    a.x1=xx;
+                    a.y1=yy;
+                    a.w1=x_inc;
+                    a.h1=y_inc;
+                    a.direction=90+random_range(-5,5);
+                    a.tag='s2_ugly_grid'
+                }
+            }
+            instance_destroy();
+        }
+    }
 }
 
 if t&gt;1709 and t&lt;1732 {
@@ -2765,6 +2786,73 @@ if t&gt;1709 and t&lt;1732 {
             if image_alpha&lt;=0 { instance_destroy(); }
         }
     }
+    with(objHappy_PartDraw) {
+        if tag=='s2_ugly_grid' {
+            x+=random_range(-2,2);
+            y+=random_range(-2,2);
+            image_angle+=random_range(-1.5,1.5);
+        }
+    }
+    
+}
+
+if t==1732 {
+    with(objHappy_PartDraw) {
+        if tag=='s2_ugly_grid' {
+            direction=point_direction(objPlayer.x,objPlayer.y,x,y);
+            image_angle=direction+180;
+            speed=random_range(6,9);
+            friction=speed/random_range(10,45);
+            //gravity_direction=point_direction(x,y,400,304);
+            gravity=random_range(0.015,0.05);
+        }
+    }
+    
+    rand_angle=random(360);
+    rand_angle2=random_range(75,105);
+    for(var yy=view_yview[0]-32;yy&lt;view_yview[0]+view_hview[0]+32;yy+=12) {
+            var a = instance_create(0,0,objHappy_Bullet_trig);
+            a.cen_x=400;
+            a.cen_y=yy;
+            a.subtag=yy;
+            a.dir=yy*0.85+rand_angle
+            a.len=(view_wview[0]/2)-16;
+            a.deg_y=4000;
+            a.sprite_index=sprPCircle;
+            a.killer=false;
+            a.image_index=0;
+            a.image_alpha=0.2;
+            a.tag='s2_exceed_spiral';
+            
+            var a2 = instance_create(0,0,objHappy_Bullet_trig);
+            a2.cen_x=400;
+            a2.cen_y=yy;
+            a2.subtag=yy;
+            a2.dir=yy*0.85+rand_angle+rand_angle2;
+            a2.len=(view_wview[0]/2)-16;
+            a2.deg_y=4000;
+            a2.sprite_index=sprPCircle;
+            a2.killer=false;
+            a2.image_index=0;
+            a2.image_alpha=0.2;
+            a2.tag='s2_exceed_spiral';
+            
+            /*
+            and then some shit happens inbetween those two lines
+            that will kill you
+            and also that's gonna be only the 1st part of entire clow-fiesta
+            that is about to happen
+            so, yeah...better leave this note here
+            */
+    }
+}
+
+if t==1747 {
+    with(objHappy_PartDraw) {
+        if tag=='s2_ugly_grid' {
+            friction=0;
+        }
+    }
 }
 
 if t&gt;1732 and t&lt;1732+20 {
@@ -2775,49 +2863,32 @@ if t&gt;1732 and t&lt;1732+20 {
     }
     //objPShaderEffect.intensity=EaseOutSine(t-1732,0.1,0,19);
 }
+
+if t&gt;1732 and t&lt;2135 {
+    with(objHappy_Bullet_trig) {
+        if tag=='s2_exceed_spiral' {
+            //image_alpha=0.15+dsin(dir)*0.05;
+            image_xscale=1.05+dsin(dir)*0.45;
+            image_yscale=image_xscale;
+            depth=-dsin(dir)*20;
+            if t&lt;50 {
+                image_alpha=EaseOutExpo(t,0,0.15+dsin(dir)*0.05,49);
+                dir_inc=0.85+dsin(t*2)*EaseInCubic(t,0,0.65,49);
+            }
+            else {
+                image_alpha=0.15+dsin(dir)*0.05;
+                dir_inc=0.85+dsin(t*2)*0.65;
+            }
+            
+        }
+    }
+}
+
 if t==1752 {
     shader_pop();
     shader_pop();
     //instance_destroy(objPShaderEffect);
 }
-
-/*
-
-if t==1709 {
-    rand_distance=random_range(8,32);
-    for (var distance=rand_distance; distance&lt;rand_distance+128*15; distance+=128) {
-        rand_angle=random(360);
-        r2_shift=distance*random_range(-0.1,0.5);
-        rand_ofs=random(360);
-        rand_ofs_inc=random_range(-2,2);
-        rand_dir_inc=random_range(-1,1);
-        for(var angle=rand_angle; angle&lt;rand_angle+360; angle+=30) {
-            var a = instance_create(0,0,objHappy_R2d_Bullet);
-            a.cen_x=400;
-            a.cen_y=304;
-            fin_r1=distance;
-            a.fin_r1=distance;
-            a.fin_r2=distance+r2_shift;
-            a.dir=angle;
-            a.ofs=rand_ofs;
-            
-            a.image_alpha=0;
-            a.killer=false;
-            a.tag='s2_chaotic_circles'
-        }
-    }
-}
-if t&gt;1709 and t&lt;1742 {
-    with(objHappy_R2d_Bullet) {
-        if tag=='s2_chaotic_circles' {
-            if t&lt;30 {
-                r_1=EaseOutSine(t,fin_r1-random_range(32,48),fin_r1,29);
-                r_2=r_1;
-                image_alpha=EaseOutQuart(t,0,1,29);
-            }
-        }
-    }
-}*/
 
 if t==1735 {
     with(objHappy_Bullet_01) {
@@ -2850,6 +2921,16 @@ if t&gt;1760 and t&lt;1860 {
 
 
 if t&gt;1735 and t&lt;2135 {
+    if t&gt;2070 {
+        view_xview[0]=EaseInOutSine(t-2080,64,128,2135-2070);
+        
+        //DANIX WILL BE VERY UPSET AT ME
+        //IF HE SEES THIS BEING USED
+        
+        view_yview[0]=view_xview[0]/1.3;
+        view_wview[0]=800-view_xview[0]*2;
+        view_hview[0]=608-view_yview[0]*2;
+    }
     /*view_angle[0]=dsin((t-1735)/2)*6;
     if t mod 10 == 1 {
         xx=400+random_range(64,point_distance(400,304,view_xview[0],view_yview[0])-48)*choose(-1,1);
@@ -2937,7 +3018,7 @@ if t&gt;1735 and t&lt;2135 {
                 image_blend=merge_color(c_maroon,c_white,EaseInCubic(other.t-2080,1,0,2135-2080))
             }
         }
-        view_xview[0]=EaseInQuart(t-2080,64,192,2315-2080);
+        view_xview[0]=EaseInQuart(t-2080,64,192,2135-2080);
         view_yview[0]=view_xview[0]/1.3;
         view_wview[0]=800-view_xview[0]*2;
         view_hview[0]=608-view_yview[0]*2;
@@ -2980,12 +3061,6 @@ if t&gt;1735 and t&lt;2135 {
             }
         }
     }*/
-    if t&gt;2080 {
-        view_xview[0]=EaseInQuart(t-2080,64,192,2315-2080);
-        view_yview[0]=view_xview[0]/1.3;
-        view_wview[0]=800-view_xview[0]*2;
-        view_hview[0]=608-view_yview[0]*2;
-    }
 }
 if t==2135 {
     instance_destroy(objPShaderEffect);
@@ -3017,7 +3092,7 @@ if t&gt;2135 and t&lt;2185 {
             if image_alpha&lt;=0 { instance_destroy(); }
         }
     }
-    view_xview[0]=EaseOutQuart(t-2135,192,64,49);
+    view_xview[0]=EaseOutQuart(t-2135,128,64,49);
     view_yview[0]=view_xview[0]/1.3;
     view_wview[0]=800-view_xview[0]*2;
     view_hview[0]=608-view_yview[0]*2;
