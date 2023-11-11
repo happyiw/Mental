@@ -428,14 +428,14 @@ for (var yy=0; yy&lt;608; yy+=32) {
             <string>///stuff for practice
 if global.debugAvoidanceStartTime==1299 or global.debugAvoidanceStartTime==2429 {
     instance_destroy(objBlock);
-    s1_ugly_bg = instance_create((800-(800*0.9))/2,(608-(608*0.9))/2,objHappy_Darkness);
-    s1_ugly_bg.sprite_index=sprHappy_Ugly;
-    s1_ugly_bg.image_xscale=0.9;
-    s1_ugly_bg.image_yscale=0.9;
-    s1_ugly_bg.image_alpha=0.5;
-    s1_ugly_bg.depth=1000;
-    s1_ugly_bg.tag='s1_ugly'
     if global.debugAvoidanceStartTime==1299 {
+        s1_ugly_bg = instance_create((800-(800*0.9))/2,(608-(608*0.9))/2,objHappy_Darkness);
+        s1_ugly_bg.sprite_index=sprHappy_Ugly;
+        s1_ugly_bg.image_xscale=0.9;
+        s1_ugly_bg.image_yscale=0.9;
+        s1_ugly_bg.image_alpha=0.5;
+        s1_ugly_bg.depth=1000;
+        s1_ugly_bg.tag='s1_ugly'
         s1_ugly_bg.image_blend=c_red;
         s1_spotlight = instance_create(0,0,objHappy_Spotlight);
         s1_spotlight.image_alpha=0.25;
@@ -2770,6 +2770,7 @@ if t==1709 {
             instance_destroy();
         }
     }
+    //var cb = instance_create(0,0,objHappy_CharismaBreaker);
 }
 
 if t&gt;1709 and t&lt;1732 {
@@ -2809,41 +2810,38 @@ if t==1732 {
     }
     
     rand_angle=random(360);
-    rand_angle2=random_range(75,105);
-    for(var yy=view_yview[0]-32;yy&lt;view_yview[0]+view_hview[0]+32;yy+=12) {
+    rand_angle2=floor(random_range(16,24));
+    //голоса в голове посоветовали написать это
+    spiral_direction=choose(-1,1);
+    uhhhhhh=random(180)
+    dirinc=random_range(-1,1)/1.5
+    for(var yy=view_yview[0]-32;yy&lt;view_yview[0]+view_hview[0]+32;yy+=4) {
+        if (yy-(view_yview[0]-32)) mod 12 == 0 {
+            it='better_alpha';
+        }
+        else {
+            it="i'll ask someone else about that thing later, cuz i have no idea what to write here"
+        }
+        for (var _a=0;_a&lt;=rand_angle2;_a+=rand_angle2) {
             var a = instance_create(0,0,objHappy_Bullet_trig);
             a.cen_x=400;
             a.cen_y=yy;
-            a.subtag=yy;
-            a.dir=yy*0.85+rand_angle
+            a.dir=yy*2+rand_angle+_a*1.25;
+            a.dir_inc=dirinc;
             a.len=(view_wview[0]/2)-16;
             a.deg_y=4000;
+            a.deg_x=spiral_direction;
             a.sprite_index=sprPCircle;
+            a.sprite_index=sprHappy_WBCherryImproved;
+            a.image_blend=c_red;
             a.killer=false;
             a.image_index=0;
             a.image_alpha=0.2;
             a.tag='s2_exceed_spiral';
-            
-            var a2 = instance_create(0,0,objHappy_Bullet_trig);
-            a2.cen_x=400;
-            a2.cen_y=yy;
-            a2.subtag=yy;
-            a2.dir=yy*0.85+rand_angle+rand_angle2;
-            a2.len=(view_wview[0]/2)-16;
-            a2.deg_y=4000;
-            a2.sprite_index=sprPCircle;
-            a2.killer=false;
-            a2.image_index=0;
-            a2.image_alpha=0.2;
-            a2.tag='s2_exceed_spiral';
-            
-            /*
-            and then some shit happens inbetween those two lines
-            that will kill you
-            and also that's gonna be only the 1st part of entire clow-fiesta
-            that is about to happen
-            so, yeah...better leave this note here
-            */
+            a.image_tag=it;
+            a.subtag=uhhhhhh;
+        }
+        
     }
 }
 
@@ -2851,6 +2849,7 @@ if t==1747 {
     with(objHappy_PartDraw) {
         if tag=='s2_ugly_grid' {
             friction=0;
+            gravity=random_range(0.015,0.05);
         }
     }
 }
@@ -2865,23 +2864,144 @@ if t&gt;1732 and t&lt;1732+20 {
 }
 
 if t&gt;1732 and t&lt;2135 {
+
+    if t&gt;1750 and (t mod 25 == 0 or t mod 25 == 12) {
+        choose_your_wall=choose(1,2,3);
+        /*
+        УДИВИТЕЛЬНЫЙ ГМСОВСКИЙ ЦИРК
+        фильм какого-то придурка
+        В главных ролях:
+        */
+        switch(choose_your_wall) {
+            case 1:
+                xx[0]=400+random_range(0,view_wview[0]/2)*choose(-1,1); //конченый идиот
+                yy[0]=view_yview[0]+view_hview[0]+10;           //какой-то мужик
+                
+                xx[1]=view_wview[0]+view_xview[0]+10;
+                yy[1]=304+random_range(0,view_hview[0]/2)*choose(-1,1);
+            break;
+            case 2:
+                xx[0]=view_xview[0]-10;
+                yy[0]=304+random_range(0,view_hview[0]/2)*choose(-1,1);
+                
+                xx[1]=view_xview[0]-6;
+                yy[1]=304+random_range(0,view_hview[0]/2)*choose(-1,1);
+            break;
+            case 3:
+                xx[0]=view_wview[0]+view_xview[0]+10;
+                yy[0]=304+random_range(0,view_hview[0]/2)*choose(-1,1);
+                
+                xx[1]=view_wview[0]+view_xview[0]+6;
+                yy[1]=304+random_range(0,view_hview[0]/2)*choose(-1,1);
+            break;
+        }
+        comedy_value=random_range(0.5,1.15);      //так себе шутник
+        i_ran_out_of_funny_variable_names=choose(1.5,1.4,1.3,2);
+        if t mod 25 == 0 {
+            for (var spd=2;spd&lt;=5;spd+=i_ran_out_of_funny_variable_names) {
+                var a = instance_create(xx[0],yy[0],objHappy_Bullet_01);
+                /*a.sprite_index=sprPBigArrowheadsprHappy_MayuCherry*/
+                a.image_blend=c_red;
+                //a.aimlock=true;
+                a.image_xscale=2;
+                a.image_yscale=2;
+                a.image_index=0;
+                a.direction=point_direction(xx[0],yy[0],objPlayer.x,objPlayer.y);
+                a.accel=spd/15*comedy_value;                //пубертатная язва
+                a.subtag=spd;                               //злодей-британец
+                a.image_tag=random_range(0.45,0.85);
+                a.tag='s2_chaos_train'
+            }
+        }
+        if t mod 25 == 12 {
+            repeat(4) {
+                var a = instance_create(xx[1],yy[1],objHappy_Bullet_01);
+                a.image_blend=c_red;
+                //a.sprite_index=sprBulletArrowhead;
+                a.aimlock=true;
+                a.image_index=0;
+                a.image_xscale=2;
+                a.image_yscale=2;
+                a.direction=point_direction(xx[1],yy[1],400,304)+random_range(-50,50);
+                a.speed=random_range(1,4);
+                a.image_tag=random_range(0.5,0.7);
+                a.tag='s2_chaos_burst';
+            }
+        }
+    }
+    with(objHappy_Bullet_01) {
+        if tag=='s2_chaos_train' {
+            if speed&gt;subtag {
+                accel=0;
+                speed=subtag;
+            }
+            if t&lt;40 {
+                image_xscale=EaseOutCubic(t,2,image_tag,39);
+                image_yscale=image_xscale;
+            }
+        }
+        if tag='s2_chaos_burst' {
+            if t&lt;40 {
+                image_xscale=EaseOutCubic(t,2,image_tag,40-1);
+                image_yscale=image_xscale;
+            }
+            /*if t mod 3 == 0 {
+                var a = instance_create(x,y,objHappy_Bullet_01);
+                a.direction=direction+180+random_range(-15,15);
+                a.sprite_index=sprite_index;
+                a.image_index=image_index;
+                a.image_xscale=image_xscale;
+                a.image_yscale=a.image_xscale;
+                a.image_angle=random(360);
+                a.speed=2;
+                a.killer=false;
+                a.tag='s2_chaos_burst_trail';
+            }*/
+        }
+        if tag=='s2_chaos_burst_trail' {
+            image_xscale-=0.1;
+            image_yscale-=0.1;
+            if image_xscale&lt;=0 { instance_destroy(); }
+        }
+    }
     with(objHappy_Bullet_trig) {
         if tag=='s2_exceed_spiral' {
             //image_alpha=0.15+dsin(dir)*0.05;
-            image_xscale=1.05+dsin(dir)*0.45;
+            image_xscale=0.75+dsin(dir)*0.5;
             image_yscale=image_xscale;
             depth=-dsin(dir)*20;
-            if t&lt;50 {
-                image_alpha=EaseOutExpo(t,0,0.15+dsin(dir)*0.05,49);
-                dir_inc=0.85+dsin(t*2)*EaseInCubic(t,0,0.65,49);
+            if t&lt;150 {
+                if image_tag!='better_alpha' {
+                    image_alpha=EaseOutExpo(t,0,0.075+dsin(dir)*0.025,149);
+                }
+                if image_tag=='better_alpha' {
+                    image_alpha=EaseOutSine(t,0,0.75+dsin(dir)*0.7,149);
+                }
             }
-            else {
-                image_alpha=0.15+dsin(dir)*0.05;
-                dir_inc=0.85+dsin(t*2)*0.65;
+            if t&gt;=100 {
+                if image_tag!='better_alpha' {
+                    image_alpha=0.075+dsin(dir)*0.025;
+                }
+                if image_tag=='better_alpha' {
+                    image_alpha=0.75+dsin(dir)*0.7
+                }
             }
-            
+            //dir_inc=0.5+dsin(subtag*2)*0.7;
+            if place_meeting(x,y,objPlayer) and image_alpha&gt;1 {
+                killer=false;
+                player_BLC_kill(0.75/25);       //  the
+                image_tag='a';
+                image_alpha=0.99;
+                //paranoic decision
+            }
+            if image_alpha&gt;1 {
+                killer=true;
+            }
+            else { killer=false; }
+            subtag++;
         }
     }
+    
 }
 
 if t==1752 {
@@ -2931,136 +3051,6 @@ if t&gt;1735 and t&lt;2135 {
         view_wview[0]=800-view_xview[0]*2;
         view_hview[0]=608-view_yview[0]*2;
     }
-    /*view_angle[0]=dsin((t-1735)/2)*6;
-    if t mod 10 == 1 {
-        xx=400+random_range(64,point_distance(400,304,view_xview[0],view_yview[0])-48)*choose(-1,1);
-        yy=304+random_range(46,point_distance(400,304,view_xview[0],view_yview[0])-48)*choose(-1,1)/1.3;
-        rand_angle=random(360);
-        scale=random_range(0.8,1);
-        length = random_range(80,224)
-        inc= -length/random_range(40,50)
-        shift=choose(40,45,60);
-        for (var angle=rand_angle;angle&lt;rand_angle+360;angle+=shift) {
-            var gather = instance_create(-3000,-3000,objHappy_Bullet_trig);
-            gather.cen_x=xx;
-            gather.cen_y=yy;
-            gather.dir=angle;
-            gather.len=length;
-            gather.len_inc=inc;
-            gather.sprite_index=sprHappy_WBCherry;
-            gather.image_xscale=scale;
-            gather.image_yscale=gather.image_xscale;
-            gather.image_tag=scale;
-            gather.image_alpha=-0.2;
-            gather.killer=false;
-            gather.tag='s2_gathering_circle_fade_in';
-        }
-    }
-    
-    if t mod 10 == 6 {
-        rand_angle=random(360);
-        scale=random_range(0.8,1);
-        xx=random_range(view_xview[0],view_xview[0]+view_wview[0]);
-        yy=random_range(view_yview[0],view_yview[0]+view_hview[0]);
-        length = random_range(80,224)
-        inc= -length/random_range(40,75)
-        shift=60
-        for (var angle=rand_angle;angle&lt;rand_angle+360;angle+=shift) {
-            var gather = instance_create(-3000,-3000,objHappy_Bullet_trig);
-            gather.cen_x=xx;
-            gather.cen_y=yy;
-            gather.dir=angle;
-            gather.len=length;
-            gather.len_inc=inc;
-            gather.sprite_index=sprHappy_WBCherry;
-            gather.image_xscale=scale;
-            gather.image_yscale=gather.image_xscale;
-            gather.image_tag=scale;
-            gather.image_alpha=-0.2;
-            gather.killer=false;
-            gather.tag='s2_deco_gathering_circle_fade_in';
-        }
-    }
-    if t==2080 {
-        sf = instance_create(0,0,objHappy_PersistSF);
-        sf.affect_killer=false;
-        
-        shader_transition = instance_create(0,0,objPShaderEffect);
-        shader_transition.shader = shEasyShaderExample;
-        shader_transition.intensity = 0;
-        
-    }
-    if t&gt;2080 and t mod 8 == 0 {
-        rand_x[0]=random_range(64,64+(800-64*2));
-        rand_y[0]=64/1.3;
-        rand_x[1]=64+(800-64*2);
-        rand_y[1]=random_range(64/1.3,64/1.3+(608-64*2/1.3));
-        rand_x[2]=random_range(64,64+(800-64*2));
-        rand_y[2]=64/1.3+(608-64*2/1.3);
-        rand_x[3]=64;
-        rand_y[3]=random_range(64/1.3,64/1.3+(608-64*2/1.3));
-        for (var i=0; i&lt;4; i++) {
-            snake = instance_create(rand_x[i],rand_y[i],objHappy_Bullet_01);
-            snake.image_xscale=2.5;
-            snake.image_yscale=snake.image_xscale;
-            snake.image_blend=c_red;
-            snake.image_alpha=0;
-            snake.direction=point_direction(snake.x,snake.y,400,304);
-            snake.speed=random_range(6,8);
-            snake.tag='s2_red_snake_spawner';
-        }
-    }
-    if t&gt;2080 {
-        objPShaderEffect.intensity+=0.075/(2135-2080);
-        with(objAvoidanceBullet) { 
-            killer=false;
-            if tag== 's2_deco_gathering_circle_fade_in' or tag=='s2_gathering_circle_fade_in' {
-                image_blend=merge_color(c_maroon,c_white,EaseInCubic(other.t-2080,1,0,2135-2080))
-            }
-        }
-        view_xview[0]=EaseInQuart(t-2080,64,192,2135-2080);
-        view_yview[0]=view_xview[0]/1.3;
-        view_wview[0]=800-view_xview[0]*2;
-        view_hview[0]=608-view_yview[0]*2;
-    }
-    with(objHappy_Bullet_01) {
-        if tag = 's2_red_snake_spawner' {
-            direction=point_direction(xstart,ystart,400,304)+dsin(t*30)*45;
-            image_xscale-=0.075;
-            image_yscale=image_xscale;
-            if image_xscale&lt;=0 { instance_destroy(); }
-            //if t mod 2 == 0 {
-                var snake = instance_create(x,y,objHappy_SFArea);
-                snake.sprite_index=sprite_index;
-                snake.image_xscale=image_xscale;
-                snake.image_yscale=image_yscale;
-                snake.image_blend=image_blend;
-                snake.depth=depth;
-                snake.tag='s2_red_snake';
-            //}
-        }
-        if tag=='s2_kardia_prefinal_bs' {
-            if t&lt;75 { 
-                image_xscale=EaseInSine(t,0,image_tag,75);
-                image_yscale=image_xscale;
-                //image_xscale=EaseInSine(t,0,1,75);
-            }
-            if t==75 { instance_destroy(); }
-        }
-    }
-    with(objHappy_Bullet_trig) {
-        if tag=='s2_gathering_circle_fade_in' or tag=='s2_gathering_circle' or tag=='s2_deco_gathering_circle_fade_in' {
-            if tag=='s2_gathering_circle_fade_in' {
-                image_alpha+=0.02;
-                if image_alpha&gt;=1 { killer=true; tag='s2_gathering_circle' }
-            }
-            if tag=='s2_deco_gathering_circle_fade_in' {
-                if image_alpha&lt;0.08 {
-                    image_alpha+=0.02;
-                }
-            }
-        }
-    }*/
 }
 if t==2135 {
     instance_destroy(objPShaderEffect);
@@ -3084,6 +3074,12 @@ if t==2135 {
     }
     shader_greyscale = shader_push(shGreyscale,0);
     instance_change_variable(shader_greyscale,"intensity",1,50,tween_linear);
+    
+    with(objHappy_PartDraw) {
+        if tag=='s2_ugly_grid' {
+            instance_destroy();
+        }
+    }
 }
 if t&gt;2135 and t&lt;2185 {
     with(objHappy_Darkness) {
@@ -3141,9 +3137,9 @@ if t&gt;2135 and t&lt;2510 {
         view_yview[0]=view_xview[0]/1.3;
         view_wview[0]=800-view_xview[0]*2;
         view_hview[0]=608-view_yview[0]*2;
-        with(objPlayer) { frozen=true; }
-        objPlayer.x=EaseOutCubic(t-2435,px,400,2510-2435);
-        objPlayer.y=EaseOutCubic(t-2435,py,304,2510-2435);
+        //with(objPlayer) { frozen=true; }
+        //objPlayer.x=EaseOutCubic(t-2435,px,400,2510-2435);
+        //objPlayer.y=EaseOutCubic(t-2435,py,304,2510-2435);
     }
 }
 if t==2510 {
@@ -3208,7 +3204,7 @@ if t==2534 {
             //killer=true;
         }
     }
-    with(objPlayer) { frozen=false; }
+    //with(objPlayer) { frozen=false; }
     with(objHappy_Darkness) {
         if tag=='s2_flash' {
             image_alpha=0.6;
@@ -6516,6 +6512,7 @@ if t==5835 {
     miku = instance_create(448,48,objHappy_Miku);
     miku.image_alpha=0;
     miku.alpha_range=-0.25
+    miku.tag='Miku';        //its says a lot about an object
 }
 if t&gt;5835 and t&lt;5885 {
     view_xview[0]=EaseOutExpo(t-5835,192,0,50);
@@ -6927,11 +6924,13 @@ if t&gt;6560 and t&lt;6635 {
 }
 if t==6635 {
     with(objAvoidanceBullet) {
-        speed=random_range(4,12);
-        friction=0;
-        accel=0.2;
-        image_alpha=0.5;
-        killer=false;
+        if tag!='Miku' {
+            speed=random_range(4,12);
+            friction=0;
+            accel=0.2;
+            image_alpha=0.5;
+            killer=false;
+        }
     }
     with(objHappy_Bullet_trig) {
         if tag=='s7_transformed_circle' {

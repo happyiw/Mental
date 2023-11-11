@@ -180,6 +180,7 @@
     </sprites>
     <sprites name="Avoidance Bullets">
       <sprite>sprites\sprPBigArrowhead</sprite>
+      <sprite>sprites\sprArrowheadWhite</sprite>
       <sprite>sprites\sprPBigArrowheadInverted</sprite>
       <sprite>sprites\sprBulletPlasma</sprite>
       <sprite>sprites\sprBulletArrowhead</sprite>
@@ -239,6 +240,8 @@
           <sprite>sprites\sprHappy_Tail6</sprite>
         </sprites>
         <sprite>sprites\sprHappy_Funny</sprite>
+        <sprite>sprites\sprHappy_CharismaBreaker</sprite>
+        <sprite>sprites\sprHappy_WBCherryImproved</sprite>
       </sprites>
     </sprites>
     <sprite>sprites\sprHitCountFrameNew</sprite>
@@ -698,6 +701,7 @@
             <object>objects\objHappy_Tail6</object>
           </objects>
           <object>objects\objHappy_PartDraw</object>
+          <object>objects\objHappy_CharismaBreaker</object>
         </objects>
         <objects name="Bullets">
           <object>objects\objHappy_ParentBullet</object>
@@ -750,6 +754,7 @@
       <room>rooms\rMikuTemplate</room>
     </rooms>
     <room>rooms\rDrawTest</room>
+    <room>rooms\rPlaceholder</room>
     <room>rooms\rResults</room>
   </rooms>
   <help>

@@ -28,6 +28,8 @@
             <string>///extended obBullet_trig
 event_inherited();
 image_speed=0;
+image_tag=0;
+//once its used, it wont leave you
 
 cen_x=0;     //center x coordinates
 cen_y=0;     //center y coordinates
