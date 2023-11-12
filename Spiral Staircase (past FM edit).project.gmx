@@ -196,6 +196,7 @@
       <sprite>sprites\sprBulletLeek</sprite>
       <sprite>sprites\sprButterflyCustom</sprite>
       <sprite>sprites\sprBulletDot</sprite>
+      <sprite>sprites\sprBulletHybrid</sprite>
     </sprites>
     <sprite>sprites\sprAvoidanceController</sprite>
     <sprite>sprites\sprDrawController</sprite>

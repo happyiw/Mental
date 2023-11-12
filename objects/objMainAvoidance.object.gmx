@@ -2832,8 +2832,8 @@ if t==1732 {
             a.deg_y=4000;
             a.deg_x=spiral_direction;
             a.sprite_index=sprPCircle;
-            a.sprite_index=sprHappy_WBCherryImproved;
-            a.image_blend=c_red;
+            a.sprite_index=sprPCircle//choose(sprBulletLeehe,sprBulletHybrid,sprPCircle);//sprHappy_WBCherryImproved;
+            //a.image_blend=c_red;
             a.killer=false;
             a.image_index=0;
             a.image_alpha=0.2;
