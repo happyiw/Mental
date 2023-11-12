@@ -2718,6 +2718,10 @@ if t&gt;1685 and t&lt;1735 {
     }
 }
 if t==1710 {
+    //PRINCE: Create the gradient background
+    var _gradient = instance_create(0,0,objPrince_Gradient);
+    _gradient.image_alpha=0;
+    instance_change_alpha(_gradient,0.2,200,tween_sine_out);
     with(objHappy_Bullet_trig) {
         if tag=='s2_burst_to_circle' {
             repeat(2) {
@@ -3029,6 +3033,7 @@ if t==1760 {
             accel=0.05;
         }
     }
+
 }
 if t&gt;1760 and t&lt;1860 {
     with(objHappy_Bullet_01) {
@@ -3053,6 +3058,8 @@ if t&gt;1735 and t&lt;2135 {
     }
 }
 if t==2135 {
+    //PRINCE: Fade out the gradient
+    with(objPrince_Gradient) instance_fade_out(id,100);
     instance_destroy(objPShaderEffect);
     instance_destroy(objHappy_PersistSF);
     instance_destroy(objHappy_SFArea);

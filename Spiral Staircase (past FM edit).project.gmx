@@ -244,6 +244,9 @@
         <sprite>sprites\sprHappy_CharismaBreaker</sprite>
         <sprite>sprites\sprHappy_WBCherryImproved</sprite>
       </sprites>
+      <sprites name="prince">
+        <sprite>sprites\sprPrince_Gradient</sprite>
+      </sprites>
     </sprites>
     <sprite>sprites\sprHitCountFrameNew</sprite>
     <sprite>sprites\sprHitCountFrameNewCell</sprite>
@@ -726,6 +729,9 @@
           <object>objects\objGlowTest</object>
           <object>objects\objHappy_new</object>
         </objects>
+      </objects>
+      <objects name="prince">
+        <object>objects\objPrince_Gradient</object>
       </objects>
     </objects>
     <object>objects\objHitCount_new</object>
