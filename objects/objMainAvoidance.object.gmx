@@ -2822,30 +2822,32 @@ if t==1732 {
     for(var yy=view_yview[0]-32;yy&lt;view_yview[0]+view_hview[0]+32;yy+=4) {
         if (yy-(view_yview[0]-32)) mod 12 == 0 {
             it='better_alpha';
+            /*}
+            else {
+                it="i'll ask someone else about that thing later, cuz i have no idea what to write here"
+            }*/
+            for (var _a=0;_a&lt;=rand_angle2;_a+=rand_angle2) {
+                var a = instance_create(0,0,objHappy_BreakingBullet);
+                a.cen_x=400;
+                a.cen_y=yy;
+                a.dir=yy*2+rand_angle+_a*1.25;
+                a.dir_inc=dirinc;
+                a.len=(view_wview[0]/2)-16;
+                a.deg_y=4000;
+                a.deg_x=spiral_direction;
+                a.killer=false;
+                //a.image_index=0;
+                a.image_alpha=0.2;
+                a.tag='s2_exceed_spiral';
+                a.image_tag=it;
+                a.subtag=uhhhhhh;
+                a.part_t=random_range(-15,75);
+                for (var i=0;i&lt;4;i++) {
+                    a.sind[i]=a.sprite_index;
+                    a.simg[i]=a.image_index;
+                }
+            }
         }
-        else {
-            it="i'll ask someone else about that thing later, cuz i have no idea what to write here"
-        }
-        for (var _a=0;_a&lt;=rand_angle2;_a+=rand_angle2) {
-            var a = instance_create(0,0,objHappy_Bullet_trig);
-            a.cen_x=400;
-            a.cen_y=yy;
-            a.dir=yy*2+rand_angle+_a*1.25;
-            a.dir_inc=dirinc;
-            a.len=(view_wview[0]/2)-16;
-            a.deg_y=4000;
-            a.deg_x=spiral_direction;
-            a.sprite_index=sprPCircle;
-            a.sprite_index=sprPCircle//choose(sprBulletLeehe,sprBulletHybrid,sprPCircle);//sprHappy_WBCherryImproved;
-            //a.image_blend=c_red;
-            a.killer=false;
-            a.image_index=0;
-            a.image_alpha=0.2;
-            a.tag='s2_exceed_spiral';
-            a.image_tag=it;
-            a.subtag=uhhhhhh;
-        }
-        
     }
 }
 
@@ -2968,28 +2970,37 @@ if t&gt;1732 and t&lt;2135 {
             if image_xscale&lt;=0 { instance_destroy(); }
         }
     }
-    with(objHappy_Bullet_trig) {
+    with(objHappy_BreakingBullet) {
         if tag=='s2_exceed_spiral' {
             //image_alpha=0.15+dsin(dir)*0.05;
             image_xscale=0.75+dsin(dir)*0.5;
             image_yscale=image_xscale;
             depth=-dsin(dir)*20;
-            if t&lt;150 {
-                if image_tag!='better_alpha' {
-                    image_alpha=EaseOutExpo(t,0,0.075+dsin(dir)*0.025,149);
+            
+            bullet_size=image_xscale;
+            
+            if not (part_t&gt;125 and part_t&lt;=299 ){
+            //ignores alpha changmenets by MainAvoidance, while effect being charged
+                if t&lt;150 {
+                    if image_tag!='better_alpha' {
+                        image_alpha=EaseOutExpo(t,0,0.075+dsin(dir)*0.025,149);
+                    }
+                    if image_tag=='better_alpha' {
+                        image_alpha=EaseOutSine(t,0,0.75+dsin(dir)*0.7,149);
+                    }
                 }
-                if image_tag=='better_alpha' {
-                    image_alpha=EaseOutSine(t,0,0.75+dsin(dir)*0.7,149);
+                if t&gt;=100 {
+                    if image_tag!='better_alpha' {
+                        image_alpha=0.075+dsin(dir)*0.025;
+                    }
+                    if image_tag=='better_alpha' {
+                        image_alpha=0.75+dsin(dir)*0.7
+                    }
                 }
             }
-            if t&gt;=100 {
-                if image_tag!='better_alpha' {
-                    image_alpha=0.075+dsin(dir)*0.025;
-                }
-                if image_tag=='better_alpha' {
-                    image_alpha=0.75+dsin(dir)*0.7
-                }
-            }
+            //part_alpha_max=image_alpha;
+            
+            
             //dir_inc=0.5+dsin(subtag*2)*0.7;
             if place_meeting(x,y,objPlayer) and image_alpha&gt;1 {
                 killer=false;

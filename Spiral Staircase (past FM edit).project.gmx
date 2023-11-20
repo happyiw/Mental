@@ -189,6 +189,7 @@
       <sprite>sprites\sprPCircleInverted</sprite>
       <sprite>sprites\sprPCircleSmall</sprite>
       <sprite>sprites\sprBulletLeehe</sprite>
+      <sprite>sprites\sprBulletVariety</sprite>
       <sprite>sprites\sprBulletCherry</sprite>
       <sprite>sprites\sprBulletCherryWhite</sprite>
       <sprite>sprites\sprBulletCherryBlack</sprite>
@@ -738,6 +739,7 @@
     <object>objects\objSeededRNGSeq</object>
     <object>objects\objBloodEmitterNew</object>
     <object>objects\objBloodNew</object>
+    <object>objects\objHappy_BreakingBullet</object>
   </objects>
   <rooms name="rooms">
     <rooms name="Init">
@@ -760,8 +762,8 @@
       <room>rooms\rAvoidanceTemplate</room>
       <room>rooms\rMikuTemplate</room>
     </rooms>
-    <room>rooms\rDrawTest</room>
     <room>rooms\rPlaceholder</room>
+    <room>rooms\rDrawTest</room>
     <room>rooms\rResults</room>
   </rooms>
   <help>
