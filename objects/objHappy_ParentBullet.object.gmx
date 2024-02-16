@@ -45,6 +45,8 @@ yy=0;
 
 image_tag=0;
 
+free_variable[0]=0;
+
 alarm[0] = -1;
 alarm[2] = 1;
 //alarm[1] = 1000;

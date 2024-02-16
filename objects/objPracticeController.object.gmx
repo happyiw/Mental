@@ -76,7 +76,7 @@ if global.practiceOn=1 {
         case 4: global.debugAvoidanceStartTime=3230-1; break;
         case 5: 
             global.debugAvoidanceStartTime=4130-1;
-            if keyboard_check_pressed(ord("S")) or keyboard_check_pressed(ord("F")){
+            if keyboard_check_pressed(ord("S")) {//or keyboard_check_pressed(ord("F")){
                 global.s5_side*=-1;
             }
         break;
@@ -123,7 +123,8 @@ if global.practiceOn=1 {
             case -1: side='Right'; break;
             case 1: side='Left'; break;
         }
-        draw_text(400,480+32,"S &lt;-    Side: " + string(side)+"    -&gt; F");
+        draw_text(400,480+16,"Press S to change side");
+        draw_text(400,480+32+32,"Side: " + string(side));
     }
     var status = "ON"
 }

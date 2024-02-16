@@ -33,6 +33,8 @@ shader=shAurora;;
 
 t=0;
 intensity=1;
+
+tag=0;
 </string>
           </argument>
         </arguments>

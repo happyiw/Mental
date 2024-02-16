@@ -32,10 +32,10 @@ image_tag=0;        //useless
 cen_x=400;     //center x coordinates
 cen_y=304;     //center y coordinates
 deg_x=1;     //degrease length on x
-deg_y=-10;     //degrease length on y
-len=200;       //length
+deg_y=1;     //degrease length on y
+len=00;       //length
 dir=0;       //direction
-dir_inc=1;   //increase direction on every frame
+dir_inc=0;   //increase direction on every frame
 len_inc=0;   //increase length on every frame
 xx=0;
 yy=0;
@@ -72,11 +72,14 @@ subtag=0;    //useless addiction to tag
             <kind>1</kind>
             <string>///Variables for breaking effect
 event_inherited();
+draw_parts=false;
+
 
 flash_alpha=0;
 
 bullet_size=1;
-part_size=1;
+part_xsize=1;
+part_ysize=1;
 
 part_cen_x=x;
 part_cen_y=y;
@@ -85,10 +88,23 @@ part_alpha_max=1;
 
 image_xscale=bullet_size;
 image_yscale=image_xscale;
+sprite_type=choose("Cherry","Barrage");
+if sprite_type=="Cherry" {
+    image_index=0;
+}
+if sprite_type=="Barrage" {
+    image_index=1;
+}
+
+
+sprite_type_flag=false;
 
 si=0;
 
 part_t=0;
+
+start_point[0]=0;
+end_point[0]=0;
 
 for (var i=0;i&lt;4;i++) {
     //sprite
@@ -123,30 +139,86 @@ for (var i=0;i&lt;4;i++) {
         case 0:
             sl[i]=0;
             st[i]=0;
-            sx[i]=x-sw[i]*part_size/2-sgxoff*part_size/2+1;
-            sy[i]=y-sh[i]*part_size/2-sgyoff*part_size/2;
+            sx[i]=x-sw[i]*part_xsize/2-sgxoff*part_xsize/2+1;
+            sy[i]=y-sh[i]*part_ysize/2-sgyoff*part_ysize/2;
+            sdir[i]=225;
         break;
         case 1:
             sl[i]=sgw/2;
             st[i]=0;
-            sx[i]=x+sw[i]*part_size/2-sgxoff*part_size/2+1;
-            sy[i]=y-sh[i]*part_size/2-sgyoff*part_size/2;
+            sx[i]=x+sw[i]*part_xsize/2-sgxoff*part_xsize/2+1;
+            sy[i]=y-sh[i]*part_ysize/2-sgyoff*part_ysize/2;
+            sdir[i]=315;
         break;
         case 2:
             sl[i]=0;
             st[i]=sgh/2;
-            sx[i]=x-sw[i]*part_size/2-sgxoff*part_size/2+1;
-            sy[i]=y+sh[i]*part_size/2-sgyoff*part_size/2;
+            sx[i]=x-sw[i]*part_xsize/2-sgxoff*part_xsize/2+1;
+            sy[i]=y+sh[i]*part_ysize/2-sgyoff*part_ysize/2;
+            sdir[i]=135;
         break;
         case 3:
             sl[i]=sgw/2;
             st[i]=sgh/2;
-            sx[i]=x+sw[i]*part_size/2-sgxoff*part_size/2+1;
-            sy[i]=y+sh[i]*part_size/2-sgyoff*part_size/2;
+            sx[i]=x+sw[i]*part_xsize/2-sgxoff*part_xsize/2+1;
+            sy[i]=y+sh[i]*part_ysize/2-sgyoff*part_ysize/2;
+            sdir[i]=45;
         break;
     }
     //at this point i dont know what does that 's' mean in the beginning
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set to cherry
+sprite_type_flag=true;
+image_index=0;
+sprite_type="Cherry"
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Set to barrage bullet
+sprite_type_flag=true;
+image_index=1;
+sprite_type="Barrage"
 </string>
           </argument>
         </arguments>
@@ -170,36 +242,53 @@ for (var i=0;i&lt;4;i++) {
           <argument>
             <kind>1</kind>
             <string>///Resetting variables for each piece
-part_t++;
-if not (part_t&gt;=300 and part_t&lt;=500) {
+//if not (part_t&gt;=300 and part_t&lt;=500) {
     part_cen_x=x;
     part_cen_y=y;
+    part_xsize=image_xscale;
+    part_ysize=image_yscale;
     for (var i=0;i&lt;4;i++) {
         sxsc[i]=image_xscale;
-        sxsc[i]=image_yscale;
+        sysc[i]=image_yscale;
     }
-}
+    
+    if sprite_type=="Cherry" {
+        image_index=0;
+    }
+    if sprite_type=="Barrage" {
+        image_index=1;
+    }
+//}
 for (var i=0;i&lt;4;i++) {
     sxadd[i]+=dcos(sdir[i])*sspd[i];
     syadd[i]+=dsin(sdir[i])*sspd[i];
+        //draws all parts
         switch(i) {
-            case 0:
-                sx[i]=part_cen_x-sw[i]*part_size/2-sgxoff*part_size/2;
-                sy[i]=part_cen_y-sh[i]*part_size/2-sgyoff*part_size/2;
+            case 0:         //top left part
+                sx[i]=part_cen_x-sw[i]*part_xsize/2-sgxoff*part_xsize/2;
+                sy[i]=part_cen_y-sh[i]*part_ysize/2-sgyoff*part_ysize/2;
+                /*
+                So, what does this code mean:
+                1. We set bullet's center coordinates
+                2. We move each part to its intended coordinates
+                (but "draw_sprite_general" sucks ass, so its not the end)
+                3. We move all those parts by intended offsets of the sprite
+                */
             break;
-            case 1:
-                sx[i]=part_cen_x+sw[i]*part_size/2-sgxoff*part_size/2;
-                sy[i]=part_cen_y-sh[i]*part_size/2-sgyoff*part_size/2;
+            case 1:         //top right part
+                sx[i]=part_cen_x+sw[i]*part_xsize/2-sgxoff*part_xsize/2;
+                sy[i]=part_cen_y-sh[i]*part_ysize/2-sgyoff*part_ysize/2;
             break
-            case 2:
-                sx[i]=part_cen_x-sw[i]*part_size/2-sgxoff*part_size/2;
-                sy[i]=part_cen_y+sh[i]*part_size/2-sgyoff*part_size/2;
+            case 2:         //bottom left part
+                sx[i]=part_cen_x-sw[i]*part_xsize/2-sgxoff*part_xsize/2;
+                sy[i]=part_cen_y+sh[i]*part_ysize/2-sgyoff*part_ysize/2;
             break
-            case 3:
-                sx[i]=part_cen_x+sw[i]*part_size/2-sgxoff*part_size/2;
-                sy[i]=part_cen_y+sh[i]*part_size/2-sgyoff*part_size/2;
+            case 3:         //bottom right part
+                sx[i]=part_cen_x+sw[i]*part_xsize/2-sgxoff*part_xsize/2;
+                sy[i]=part_cen_y+sh[i]*part_ysize/2-sgyoff*part_ysize/2;
             break
         }
+    //adds additional numbers to each part's coordinates
     sx[i]+=sxadd[i];
     sy[i]+=syadd[i];
 }
@@ -257,70 +346,134 @@ y=cen_y+len*sin(degtorad(dir))/deg_y;
           <argument>
             <kind>1</kind>
             <string>///Breaking effect and changing sprites
-//I HAVE ABSOLUTELY NO IDEA HOW THIS SHIT STILL WORKING
+/*
+Small rundown over what the hell is going on down there
+1. We start shaking each piece, which is followed by some alpha and color changements
+2. Pieces stop shaking, preparing for the break
+3. Pieces break, followed by alpha degrease and 'new bullet' appear
+4. Reset the cycle
+*/
 
 part_t++;
 
-if part_t&gt;125 and part_t&lt;299 {//and part_t&lt;400 {
+start_point[0]=50;
+end_point[0]=125;
+
+break_point=125;
+
+start_point[1]=125;
+end_point[1]=175;
+
+very_end_point=176;
+
+if part_t&gt;=start_point[0] and part_t&lt;=end_point[0] {             //and part_t&lt;400 {
+    
+    
+    //1. We start shaking each piece, which is followed by some alpha and color changements
+    
+    
     for (var i=0;i&lt;4;i++) {
+        //working with each pieces
+        //start with adding random numbers to each piece's coordinates
+        draw_parts=true;
         rand_angle[i]=random(360);
-        sxadd[i]=dcos(rand_angle[i])*max(0,dsin((part_t-125)*195/(299-125-2))*2*bullet_size)
-        syadd[i]=dsin(rand_angle[i])*max(0,dsin((part_t-125)*195/(299-125-2))*2*bullet_size)
+        sxadd[i]=dcos(rand_angle[i])*max(0,dsin((part_t-start_point[0])*195/(end_point[0]-start_point[0]-2))*2*image_xscale)
+        syadd[i]=dsin(rand_angle[i])*max(0,dsin((part_t-start_point[0])*195/(end_point[0]-start_point[0]-2))*2*image_yscale)
         
-        
-        if part_t&lt;=200 {
-            flash_alpha=EaseOutExpo(part_t-125,part_alpha_max,0,75);
-            image_alpha=EaseOutExpo(part_t-125,part_alpha_max,0,75);
-            salp[i]=EaseOutExpo(part_t-125,0,part_alpha_max,75);
+        //working on bullets and piece's alpha
+        //increasing piece's alpha, degreasing bullet's alpha
+        if part_t&lt;=end_point[0]*2/3 {
+            flash_alpha=EaseInOutCubic(part_t-start_point[0],part_alpha_max,0,(end_point[0]*2/3)-start_point[0]);
+            image_alpha=EaseInOutCubic(part_t-start_point[0],part_alpha_max,0,(end_point[0]*2/3)-start_point[0]);
+            salp[i]=EaseInOutCubic(part_t-start_point[0],0,part_alpha_max,(end_point[0]*2/3)-start_point[0]);
+        }
+        else {
+        //when bullet is invisible, changing its sprite
+        //i put this in here, because it didnt want to change correctly at step 2
+            if (sprite_type_flag=false) {
+                if sprite_type=="Cherry" {
+                    alarm[0]=1;
+                }
+                if sprite_type=="Barrage" {
+                    alarm[1]=1
+                }
+            }
         }
         
-        if part_t&lt;175 {
-            smercol[i]=275-part_t;
+        //working on piece's color
+        if part_t&lt;start_point[0]+(50*((end_point[0]-start_point[0])/175)) {
+            smercol[i]=275-part_t;                              //set 'color chaos' far away from being actually seen
         }
-        if part_t&gt;=175 and part_t&lt;=225 {
-            smercol[i]=EaseOutSine(part_t-175,1,0.2,50);
+        if part_t&gt;=start_point[0]+(50*((end_point[0]-start_point[0])/175)) and part_t&lt;=start_point[0]+(100*((end_point[0]-start_point[0])/175)) {
+            smercol[i]=EaseOutSine(part_t-175,1,0.2,50);        //color of each piece start changing
         }
-        if part_t&gt;=225 {
-            smercol[i]=0.2;
+        if part_t&gt;=start_point[0]+(100*((end_point[0]-start_point[0])/175)) {
+            smercol[i]=0.2;                                     //color ends up being a chaos
         }
         scol[i]=choose(c_white,merge_colour(c_white,choose(c_red,c_blue,c_green),1/(smercol[i]*6)));
+        //sing[i]=sprite_index;
+        //simg[i]=image_index;
     }
 }
+if part_t&lt;=start_point[0] or part_t&gt;=end_point[0] {
+    image_alpha=part_alpha_max;
+}
+if part_t==break_point {
 
-if part_t==299 {
+
+    //2. Pieces stop shaking, preparing for the break
+    
+    
     for (var i=0;i&lt;4;i++) {
         sxadd[i]=0;
         syadd[i]=0;
-        switch(i) {
-            case 3: sdir[i]=45; break;
-            case 2: sdir[i]=135; break;
-            case 1: sdir[i]=315; break;
-            case 0: sdir[i]=225; break;
-        }
+        //switch(i) {
+            //case 3: sdir[i]=45; break;
+            //case 2: sdir[i]=135; break;
+            //case 1: sdir[i]=315; break;
+            //case 0: sdir[i]=225; break;
+        //}
     }
-    image_alpha=1;
-    image_index=abs(image_index-1);
+    image_alpha=part_alpha_max;
+    /*if (sprite_type_flag=false) {
+        
+        if sprite_type=="Cherry" {
+            alarm[0]=1;
+        }
+        if sprite_type=="Barrage" {
+            alarm[1]=1
+        }
+    }*/
     image_xscale=bullet_size/3;
     image_yscale=bullet_size/3;
 }
 
-if part_t&gt;=300 and part_t&lt;=500 {
-    a=EaseOutExpo(part_t-300,2,0.5,100);
+if part_t&gt;=start_point[1] and part_t&lt;=end_point[1] {
+
+
+    //3. Pieces break, followed by alpha degrease and 'new bullet' appear
+
+
+    a=EaseOutExpo(part_t-start_point[1],2.5,0.5,(end_point[1]-start_point[1])/2)*image_xscale;
     for (var i=0;i&lt;4;i++) {
-        if part_t&lt;=425 {
-            salp[i]=EaseOutQuart(part_t-300,1,0,125);
+        if part_t&lt;=end_point[1]*0.9 {
+            salp[i]=EaseOutQuart(part_t-start_point[1],part_alpha_max,0,(end_point[1]-start_point[1])*0.9);
         }
         sspd[i]=a
         scol[i]=merge_colour(c_white,choose(c_red,c_blue,c_green),1/(0.2*6));
     }
-    if t&lt;=400 {
-        flash_alpha=EaseOutSine(part_t-300,1,0,100);
+    if part_t&lt;=end_point[1]*0.8 {
+        flash_alpha=EaseOutSine(part_t-start_point[1],1,0,(end_point[1]-start_point[1])*0.8);
     }
-    image_xscale=EaseOutExpo(part_t-300,bullet_size/3,bullet_size,200);
+    image_xscale=EaseOutExpo(part_t-start_point[1],bullet_size/3,bullet_size,end_point[1]-start_point[1]);
     image_yscale=image_xscale;
 }
 
-if part_t&gt;501 {
+if part_t&gt;very_end_point {
+
+    //4. Resets the cycle
+    draw_parts=false;               //stops drawing parts
+    sprite_type_flag=false;         //resets sprite changing flag
     for (var i=0;i&lt;4;i++) {
         simg[i]=image_index;
         
@@ -340,8 +493,33 @@ if part_t&gt;501 {
         syadd[i]=0;
     }
     
-    part_t=1;
+    part_t=0;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Testing
+/*
+image_xscale=dcos(t*2)+7;
+image_yscale=image_xscale;
+part_alpha_max=dsin(t*3)*0.25+0.45;
 </string>
           </argument>
         </arguments>
@@ -364,23 +542,40 @@ if part_t&gt;501 {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-draw_text(64,64,part_t);
-draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,flash_alpha);
+            <string>///Drawing Bad
+//draw_text(64,64,part_t);
+
+//draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,flash_alpha);
+draw_self();
 draw_set_blend_mode(bm_add);
-for (var i=0;i&lt;4;i++) {
-    draw_sprite_general(sind[i],simg[i],    //sprite
-    sl[i],st[i],sw[i],sh[i],                //part of the sprite
-    sx[i],sy[i],                            //coordinates
-    sxsc[i],sysc[i],sang[i],                //scaling and angle
-    scol[i],scol[i],scol[i],scol[i],        //color
-    salp[i]);                               //alpha
+if(draw_parts) {
+    for (var i=0;i&lt;4;i++) {
+        draw_sprite_general(sind[i],simg[i],    //sprite
+        sl[i],st[i],sw[i],sh[i],                //part of the sprite
+        sx[i],sy[i],                            //coordinates
+        sxsc[i],sysc[i],sang[i],                //scaling and angle
+        scol[i],scol[i],scol[i],scol[i],        //color
+        salp[i]);                               //alpha
+    }
 }
 draw_set_blend_mode(bm_normal);
-/*draw_set_color(c_white);
-draw_line_width(sx[0],sy[0],sx[3],sy[3],4);
-draw_line_width(sx[1],sy[1],sx[2],sy[2],4);
 
+draw_set_alpha(1);
+
+//Writes type of the sprite
+//draw_set_color(c_white)
+//draw_text(x,y,sprite_type);
+
+
+//Draws lines...idk what to say
+/*draw_set_color(c_green);
+draw_line_width(sx[0]+sgxoff*part_xsize/2,sy[0]+sgyoff*part_ysize/2,sx[3]+sgxoff*part_xsize/2,sy[3]+sgyoff*part_ysize/2,4);
+draw_line_width(sx[1]+sgxoff*part_xsize/2,sy[1]+sgyoff*part_ysize/2,sx[2]+sgxoff*part_xsize/2,sy[2]+sgyoff*part_ysize/2,4);
+
+
+//Draws center of the bullet
+draw_set_colour(c_red)
+draw_circle(x,y,4,false)
 </string>
           </argument>
         </arguments>

@@ -28,6 +28,10 @@
             <string>event_inherited();
 tag = -1;
 replace=true;
+free_variable[0]=0;
+replace_cherry=true;
+
+t=0;
 </string>
           </argument>
         </arguments>
@@ -50,32 +54,36 @@ replace=true;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//if (y - speed &lt; 0 - 16 ) y += 624;
-if (y -+ speed &lt; 0 - 16) and (replace) {
-    var line_cherry_case = irandom_range(1,10)
-    /*
-    1 - semi-transparent cherry
-    2 - usual cherry
-    3 - 'hold' cherry
-    4 - 'penalty' cherry
-    */
+            <string>t++;
+
+if t==1 and (replace_cherry) {
+    obj_cherry = instance_create(x+16,y-24,objHappy_Bullet_01);
+    obj_cherry.speed = speed;
+    obj_cherry.direction = direction;
+    obj_cherry.sprite_index=choose(sprHappy_MayuCherry,sprHappy_WBCherry);
+    obj_cherry.image_xscale=random_range(1.25,1.75);
+    obj_cherry.image_yscale=obj_cherry.image_xscale;
+    obj_cherry.tag='S6_follow_platform';
+    obj_cherry.persist=true;
+    obj_cherry.aimlock=false;
+    if (free_variable[0]&lt;=4) {
+        obj_cherry.killer=false;
+        obj_cherry.image_alpha=0.15;
+    }
+    else {
+        if (free_variable[0]==5 or free_variable[0]==6) { Type="Low_Damage"; }
+
+    }
+}
+
+if (y - vspeed &lt; - 16) and (replace) {
     obj = instance_create(x,y+624,objHappy_Platform);
     obj.speed = speed
     obj.direction = direction
-    if line_cherry_case &gt; 2 and line_cherry_case &lt; 8 {
-        obj_cherry = instance_create(x + 16 ,y - 18 + 624,objHappy_Bullet_01);
-        obj_cherry.speed = obj.speed;
-        obj_cherry.direction = obj.direction;
-        obj_cherry.sprite_index=choose(sprHappy_MayuCherry,sprHappy_WBCherry);
-        obj_cherry.image_xscale=random_range(1.25,1.75);
-        obj_cherry.image_yscale=obj_cherry.image_xscale;
-        obj_cherry.tag='S6_follow_platform';
-        obj_cherry.aimlock=false;
-        obj_cherry.persist=true;
-        if line_cherry_case == 5 or line_cherry_case == 6 { obj_cherry.Type = "Hold" }
-    }
+    obj.free_variable[0]=free_variable[0]
     instance_destroy();
 }
+
 </string>
           </argument>
         </arguments>
