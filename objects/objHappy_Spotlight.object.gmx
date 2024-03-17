@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>tag=0;
+free_variable[0]=0;
 </string>
           </argument>
         </arguments>

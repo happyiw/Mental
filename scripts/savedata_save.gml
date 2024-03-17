@@ -4,6 +4,8 @@
 
 var savePosition = argument0;
 
+savedata_set("avoidance pb",global.avoidance_pb);
+
 if savePosition && instance_exists(objPlayer) {
     savedata_set("room", room_get_name(room));
     savedata_set("playerX", objPlayer.x);

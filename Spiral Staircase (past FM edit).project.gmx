@@ -3,8 +3,8 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="4" name="datafiles">
-    <datafiles number="4" name="Music">
+  <datafiles number="5" name="datafiles">
+    <datafiles number="5" name="Music">
       <datafile>
         <name>GuyRock.ogg</name>
         <exists>-1</exists>
@@ -57,6 +57,23 @@
       </ConfigOptions>
       <filename>docs_gm.json</filename>
     </datafile>
+    <datafile>
+      <name>2023-11-26 22-01-17.mp4</name>
+      <exists>-1</exists>
+      <size>1729645</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>2023-11-26 22-01-17.mp4</filename>
+    </datafile>
   </datafiles>
   <NewExtensions>
     <extension index="0">extensions\GMSched</extension>
@@ -80,12 +97,8 @@
     <sounds name="Music">
       <sound>sound\musMainAvoidance</sound>
       <sound>sound\musFinal</sound>
-      <sound>sound\musOnDeath</sound>
     </sounds>
     <sound>sound\musKeepMyMental</sound>
-    <sound>sound\sndItsNotOver</sound>
-    <sound>sound\sndText</sound>
-    <sound>sound\sndBruh</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="World">
@@ -245,6 +258,7 @@
         <sprite>sprites\sprHappy_WBCherryImproved</sprite>
         <sprite>sprites\sprBulletVariety</sprite>
         <sprite>sprites\sprLeeheMoment</sprite>
+        <sprite>sprites\sprBloodScreen</sprite>
       </sprites>
       <sprites name="prince">
         <sprite>sprites\sprPrince_Gradient</sprite>
