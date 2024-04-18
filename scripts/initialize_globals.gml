@@ -3,9 +3,9 @@
 
 engine_options();
 
-global.debugAvoidanceStartTime=0;
+global.debugAvoidanceStartTime=7500;
 global.s5_side=choose(-1,1)
-global.avoidance_pb=0;
+global.avoidance_pb=0//savedata_get("avoidance pb");
 
 global.debugOverlay = false;    //Enables showing the debug text overlay (shows player location, align, etc.)
 global.debugNoDeath = true;    //Enables god mode (toggle with Home key)

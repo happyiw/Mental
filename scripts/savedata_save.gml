@@ -4,7 +4,6 @@
 
 var savePosition = argument0;
 
-savedata_set("avoidance pb",global.avoidance_pb);
 
 if savePosition && instance_exists(objPlayer) {
     savedata_set("room", room_get_name(room));
@@ -17,6 +16,8 @@ if savePosition && instance_exists(objPlayer) {
     
     ds_map_copy(global.persistentSaveData, global.saveData);
 }
+
+//savedata_set("avoidance pb",global.avoidance_pb);
 
 savedata_set("saved", true);
 

@@ -32,7 +32,9 @@ if savedata_get("saved") {
     with(instance_create(savedata_get("playerX"), savedata_get("playerY"), objPlayer)) {
         xScale = savedata_get("playerXScale");
     }
+    //global.avoidance_pb=savedata_get("avoidance pb");
 }
+
 
 with(objBLCSystemController) { comboTimer=0; }
 

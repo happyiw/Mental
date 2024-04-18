@@ -99,6 +99,7 @@
       <sound>sound\musFinal</sound>
     </sounds>
     <sound>sound\musKeepMyMental</sound>
+    <sound>sound\sndAmbience</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="World">
@@ -259,6 +260,8 @@
         <sprite>sprites\sprBulletVariety</sprite>
         <sprite>sprites\sprLeeheMoment</sprite>
         <sprite>sprites\sprBloodScreen</sprite>
+        <sprite>sprites\sprHappy_KardiaCherry</sprite>
+        <sprite>sprites\sprHappy_Vortex</sprite>
       </sprites>
       <sprites name="prince">
         <sprite>sprites\sprPrince_Gradient</sprite>
@@ -540,6 +543,8 @@
     <font>fonts\fDefault30_new</font>
     <font>fonts\fDefault24_new</font>
     <font>fonts\fDefault18_new</font>
+    <font>fonts\fDefault12_new</font>
+    <font>fonts\fBaskerville_30</font>
   </fonts>
   <objects name="objects">
     <objects name="World">
@@ -702,6 +707,7 @@
       <object>objects\objBLCCircle</object>
     </objects>
     <object>objects\objMainAvoidance</object>
+    <object>objects\objPracticeEnd</object>
     <object>objects\objPracticeController</object>
     <objects name="KMM">
       <objects name="happy">
@@ -731,6 +737,7 @@
             <object>objects\objDNAParticle</object>
           </objects>
           <object>objects\objHappy_CRTScanline</object>
+          <object>objects\objHappy_Scanline2</object>
         </objects>
         <objects name="Bullets">
           <object>objects\objHappy_ParentBullet</object>
@@ -741,6 +748,7 @@
           <object>objects\objHappy_Bullet_trig_deco</object>
           <object>objects\objHappy_Bullet_trig_ext</object>
           <object>objects\objHappy_R2d_Bullet</object>
+          <object>objects\objHappy_BreakingBullet</object>
         </objects>
         <objects name="stuff">
           <object>objects\objHappy_Platform</object>
@@ -763,7 +771,6 @@
     <object>objects\objSeededRNGSeq</object>
     <object>objects\objBloodEmitterNew</object>
     <object>objects\objBloodNew</object>
-    <object>objects\objHappy_BreakingBullet</object>
   </objects>
   <rooms name="rooms">
     <rooms name="Init">

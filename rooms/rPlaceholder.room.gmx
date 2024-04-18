@@ -52,9 +52,9 @@
   </views>
   <instances>
     <instance objName="objAvoidanceDrawController" x="32" y="32" name="inst_BAB5A55B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objPlayer" x="224" y="832" name="inst_4D62E582" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objPrince_Gradient" x="0" y="0" name="inst_60AADBBF" locked="0" code="" scaleX="1" scaleY="1.25" colour="4294967295" rotation="0"/>
+    <instance objName="objPrince_Gradient" x="0" y="-96" name="inst_60AADBBF" locked="0" code="" scaleX="1" scaleY="1.25" colour="1694498815" rotation="0"/>
     <instance objName="objPShaderRectangle" x="0" y="0" name="inst_064B67CB" locked="0" code="shader=shDanixIsAGod&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="objHappy_Scanline2" x="416" y="288" name="inst_4A6BB281" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

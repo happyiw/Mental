@@ -25,8 +25,125 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.practiceSegment=savedata_get("practiceSegment");
+            <string>///practice variables and PB time
+
+global.practiceSegment=max(1,savedata_get("practiceSegment"));
 global.practiceOn=savedata_get("practiceOn");
+global.avoidance_pb=savedata_get("avoidance pb");
+
+pb_t = global.avoidance_pb;
+pb_max=1
+
+strPb = "";
+strPb += string(pb_t div 3000) + ":";
+pb_t = pb_t mod 3000
+strPb += string(pb_t div 500);
+pb_t = pb_t mod 500
+strPb += string(pb_t div 50) + ".";
+pb_t = pb_t mod 50
+if(((pb_t * 2) mod 100) &lt; 10) strPb += "0";
+strPb += string(pb_t * 2)
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Particle System
+global.psys = part_system_create();
+part_system_depth(global.psys, -100);
+
+
+global.ptyp = part_type_create();
+part_type_shape(global.ptyp, pt_shape_flare);
+part_type_color1(global.ptyp, 16777215);
+part_type_alpha3(global.ptyp, 0.025, 0.1, 0.01);
+part_type_life(global.ptyp, 19, 34);
+part_type_size(global.ptyp, 0.03, 0.24, -0.001, 0);
+part_type_speed(global.ptyp, 0.14, 0.18, -0.001, 0);
+part_type_direction(global.ptyp, 189.33, 282.81, -0.26, 0);
+part_type_orientation(global.ptyp, 89.6, 151.55, 0.21, 0, false);
+part_type_gravity(global.ptyp, 0, 270);
+part_type_blend(global.ptyp, false);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///line board
+for (var yy=0; yy&lt;72;yy+=24) {
+    switch(yy) {
+        case 0: bruh=3;break;
+        case 24: bruh=5;break;
+        case 48: bruh=10;break;
+    }
+    for (xx=0; xx&lt;800; xx+=64) {
+        var nu_i_hueta_je_eti_vashi_vizuali = instance_create(xx+32,352+yy,objHappy_Line);
+        nu_i_hueta_je_eti_vashi_vizuali.sprite_index=sprHappy_FuckingLine;
+        nu_i_hueta_je_eti_vashi_vizuali.image_xscale=2
+        nu_i_hueta_je_eti_vashi_vizuali.image_yscale=0.2
+        nu_i_hueta_je_eti_vashi_vizuali.image_alpha=1/bruh;
+        nu_i_hueta_je_eti_vashi_vizuali.tag='pre avoidance blocks'
+    } 
+}
+alarm[0]=25;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>with(objHappy_Line) {
+    if tag=='pre avoidance blocks' {
+        image_angle=direction+random_range(-3,3);
+    }
+}
+alarm[0]=25;
 </string>
           </argument>
         </arguments>
@@ -49,22 +166,42 @@ global.practiceOn=savedata_get("practiceOn");
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check_pressed(ord("E")) {
+            <string>///Practice settings
+if keyboard_check_pressed(ord("E")) {
     global.practiceOn=abs(global.practiceOn-1);
     global.debugAvoidanceStartTime*=global.practiceOn;
     savedata_set_persistent("practiceOn",global.practiceOn);
     savedata_save(false);
 }
 
+if global.avoidance_pb&gt;1300 {
+    pb_max=2
+}
+if global.avoidance_pb&gt;2430 {
+    pb_max=3
+}
+if global.avoidance_pb&gt;3230 {
+    pb_max=4
+}
+if global.avoidance_pb&gt;4130 {
+    pb_max=5
+}
+if global.avoidance_pb&gt;4930 {
+    pb_max=6
+}
+if global.avoidance_pb&gt;5830 {
+    pb_max=7
+}
+
 if global.practiceOn=1 {
     if keyboard_check_pressed(ord("A")) {
         if (global.practiceSegment!=1) { global.practiceSegment--; }
-        else { global.practiceSegment=7 }
+        else { global.practiceSegment=pb_max }
         savedata_set_persistent("practiceSegment",global.practiceSegment);
         savedata_save(false);
     }
     if keyboard_check_pressed(ord("D")) {
-        if (global.practiceSegment!=7) { global.practiceSegment++; }
+        if (global.practiceSegment!=pb_max) { global.practiceSegment++; }
         else { global.practiceSegment=1 }
         savedata_set_persistent("practiceSegment",global.practiceSegment);
         savedata_save(false);
@@ -90,6 +227,56 @@ else {
     global.s5_side=choose(-1,1)
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Display progressbar using particles
+repeat(10){
+    partX = random(800);
+    partY = random(608);
+    part_particles_create(global.psys, partX , partY, global.ptyp, 1);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>part_system_destroy(global.psys);
+part_type_destroy(global.ptyp);
 </string>
           </argument>
         </arguments>
@@ -132,9 +319,9 @@ else {
     var status = "OFF"
 }
 
-draw_text(400,128,"Practice: "+status)
-
+draw_text(400,88,"Best time: " + string(strPb));
 draw_set_font(fDefault18_new);
+draw_text(400,136,"Practice: "+status)
 draw_text(400,176,"Press E to switch")
 </string>
           </argument>

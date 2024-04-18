@@ -32,6 +32,7 @@ if (instance_number(object_index) &gt; 1)
 {
     instance_destroy();
 }
+
 </string>
           </argument>
         </arguments>
@@ -133,9 +134,6 @@ if (global.gameStarted)
                 global.musicFading = false;
                 audio_sound_gain(global.currentMusic, global.currentGain,0);
                 alarm[0] = -1;   //Reset alarm that pauses music
-            }
-            if (!global.practiceOn)and(room==rAvoidanceTemplate) {
-                global.avoidance_pb=max(global.avoidance_pb,objMainAvoidance.t);
             }
             savedata_save(false);    //Save death/time
             savedata_load(false);    //Load the game

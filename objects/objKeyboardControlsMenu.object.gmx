@@ -204,6 +204,29 @@ for (var i = 0; i &lt; numberOfKeys - 1; i++)
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>menu_draw_menu_buttons(false);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -222,8 +245,8 @@ for (var i = 0; i &lt; numberOfKeys - 1; i++)
           <argument>
             <kind>1</kind>
             <string>draw_set_valign(fa_top);
-draw_set_color(ternary(!global.gameStarted, c_black, c_white));
-draw_set_font(fDefault24);
+draw_set_color(c_white)//ternary(!global.gameStarted, c_black, c_white));
+draw_set_font(fDefault24_new);
 
 yStart = (608 - numberOfKeys * yStep) / 2;
 
@@ -241,10 +264,10 @@ for(var i = 0; i &lt; numberOfKeys; i++)
     }
     menu_draw_option(buttonName[i], bindText);
     
-    draw_sprite(sprPlayerIdle, animationTime/5, xMargin - 16, yStart + (yStep * select) + 21);
+    draw_sprite(sprHappy_MayuCherry, animationTime/5, xMargin - 18, yStart + (yStep * select) + 21-6);
 }
 
-menu_draw_menu_buttons(false);
+//menu_draw_menu_buttons(false);
 </string>
           </argument>
         </arguments>

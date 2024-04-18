@@ -10,9 +10,43 @@
   <persistent>0</persistent>
   <colour>0</colour>
   <showcolour>-1</showcolour>
-  <code>instance_create(0,0,objHappy_Spotlight);
-
-//fucking "ObJeCt To AdD wItH lEfT mOuSe"</code>
+  <code>a = instance_create(0,0,objHappy_Spotlight);
+//a.image_alpha=0.85
+//fucking "ObJeCt To AdD wItH lEfT mOuSe"
+background_choice=choose(0,1,2);
+if background_choice==0 {
+    s1_ugly_bg = instance_create(0,0,objHappy_Darkness);
+    s1_ugly_bg.sprite_index=sprHappy_Ugly;
+    s1_ugly_bg.image_alpha=0.2;
+    s1_ugly_bg.depth=1000;
+    s1_ugly_bg.tag='s1_ugly'
+}
+if background_choice==1 {
+    glitch_transition = instance_create(400,304,objHappy_Glitch);
+    glitch_transition.image_alpha=0.1;
+    glitch_transition.image_speed=4/50;
+    glitch_transition.depth=50;
+}
+if background_choice==2 {
+    tail_1 = instance_create(320,256,objHappy_Tail1);
+    tail_1.t=random(360);
+    tail_2 = instance_create(-48,114,objHappy_Tail2);
+    tail_2.t=random(360);
+    tail_3 = instance_create(256,0,objHappy_Tail3);
+    tail_3.t=random(360);
+    tail_4 = instance_create(0,-32,objHappy_Tail4);
+    tail_4.t=random(360);
+    tail_5 = instance_create(0,192,objHappy_Tail5);
+    tail_5.t=random(360);
+    tail_6 = instance_create(-64,368,objHappy_Tail6);
+    tail_6.t=random(360);
+    
+    ugly2 = instance_create(0,0,objHappy_Darkness);
+    ugly2.sprite_index=sprHappy_Ugly2;
+    ugly2.image_alpha=0.2;
+    ugly2.depth=254;
+    ugly2.tag='s6_ugly2';
+}</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -56,8 +90,8 @@
     <instance objName="objPlayerStart" x="384" y="320" name="inst_13D9482A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objBlock" x="0" y="352" name="inst_6B04F5C2" locked="0" code="" scaleX="25" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objWarpNext" x="384" y="288" name="inst_EE803896" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="0" y="0" name="inst_4B7FE50B" locked="0" code="" scaleX="1" scaleY="19" colour="4294967295" rotation="0"/>
-    <instance objName="objBlock" x="768" y="0" name="inst_A5A7A16E" locked="0" code="" scaleX="1" scaleY="19" colour="4294967295" rotation="0"/>
+    <instance objName="objBlock" x="-32" y="0" name="inst_4B7FE50B" locked="0" code="" scaleX="1" scaleY="19" colour="4294967295" rotation="0"/>
+    <instance objName="objBlock" x="800" y="0" name="inst_A5A7A16E" locked="0" code="" scaleX="1" scaleY="19" colour="4294967295" rotation="0"/>
     <instance objName="objSave" x="384" y="320" name="inst_00204780" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objPracticeController" x="96" y="96" name="inst_4FFCC21E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="objAvoidanceDrawController" x="64" y="32" name="inst_2DC8E990" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
