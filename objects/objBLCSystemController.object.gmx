@@ -55,7 +55,7 @@ if(instance_number(object_index)&gt;1){
 comboTimer = 0;
 global.BLCcomboDropRate = 1/1500;
 
-
+global.hitless=true;
 </string>
           </argument>
         </arguments>

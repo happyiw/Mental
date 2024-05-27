@@ -3,12 +3,11 @@
 
 engine_options();
 
-global.debugAvoidanceStartTime=7500;
-global.s5_side=choose(-1,1)
+global.s5_side=1
 global.avoidance_pb=0//savedata_get("avoidance pb");
 
 global.debugOverlay = false;    //Enables showing the debug text overlay (shows player location, align, etc.)
-global.debugNoDeath = true;    //Enables god mode (toggle with Home key)
+global.debugNoDeath = false;    //Enables god mode (toggle with Home key)
 global.debugInfJump = false;    //Enables infinite jump (toggle with End key)
 global.debugShowHitbox = false; //Enables showing the player's hitbox (toggle with Del key)
 

@@ -30,6 +30,68 @@ for(var i=0; i&lt;9; i++) {
     bruv[i]=random_range(1,3);
 }
 
+sh = instance_create(0,0,objPShaderRectangle);
+sh.shader=shGlitch;
+sh.intensity=1;
+
+fnuuy=irandom(50)
+
+if objMainAvoidance.t&gt;=6130 {
+    str="We are ready to climb the staircase.";
+    font=fBaskerville_30;
+}
+else {
+    font=fBaskerville_50;
+    if fnuuy==21
+        str="Mister Beast."
+    else str="You are one step closer."
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>audio_stop_sound(sndAmbience)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>audio_stop_sound(sndAmbience)
 </string>
           </argument>
         </arguments>
@@ -56,17 +118,23 @@ for(var i=0; i&lt;9; i++) {
 if t==100 {
     audio_play_sound(sndAmbience,0,true);
 }
-draw_sprite_ext(sprHappy_Vortex,0,400,304,2,2,t/2,c_white,EaseOutSine(min(t,150),0,0.0225,150));
+//draw_sprite_ext(sprHappy_Vortex,0,400,304,2,2,t/2,c_white,EaseOutSine(min(t,150),0,0.0225,150));
+
+draw_sprite_ext(sprHappy_Spotlight,0,0,0,1,1,0,c_white,0.25);
+
+draw_set_alpha(EaseLinear(min(t,150),0,0.7,150));
+/*
+
+BULLSHIT SECTION STARTS HERE
+TAKE AWAY KIDS AND PEOPLE WITH WEAK MENTAL HEALTH
+
+*/
+if instance_exists(objMainAvoidance) {
+        draw_set_text(fa_center,fa_middle,c_white,font)
+    draw_text_transformed(400,304+dsin(t)*4,str,1+0.1*(objMainAvoidance.t&gt;=6130),1+0.1*(objMainAvoidance.t&gt;=6130),0);
+}
 
 draw_set_text(fa_center,fa_middle,c_white,fBaskerville_30)
-draw_set_alpha(EaseLinear(min(t,150),0,0.5,150));
-if objMainAvoidance.t&gt;5830 {
-    str="Practice Complete.";
-}
-else {
-    str="Enough. "
-}
-draw_text_transformed(400,304,str,1.5,1.5,0);
 a=30
 for(var xx=-a*string_length("Enough.")/2;xx&lt;=800+a*string_length("Enough.")/2+a*string_length("Enough.")*0.75;xx+=a*string_length("Enough.")*0.75) {
     for (var yy=8;yy&lt;=608+a*string_length("Enough.")/2;yy+=a*string_length("Enough.")*0.2) {
@@ -78,13 +146,21 @@ for(var xx=-a*string_length("Enough.")/2;xx&lt;=800+a*string_length("Enough.")/2
             
             _x=xx-_y/(a*string_length("Enough.")*0.2)+random_range(-2,2)*sign(i);
         
-            draw_set_alpha(EaseLinear(min(t,150),0,0.05-i*0.015,150));
+            draw_set_alpha(EaseLinear(min(t,150),0,0.075-i*0.015-0.015,150));
             draw_text_transformed(_x,_y,"Enough.",1,1,-2);
         }
     }
 }
 
 draw_sprite_ext(sprHappy_Spotlight,0,0,0,1,1,0,c_white,0.75);
+
+c=c_black
+draw_set_alpha(1);
+draw_rectangle_colour(0,0,800,56,c,c,c,c,false);
+draw_rectangle_colour(0,608,800,608-56,c,c,c,c,false);
+
+draw_rectangle_colour(0,0,-800,608,c,c,c,c,false)
+draw_rectangle_colour(800,0,800+800,608,c,c,c,c,false)
 </string>
           </argument>
         </arguments>

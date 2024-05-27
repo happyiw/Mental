@@ -8,6 +8,8 @@ enum KEY
     RIGHT,
     UP,
     DOWN,
+    //A,
+    //D,
     JUMP,
     SHOOT,
     RESTART,
@@ -36,6 +38,8 @@ switch(type)
         global.controls[KEY.RIGHT, 0] =         ini_read_real("Keyboard",  "Right",    vk_right);
         global.controls[KEY.UP, 0] =            ini_read_real("Keyboard",  "Up",       vk_up);
         global.controls[KEY.DOWN, 0] =          ini_read_real("Keyboard",  "Down",     vk_down);
+        //global.controls[KEY.A, 0] =          ini_read_real("Keyboard",  "A",     ord("A"));
+        //global.controls[KEY.D, 0] =          ini_read_real("Keyboard",  "D",     ord("D"));
         global.controls[KEY.JUMP, 0] =          ini_read_real("Keyboard",  "Jump",     vk_shift);
         global.controls[KEY.SHOOT, 0] =         ini_read_real("Keyboard",  "Shoot",    ord('Z'));
         global.controls[KEY.RESTART, 0] =       ini_read_real("Keyboard",  "Restart",  ord('R'));

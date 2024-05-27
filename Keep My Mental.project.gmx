@@ -100,6 +100,12 @@
     </sounds>
     <sound>sound\musKeepMyMental</sound>
     <sound>sound\sndAmbience</sound>
+    <sound>sound\sndDontTouch</sound>
+    <sound>sound\sndTextSoundA</sound>
+    <sound>sound\sndText</sound>
+    <sound>sound\sndNoise</sound>
+    <sound>sound\sndTVTurnOff</sound>
+    <sound>sound\sndStolenFromRequiem</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="World">
@@ -227,6 +233,7 @@
       <sprites name="happy">
         <sprite>sprites\sprHappy_Darkness</sprite>
         <sprite>sprites\sprHappy_Spotlight</sprite>
+        <sprite>sprites\sprReverseSpotlight</sprite>
         <sprite>sprites\sprHappy_Border</sprite>
         <sprite>sprites\sprHappy_MayuCherry</sprite>
         <sprite>sprites\sprHappy_WBCherry</sprite>
@@ -236,6 +243,7 @@
         <sprite>sprites\sprHappy_KMMTitleLogo</sprite>
         <sprite>sprites\sprHappy_KMMTitleLogoGlow</sprite>
         <sprite>sprites\sprHappy_Glitch</sprite>
+        <sprite>sprites\sprHappy_Glitch2</sprite>
         <sprite>sprites\sprHappy_KMMLogo</sprite>
         <sprite>sprites\sprHappy_KMMLogoGlow</sprite>
         <sprite>sprites\sprHappy_Hand</sprite>
@@ -243,6 +251,7 @@
         <sprite>sprites\sprHappy_Ugly2</sprite>
         <sprite>sprites\sprHappy_Miku</sprite>
         <sprite>sprites\sprHappy_FuckingLine</sprite>
+        <sprite>sprites\DONT_ASK_ME_WHY</sprite>
         <sprite>sprites\sprGravitySwitcherLine</sprite>
         <sprite>sprites\sprHappy_BlackSquare</sprite>
         <sprite>sprites\sprHappy_ArrowUp</sprite>
@@ -262,6 +271,8 @@
         <sprite>sprites\sprBloodScreen</sprite>
         <sprite>sprites\sprHappy_KardiaCherry</sprite>
         <sprite>sprites\sprHappy_Vortex</sprite>
+        <sprite>sprites\sprOutroAnimation</sprite>
+        <sprite>sprites\sprPracticeMode</sprite>
       </sprites>
       <sprites name="prince">
         <sprite>sprites\sprPrince_Gradient</sprite>
@@ -278,9 +289,23 @@
     <sprite>sprites\sprCircle</sprite>
     <sprite>sprites\sprCircleEffect</sprite>
     <sprite>sprites\sprMarenolBullet</sprite>
+    <sprite>sprites\sprIdiot</sprite>
+    <sprite>sprites\sprDanil</sprite>
+    <sprite>sprites\sprPrince</sprite>
+    <sprite>sprites\sprGaborro</sprite>
+    <sprite>sprites\sprTSM</sprite>
+    <sprite>sprites\sprMurzikk</sprite>
+    <sprite>sprites\sprIruenn</sprite>
+    <sprite>sprites\sprCthaere</sprite>
+    <sprite>sprites\sprLeehe</sprite>
+    <sprite>sprites\sprLasttis</sprite>
+    <sprite>sprites\sprDanix</sprite>
+    <sprite>sprites\sprGafro</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bAllTiles</background>
+    <background>background\bCredits</background>
+    <background>background\bCredits2</background>
     <background>background\bCMI</background>
     <background>background\bOutline</background>
     <background>background\bMegaman</background>
@@ -515,6 +540,11 @@
     <script>scripts\scrMakeStar.gml</script>
     <script>scripts\distance_difference.gml</script>
     <script>scripts\set_camera.gml</script>
+    <script>scripts\convert.gml</script>
+    <script>scripts\scrSinusoidEaseIn.gml</script>
+    <script>scripts\scrGoodDrawGUI.gml</script>
+    <script>scripts\scrDrawTextOutlineTransformed.gml</script>
+    <script>scripts\scrResetGoodDrawGUI.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shAurora.shader</shader>
@@ -529,6 +559,8 @@
     <shader type="GLSLES">shaders\shGreyscale.shader</shader>
     <shader type="GLSLES">shaders\shdGlowTest.shader</shader>
     <shader type="GLSLES">shaders\shDanixIsAGod.shader</shader>
+    <shader type="GLSLES">shaders\shGlitch.shader</shader>
+    <shader type="GLSLES">shaders\shGraySpiral.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\fDefault30</font>
@@ -537,6 +569,7 @@
     <font>fonts\fScore</font>
     <font>fonts\fDefault12</font>
     <font>fonts\fKMM</font>
+    <font>fonts\fKMM24</font>
     <font>fonts\fKMMItalic</font>
     <font>fonts\fKMMBold</font>
     <font>fonts\fKMMItalicBold</font>
@@ -544,7 +577,16 @@
     <font>fonts\fDefault24_new</font>
     <font>fonts\fDefault18_new</font>
     <font>fonts\fDefault12_new</font>
+    <font>fonts\fComicSans30</font>
+    <font>fonts\fAnCe12</font>
+    <font>fonts\fAnCe18</font>
+    <font>fonts\fAnCe24</font>
     <font>fonts\fBaskerville_30</font>
+    <font>fonts\fBaskerville_24</font>
+    <font>fonts\fBaskerville_18</font>
+    <font>fonts\fBaskerville_12</font>
+    <font>fonts\fBaskerville_13</font>
+    <font>fonts\fBaskerville_50</font>
   </fonts>
   <objects name="objects">
     <objects name="World">
@@ -565,6 +607,7 @@
       <object>objects\objBloodEmitter</object>
       <object>objects\objBlood</object>
       <object>objects\objGameOver</object>
+      <object>objects\objGameOverText</object>
     </objects>
     <objects name="Blocks">
       <object>objects\objBlock</object>
@@ -738,6 +781,8 @@
           </objects>
           <object>objects\objHappy_CRTScanline</object>
           <object>objects\objHappy_Scanline2</object>
+          <object>objects\objHappy_Vortex</object>
+          <object>objects\objHappy_OutroAnimation</object>
         </objects>
         <objects name="Bullets">
           <object>objects\objHappy_ParentBullet</object>
@@ -771,6 +816,12 @@
     <object>objects\objSeededRNGSeq</object>
     <object>objects\objBloodEmitterNew</object>
     <object>objects\objBloodNew</object>
+    <object>objects\objPracticeFailedSuccessfully</object>
+    <object>objects\objRNGTextTemplate</object>
+    <object>objects\objCredits</object>
+    <object>objects\objTYFP</object>
+    <object>objects\objChooseYourFate</object>
+    <object>objects\objBlackTransition</object>
   </objects>
   <rooms name="rooms">
     <rooms name="Init">
@@ -795,6 +846,8 @@
     </rooms>
     <room>rooms\rDrawTest</room>
     <room>rooms\rPlaceholder</room>
+    <room>rooms\rClear</room>
+    <room>rooms\rCredits</room>
     <room>rooms\rResults</room>
   </rooms>
   <help>

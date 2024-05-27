@@ -25,7 +25,7 @@ if (instance_exists(objPlayer) && (!global.noDeath && !global.debugNoDeath))
     {
         if(opt_amount>=0){
             //Multiply the score by the current combo multiplier
-            opt_amount*=global.comboMultiplier;
+            opt_amount*=1//global.comboMultiplier;
             //Increase the combo
             with(objScoreSystemController){
                 comboTimer=comboTimerMax;

@@ -30,12 +30,12 @@ if (fileSelected && index == savefileSelect)
 if (exists[index])
 {        
     if (!fileSelected) || (fileSelected && index != savefileSelect) {
-        var displayText = global.difficultyNames[difficulty[index] + 1];
+        var displayText = global.difficultyNames[difficulty[index] + 0];
         draw_text(xx + 64, yy + 49, displayText);
     }
     
     if clear[index] {
-        draw_set_font(fDefault24);
+        draw_set_font(fDefault24_new);
         draw_text(xx + 63, yy + 215, "Clear!!");
     }
     

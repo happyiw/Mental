@@ -83,6 +83,20 @@ if t&lt;150 {
         }
     }
 }
+if t==175 {
+    with(objHappy_Darkness) {
+        //if tag=='GameOver_darkness'
+            //instance_destroy();
+    }
+    instance_destroy(objPShaderEffect);
+    instance_create(0,0,objGameOverText);
+    sh = instance_create(0,0,objPShaderEffect);
+    sh.shader=shGreyscale;
+    sh.intensity=0.5;
+    //sh = instance_create(0,0,objPShaderEffect);
+    //sh.shader=shEasyShaderExample;
+    //sh.intensity=0.01;
+}
 </string>
           </argument>
         </arguments>

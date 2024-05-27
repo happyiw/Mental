@@ -120,6 +120,32 @@ alarm[0]=25;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///etc.
+
+global.noPause=false
+
+global.can_restart=true;
+global.can_f2=true;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="0">
       <action>
@@ -303,7 +329,18 @@ part_type_destroy(global.ptyp);
 draw_set_font(fDefault24_new);
 
 if global.practiceOn=1 {
-
+    /*if (global.practiceSegment==1) {
+        if (global.practiceSegment==pb_max)
+            draw_text(400,480-32,"        Segment №" + string(global.practiceSegment)+"        ");
+        else
+            draw_text(400,480-32,"        Segment №" + string(global.practiceSegment)+"    -&gt; D");
+    }
+    else {
+        if (global.practiceSegment==pb_max)
+            draw_text(400,480-32,"A &lt;-    Segment №" + string(global.practiceSegment)+"        ");
+        else
+            draw_text(400,480-32,"A &lt;-    Segment №" + string(global.practiceSegment)+"    -&gt; D");
+    }*/
     draw_text(400,480-32,"A &lt;-    Segment №" + string(global.practiceSegment)+"    -&gt; D");
     if global.practiceSegment==5 {
         switch(global.s5_side) {

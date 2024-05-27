@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-2</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>scanlineT=0;
+image_blend=c_black;
 </string>
           </argument>
         </arguments>
@@ -50,7 +51,8 @@
             <kind>1</kind>
             <string>
 scanlineT++;
-draw_set_alpha(0.2);
+draw_set_alpha(image_alpha);
+draw_set_colour(image_blend);
 draw_sprite_tiled(sprCRTScanline,0,0,scanlineT);
 draw_set_alpha(1);
 </string>

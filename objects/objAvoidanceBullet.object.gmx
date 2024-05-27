@@ -160,6 +160,15 @@ if(killer){
             player_BLC_kill(1/4);
             break;
     }
+    if(global.hitless) {
+        with(objPlayer) {
+            instance_create(x,y,objBloodEmitterNew);
+        }
+        audio_sound_gain(sndGlass,0.25,0);
+        audio_sound_pitch(sndGlass,1.2);
+        audio_play_sound(sndGlass,0,false);
+    }
+    global.hitless=false;
 }
 </string>
           </argument>

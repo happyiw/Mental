@@ -11,7 +11,6 @@ savedata_set("time", 0);
 savedata_set("grav", 1);
 savedata_set("hitScore",0);
 
-
 ds_map_copy(global.persistentSaveData, global.saveData);
 
 savedata_load(false);

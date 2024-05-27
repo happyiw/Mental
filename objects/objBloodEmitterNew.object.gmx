@@ -71,8 +71,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>repeat(4)
+            <string>repeat(30)
     { instance_create(x, y, objBloodNew); }
+
+//spawn_circle(x,y,random(360),20,2,objBloodNew);
+//spawn_circle(x,y,random(360),15,1,objBloodNew);
+x=objPlayer.x;
+y=objPlayer.y;
 </string>
           </argument>
         </arguments>

@@ -32,6 +32,7 @@ shader=shAurora;;
 
 
 t=0;
+t_inc=1;
 intensity=1;
 
 tag=0;
@@ -80,7 +81,7 @@ tag=0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>t++;
+            <string>t+=t_inc;
 </string>
           </argument>
         </arguments>

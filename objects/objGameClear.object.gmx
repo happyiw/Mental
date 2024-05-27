@@ -30,7 +30,7 @@
 if (!savedata_get("gameClear"))
 {
     savedata_set("gameClear", true);
-    savedata_save(true);
+    savedata_save(false);
 }
 </string>
           </argument>

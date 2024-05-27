@@ -159,11 +159,11 @@ image_alpha=baseAlpha*imageAlpha;
             <string>if(killer&amp;&amp;z&lt;=0&amp;&amp;active){
     switch(Type){
         case "Hold":
-            player_kill(Score/5,Combo/5);
+            //player_kill(Score/5,Combo/5);
             break;
         default:
         case "Collect":
-            player_kill(Score,Combo); //deactivate instead of destroying
+            //player_kill(Score,Combo); //deactivate instead of destroying
             active=false;
     }
 }

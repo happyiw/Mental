@@ -158,7 +158,7 @@ else
 var killer = instance_place(x, y, objPlayerKiller)
 if (killer != noone)
 {
-    player_kill(killer.Score);
+    //player_kill(killer.Score);
     with(killer) if(Destroy) instance_destroy();
 }
 </string>

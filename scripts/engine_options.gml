@@ -1,8 +1,10 @@
 ///engine_options()
 // Sets configurable global options
 
+global.debugAvoidanceStartTime=0;
+
 //Debug
-global.debugMode = true        //Enables debug keys (check objWorld step to see all of them), make sure to set this to "false" before releasing your game
+global.debugMode = false        //Enables debug keys (check objWorld step to see all of them), make sure to set this to "false" before releasing your game
 global.debugVisuals = true;     //Enables changing the color/alpha of player when infjump/god mode are toggled, make sure to disable this if you want to change the player's image_alpha or image_blend
 
 //Updates
@@ -41,9 +43,9 @@ global.controllerEnabled = true;    //Sets whether controllers are supported
 global.controllerDelayLength = 5;   //Sets the delay in frames in which the player can switch between keyboard/controller (can be set to 0 to disable delay)
 
 //Difficulty
-global.difficultyCount = 4;
+global.difficultyCount = 1;
 global.difficultyNames[0] = "Load Game";
-global.difficultyNames[1] = "Medium";
+global.difficultyNames[1] = "New Game";
 global.difficultyNames[2] = "Hard";
 global.difficultyNames[3] = "Very Hard";
 global.difficultyNames[4] = "Impossible";

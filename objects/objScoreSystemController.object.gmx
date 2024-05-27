@@ -146,8 +146,8 @@ if (global.freeze==false) {
     }
     
     
-    global.comboMultiplier = 1 + sqrt(global.combo)/2;
-    show_debug_message(global.comboMultiplier);
+    //global.comboMultiplier = 1 + sqrt(global.combo)/2;
+    //show_debug_message(global.comboMultiplier);
     if(global.combo&gt;global.maxCombo) global.maxCombo = global.combo;
 }
 </string>
@@ -273,8 +273,8 @@ if(global.scoreVisible){
     draw_set_alpha(alpha);
     //draw_text(room_width-32,room_height-32,string(floor(global.hitScore)));
     //draw_text(room_width-32,room_height-64,"x"+string(global.comboMultiplier));
-    draw_text_transformed(view_xview+view_wview-32*(view_wview/800),view_yview+view_hview-32*(view_hview/608),string(floor(global.hitScore)),view_wview/800,view_hview/608,0);
-    draw_text_transformed(view_xview+view_wview-32*(view_wview/800),view_yview+view_hview-64*(view_hview/608),"x"+string(global.comboMultiplier),view_wview/800,view_hview/608,0);
+    //draw_text_transformed(view_xview+view_wview-32*(view_wview/800),view_yview+view_hview-32*(view_hview/608),string(floor(global.hitScore)),view_wview/800,view_hview/608,0);
+    //draw_text_transformed(view_xview+view_wview-32*(view_wview/800),view_yview+view_hview-64*(view_hview/608),"x"+string(global.comboMultiplier),view_wview/800,view_hview/608,0);
     draw_set_font(fDefault12);
     draw_set_align(1,1);
 }
