@@ -290,6 +290,7 @@
     <sprite>sprites\sprCircleEffect</sprite>
     <sprite>sprites\sprMarenolBullet</sprite>
     <sprite>sprites\sprIdiot</sprite>
+    <sprite>sprites\sprQuestionMark</sprite>
     <sprite>sprites\sprDanil</sprite>
     <sprite>sprites\sprPrince</sprite>
     <sprite>sprites\sprGaborro</sprite>
@@ -794,6 +795,7 @@
           <object>objects\objHappy_Bullet_trig_ext</object>
           <object>objects\objHappy_R2d_Bullet</object>
           <object>objects\objHappy_BreakingBullet</object>
+          <object>objects\objLazyParticleReplacement</object>
         </objects>
         <objects name="stuff">
           <object>objects\objHappy_Platform</object>
@@ -822,6 +824,8 @@
     <object>objects\objTYFP</object>
     <object>objects\objChooseYourFate</object>
     <object>objects\objBlackTransition</object>
+    <object>objects\objShitYourself</object>
+    <object>objects\A_message_to_decompiler_fans</object>
   </objects>
   <rooms name="rooms">
     <rooms name="Init">

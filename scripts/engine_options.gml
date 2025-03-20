@@ -4,7 +4,7 @@
 global.debugAvoidanceStartTime=0;
 
 //Debug
-global.debugMode = false        //Enables debug keys (check objWorld step to see all of them), make sure to set this to "false" before releasing your game
+global.debugMode = 0        //Enables debug keys (check objWorld step to see all of them), make sure to set this to "false" before releasing your game
 global.debugVisuals = true;     //Enables changing the color/alpha of player when infjump/god mode are toggled, make sure to disable this if you want to change the player's image_alpha or image_blend
 
 //Updates
@@ -51,7 +51,7 @@ global.difficultyNames[3] = "Very Hard";
 global.difficultyNames[4] = "Impossible";
 
 //Savefiles
-global.md5StrAdd = "Put something here"; //sets what to add to the end of md5 input string to make the save harder to mess with, can be changed to anything, should be set to something unique and hard to predict (like setting a password)
+global.md5StrAdd = "what are you doing here?"; //sets what to add to the end of md5 input string to make the save harder to mess with, can be changed to anything, should be set to something unique and hard to predict (like setting a password)
 
 //Anti Avoidance
 global.scoreVisible = false; //set whether the score is always visible, or only on the end screen

@@ -30,6 +30,8 @@ global.can_restart=false;
 
 xx=0;
 yy=0;
+
+undefined_string="u"+choose("n","$","!","@")+"d"+choose("e","3","6","5")+"f"+choose("i","[","(",")")+"n"+choose("e",".",",","/")+"d"
 </string>
           </argument>
         </arguments>
@@ -183,12 +185,28 @@ draw_text(64,608-160,"S#go down");
 
 draw_set_text(fa_center,fa_middle,c_white,fBaskerville_24);
 draw_text(400,608+48, "Created by:");
-draw_sprite_ext(sprIdiot,0,200,608+160+88+32+dsin(t)*6,1.5,1.5,0,c_white,1);
-draw_text(200,608+160+176*1.5+24+dsin(t)*6, "happy");
 
-draw_set_alpha(0.05);
-draw_text(200,608+160+176*1.5+32+24+dsin(t)*6, "an idiot");
+if t mod 8 == 0 {
+    undefined_string="u"+choose("n","$","!","@")+"d"+choose("e","3","6","5")+"f"+choose("i","[","(",")")+"n"+choose("e",".",",","/")+"d"
+}
+shader=shEasyShaderExample
+var shaderTimerHandle=shader_get_uniform(shader,"time");
+var shaderIntensityHandle=shader_get_uniform(shader,"intensity");
+shader_set(shader);
+shader_set_uniform_f(shaderTimerHandle,t/50);
+shader_set_uniform_f(shaderIntensityHandle,0.003);
+draw_set_color(merge_colour(c_white,c_black,0.92))
+draw_text(200,608+160+176*1.5+24+dsin(t)*6, undefined_string);
 draw_set_alpha(1);
+shader_set_uniform_f(shaderIntensityHandle,0.01);
+draw_sprite_ext(sprQuestionMark,0,200,608+160+88+32+dsin(t)*6,1.5,1.5,0,c_white,1);
+shader_reset()
+
+
+draw_set_color(c_white)
+/*draw_set_alpha(0.05);
+draw_text(200,608+160+176*1.5+32+24+dsin(t)*6, "an idiot");
+draw_set_alpha(1);*/
 
 draw_sprite_ext(sprPrince,0,600,608+160+88+32+dsin(t)*6,(1.375)*1.5,(1.375)*1.5,0,c_white,1);
 draw_text(600,608+160+176*1.5+24+dsin(t)*6, "princeoflight");
@@ -211,10 +229,10 @@ draw_set_alpha(1);
 draw_text(400,1216+304, "Original victims:") 
 
 draw_sprite_ext(sprGaborro,0,200,1216+304+96+dsin(t+120)*6,1.28,1.28,0,c_white,1);
-draw_text(200,1216+304+80+128+dsin(t+120)*6, "Gaborro#idk whats that pfp");
+draw_text(200,1216+304+80+128+dsin(t+120)*6, "Gaborro");
 
 draw_sprite_ext(sprMurzikk,0,600,1216+304+96+dsin(t+90)*6,0.73,0.73,0,c_white,1);
-draw_text(600,1216+304+80+128+dsin(t+90)*6, "Murzikk#That one lazy bitch");
+draw_text(600,1216+304+80+128+dsin(t+90)*6, "Murzikk");
 
 //Screen 4
 draw_set_text(fa_center,fa_middle,c_white,fBaskerville_24);
@@ -227,7 +245,7 @@ draw_text(400+lengthdir_x(300,t*0.25),2128+lengthdir_y(200,t*0.25)+48-32,"Iruenn
 
 angle=45
 draw_sprite_ext(sprPrince,0,400+lengthdir_x(300,(t*0.25+angle)),2128+lengthdir_y(200,(t*0.25+angle))-32,0.5,0.5,0,c_white,1)
-draw_text(400+lengthdir_x(300,(t*0.25+angle)),2128+lengthdir_y(200,(t*0.25+angle))+48-32,"Prince#for believing in me#+ he's the main reason#this game exist");
+draw_text(400+lengthdir_x(300,(t*0.25+angle)),2128+lengthdir_y(200,(t*0.25+angle))+48-32,"Prince#hosting Ance");
 
 angle=90
 draw_sprite_ext(sprTSM,0,400+lengthdir_x(300,(t*0.25+angle)),2128+lengthdir_y(200,(t*0.25+angle))-32,0.36,0.36,0,c_white,1)
@@ -239,7 +257,7 @@ draw_text(400+lengthdir_x(300,(t*0.25+angle)),2128+lengthdir_y(200,(t*0.25+angle
 
 angle=180
 draw_sprite_ext(sprGafro,0,400+lengthdir_x(300,(t*0.25+angle)),2128+lengthdir_y(200,(t*0.25+angle))-32,0.4,0.4,0,c_white,1)
-draw_text(400+lengthdir_x(300,(t*0.25+angle)),2128+lengthdir_y(200,(t*0.25+angle))+48-32,"gafro450#seksualniy general");
+draw_text(400+lengthdir_x(300,(t*0.25+angle)),2128+lengthdir_y(200,(t*0.25+angle))+48-32,"gafro#seksualniy general");
 
 angle=225
 draw_sprite_ext(sprDanix,0,400+lengthdir_x(300,(t*0.25+angle)),2128+lengthdir_y(200,(t*0.25+angle))-32,0.32,0.32,0,c_white,1)
@@ -257,9 +275,18 @@ draw_set_text(fa_center,fa_top,c_white,fBaskerville_24);
 draw_text_transformed(400,2432+304-32+dsin(t)*6,"Congratulations#on beating this game hitless!",1,1,0);
 
 //Screen 6
-draw_set_text(fa_center,fa_top,c_white,fBaskerville_18);
-draw_text(400,3040+48, "Special unthanks") 
-draw_sprite_ext(sprIdiot,0,400,3040+48+160+32+dsin(t)*6,1.5,1.5,0,c_white,1);
+draw_set_text(fa_center,fa_top,c_white,fBaskerville_30);
+//draw_text(400,3040+304, "Special unthanks") 
+
+var shaderTimerHandle=shader_get_uniform(shader,"time");
+var shaderIntensityHandle=shader_get_uniform(shader,"intensity");
+shader_set(shader);
+shader_set_uniform_f(shaderTimerHandle,t/50);
+shader_set_uniform_f(shaderIntensityHandle,0.002);
+draw_set_color(merge_colour(c_white,c_black,0.95))
+draw_text_transformed(400,3040+304,"Im just a fraud...#Forget about me...",-1,1,180)
+shader_reset();
+/*draw_sprite_ext(sprIdiot,0,400,3040+48+160+32+dsin(t)*6,1.5,1.5,0,c_white,1);
 draw_text(400,3040+48+64+176*1.5+24+dsin(t)*6, "myself!#for ruining deadline#for being bad#not realizing all ideas i wanted#for being bad#for stealing shaders from shadertoy (skill issue)#for making shitty game for 2023 ance tourney#for being bad");
 
 </string>

@@ -185,6 +185,10 @@ if (killer != noone)
 
 if ((bbox_right &lt; 0 || bbox_left &gt; room_width || bbox_bottom &lt; 0 || bbox_top &gt; room_height) &amp;&amp; global.edgeDeath)
 {
+    
+    audio_stop_sound(sndBossHit2)
+    global.deathSound = audio_play_sound(sndBossHit2, 0, false);
+    
     kill_player();
 }
 

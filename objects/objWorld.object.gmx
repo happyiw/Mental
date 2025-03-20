@@ -606,10 +606,13 @@ else if (global.debugOverlay)
     draw_text_outline(20, 100, "Room number: "+string(room), c_black, c_white);
     draw_text_outline(20, 120, "God mode: "+string(global.debugNoDeath), c_black, c_white);
     draw_text_outline(20, 140, "Infinite jump: "+string(global.debugInfJump), c_black, c_white);
-    draw_text_outline(20, 160, "FPS: "+string(fps), c_black, c_white);
-    draw_text_outline(20, 180, "Real FPS: "+string(fps_real), c_black, c_white);
+    //draw_text_outline(20, 160, "FPS: "+string(fps), c_black, c_white);
+    //draw_text_outline(20, 180, "Real FPS: "+string(fps_real), c_black, c_white);
     draw_text_outline(20, 200, "Instance count: "+string(instance_count), c_black, c_white);
 }
+    //i was testing LDM
+    //draw_text_outline(20, 20, "FPS: "+string(fps), c_black, c_white);
+    //draw_text_outline(20, 40, "Real FPS: "+string(fps_real), c_black, c_white);
 </string>
           </argument>
         </arguments>

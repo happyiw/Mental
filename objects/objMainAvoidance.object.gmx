@@ -405,7 +405,10 @@ s4_penta_funny_spin=choose(0,1)
 
 global.s5_inside_star=false;
 
-tc_distance = 64;
+tc_distance = 70;
+
+//6th segment
+s6_rng=noone;
 
 //7th segment
 s7_spiral_angle=45;
@@ -1675,7 +1678,7 @@ if t==1 {
 }
 
 if t==33 {
-    repeat(155) {
+    repeat(130) {
         s1_rain = instance_create(irandom(800),irandom(608),objHappy_Bullet_01);
         s1_rain.killer=false;
         s1_rain.Type="Low_alpha";
@@ -1911,7 +1914,14 @@ if t&gt;33 and t&lt;1307 {
     if t&gt;315 and t&lt;415 or t&gt;635 and t&lt;735 or t&gt;940 and t&lt;1040 {
         with(objHappy_Bullet_01) {
             if tag=='s1_white_thingy' or tag=='s1_border' or tag=='s1_border2' {
-                if image_alpha&gt;0.25 { image_alpha-=0.01; }
+                if (global.LDM==0) {
+                    if image_alpha&gt;0.25 { image_alpha-=0.01; }
+                }
+                else {
+                    image_alpha-=random_range(0.01,0.02)
+                    if image_alpha&lt;=0 instance_destroy();
+                }
+                    
                 speed+=0.02;
                 if image_alpha&lt;=0.75 { killer=false; }
             }
@@ -1930,8 +1940,8 @@ if t&gt;33 and t&lt;1307 {
         }
     }
     if t&gt;=635 and t&lt;=850 {
-        if t mod 10 == 0 {
-            var border1 = instance_create(view_xview[0]+EaseLinear(t-635,0,view_wview[0],850-635)+random_range(-8,8),view_yview[0],objHappy_Bullet_01);
+        if t mod 16 == 0 {
+            var border1 = instance_create(view_xview[0]+EaseLinear(t-635,0,view_wview[0],850-635)+random_range(-8,8),view_yview[0]+5,objHappy_Bullet_01);
             border1.direction=270+random_range(-10,10);
             border1.speed=random_range(1.5,4);
             border1.image_xscale=random_range(0.25,0.5);
@@ -1941,7 +1951,7 @@ if t&gt;33 and t&lt;1307 {
             border1.friction=0.1
             border1.tag='s1_border1';
             border1.killer=false;
-            var border2 = instance_create(view_xview[0]+view_wview[0]-EaseLinear(t-635,0,view_wview[0],850-635)+random_range(-8,8),view_yview[0]+view_hview[0],objHappy_Bullet_01);
+            var border2 = instance_create(view_xview[0]+view_wview[0]-EaseLinear(t-635,0,view_wview[0],850-635)+random_range(-8,8),view_yview[0]+view_hview[0]-5,objHappy_Bullet_01);
             border2.direction=90+random_range(-10,10);
             border2.speed=random_range(1.5,4);
             border2.image_xscale=random_range(0.25,0.5);
@@ -1983,7 +1993,8 @@ if t&gt;33 and t&lt;1307 {
                     white_thingy.friction=0.75;
                     white_thingy.tag='s1_white_thingy';
                     white_thingy.subtag=random_range(2,4);
-                    white_thingy.trail=true;
+                        
+                    white_thingy.trail=1-global.LDM;
                     white_thingy.persist=false;
                     white_thingy.killer=true;
                     white_thingy.curve_real=random_range(2,6)*choose(-1,1);
@@ -1993,7 +2004,8 @@ if t&gt;33 and t&lt;1307 {
                 friction=0.5;
                 tag='s1_white_thingy';
                 subtag=random_range(0.75,1.25);
-                trail=true;
+                    
+                trail=1-global.LDM;
                 persist=false;
                 killer=true;
                 curve_real=random_range(2,6)*choose(-1,1);
@@ -2015,7 +2027,8 @@ if t&gt;33 and t&lt;1307 {
                     white_thingy.friction=0.75;
                     white_thingy.tag='s1_white_thingy';
                     white_thingy.subtag=random_range(2,4);
-                    white_thingy.trail=true;
+                    
+                    white_thingy.trail=1-global.LDM;
                     white_thingy.persist=false;
                     white_thingy.killer=true;
                     white_thingy.curve_real=random_range(2,6)*choose(-1,1);
@@ -2025,7 +2038,9 @@ if t&gt;33 and t&lt;1307 {
                 friction=0.5;
                 tag='s1_white_thingy';
                 subtag=random_range(0.75,1.25);
-                trail=true;
+                
+                    
+                trail=1-global.LDM;
                 persist=false;
                 killer=true;
                 curve_real=random_range(2,6)*choose(-1,1);
@@ -2047,7 +2062,7 @@ if t&gt;33 and t&lt;1307 {
                     white_thingy.friction=0.75;
                     white_thingy.tag='s1_white_thingy';
                     white_thingy.subtag=random_range(2,4);
-                    white_thingy.trail=true;
+                    white_thingy.trail=1-global.LDM;
                     white_thingy.persist=false;
                     white_thingy.killer=true;
                     white_thingy.curve_real=random_range(2,6)*choose(-1,1);
@@ -2057,7 +2072,8 @@ if t&gt;33 and t&lt;1307 {
                 friction=0.5;
                 tag='s1_white_thingy';
                 subtag=random_range(0.75,1.25);
-                trail=true;
+                    
+                trail=1-global.LDM;
                 persist=false;
                 killer=true;
                 curve_real=random_range(2,6)*choose(-1,1);
@@ -2244,7 +2260,7 @@ if t&lt;1307 and t mod 10 == 0 {
 }
 
 if t&lt;1250 {
-    repeat(3) {
+    repeat(3-global.LDM) {
         var rain__maybe = instance_create(view_xview[0]+random(view_wview[0]),view_yview[0],objHappy_Bullet_01);
         rain__maybe.sprite_index=sprBlood_new;
         rain__maybe.image_xscale=random_range(3,5);
@@ -2705,7 +2721,7 @@ if t&gt;1335 and t&lt;1535 {
                 image_tag=EaseOutExpo(t,0.3,1,50);
                 image_blend=merge_color(c_white,c_red,image_tag-0.1);
                 
-                if t &lt; 50 and t mod 12 == 0 {
+                if t &lt; 50 and t mod (12+3*global.LDM) == 0 {
                     a = instance_create(x,y,objHappy_Bullet_01);
                     a.image_blend=merge_color(c_orange,c_red,random_range(0.9,1));
                     a.image_xscale=image_xscale-random_range(0.05,0.1);
@@ -2737,6 +2753,13 @@ if t&gt;1335 and t&lt;1535 {
                     a.accel=random_range(0.05,0.15);
                     a.tag='s2_circle_spam_killer';      //guess what does killer mean
                 }
+            }
+        }
+        if tag=='s2_circle_spam' {
+            if speed&lt;=1 and global.LDM {
+                image_alpha-=0.01;
+                if image_alpha&lt;=0
+                    instance_destroy()
             }
         }
     }
@@ -2782,7 +2805,7 @@ if t==1535 or t==1560 or t==1585 or t==1605 {
         burst.persist=true;
         burst.tag='s2_burst_to_circle';
     }
-    repeat(50) {
+    repeat(50-20*global.LDM) {
         burst = instance_create(px,py,objHappy_Bullet_01);
         burst.direction=random(360);
         burst.speed=random_range(2,12);
@@ -2967,8 +2990,8 @@ if t==1709 {
     
     with(objHappy_Darkness) {
         if tag=='s1_ugly' {
-            x_inc=32;
-            y_inc=32;
+            x_inc=32+44*global.LDM;
+            y_inc=32+18*global.LDM;
             for (var xx=0;xx&lt;800;xx+=x_inc) {
                 for (var yy=0;yy&lt;608;yy+=y_inc) {
                     var a = instance_create(xx,yy,objHappy_PartDraw);
@@ -3059,10 +3082,16 @@ if t==1732 {
             //}
         _a=0;
         if (yy-y_start) mod 6 == 0 {
-            if(bullet_choice==1) 
-                bullet = objHappy_BreakingBullet;
-            else
+            if (global.LDM==0) {
+                if(bullet_choice==1)
+                    bullet = objHappy_BreakingBullet;
+                else
+                    bullet = objHappy_Bullet_trig;
+            }
+            else {
                 bullet = objHappy_Bullet_trig;
+                bullet_choice=0;
+            }
             var a = instance_create(0,0,bullet);
             a.cen_x=400;
             a.cen_y=yy;
@@ -3124,6 +3153,16 @@ if t&gt;1732 and t&lt;1732+20 {
 
 if t&gt;1732 and t&lt;2135 {
 
+    if (global.LDM) {
+        with(objHappy_PartDraw) {
+            if tag=='s2_ugly_grid' {
+                image_alpha-=0.01;
+                if image_alpha&lt;=0
+                    instance_destroy();
+            }
+        }
+    }
+    
     with(objDNAParticle) {
         if(t&gt;2) {
             if(point_distance(cen_x,304,cen_x,cen_y)&gt;192) instance_destroy();
@@ -3200,7 +3239,7 @@ if t&gt;1732 and t&lt;2135 {
             }
         }
     }
-    if t mod 50 == 33 {
+    if t mod (50+25*(global.LDM==0)) == 33 {
         var a = instance_create(view_xview[0]-32+random(view_wview[0]+64),view_yview[0]+view_hview[0],objDNASpawner);
     }
     
@@ -3215,27 +3254,29 @@ if t&gt;1732 and t&lt;2135 {
         shader_transition.intensity = 0;
         shader_transition.tag='s2_yet_another_lag'
         
-        scanline = instance_create(0,0,objHappy_Scanline2);
+        //scanline = instance_create(0,0,objHappy_Scanline2);
     }
     if t&gt;2080 {
-        if t mod 5 == 0 {
-            rand_x[0]=random_range(64,64+(800-64*2));
-            rand_y[0]=64/1.3;
-            rand_x[1]=64+(800-64*2);
-            rand_y[1]=random_range(64/1.3,64/1.3+(608-64*2/1.3));
-            rand_x[2]=random_range(64,64+(800-64*2));
-            rand_y[2]=64/1.3+(608-64*2/1.3);
-            rand_x[3]=64;
-            rand_y[3]=random_range(64/1.3,64/1.3+(608-64*2/1.3));
-            for (var i=0; i&lt;4; i++) {
-                snake = instance_create(rand_x[i],rand_y[i],objHappy_Bullet_01);
-                snake.image_xscale=2.5;
-                snake.image_yscale=snake.image_xscale;
-                snake.image_blend=c_red;
-                snake.image_alpha=0;
-                snake.direction=point_direction(snake.x,snake.y,400,304);
-                snake.speed=random_range(5,7);
-                snake.tag='s2_red_snake_spawner';
+        if (global.LDM==0) {
+            if t mod 5 == 0 {
+                rand_x[0]=random_range(64,64+(800-64*2));
+                rand_y[0]=64/1.3;
+                rand_x[1]=64+(800-64*2);
+                rand_y[1]=random_range(64/1.3,64/1.3+(608-64*2/1.3));
+                rand_x[2]=random_range(64,64+(800-64*2));
+                rand_y[2]=64/1.3+(608-64*2/1.3);
+                rand_x[3]=64;
+                rand_y[3]=random_range(64/1.3,64/1.3+(608-64*2/1.3));
+                for (var i=0; i&lt;4; i++) {
+                    snake = instance_create(rand_x[i],rand_y[i],objHappy_Bullet_01);
+                    snake.image_xscale=2.5;
+                    snake.image_yscale=snake.image_xscale;
+                    snake.image_blend=c_red;
+                    snake.image_alpha=0;
+                    snake.direction=point_direction(snake.x,snake.y,400,304);
+                    snake.speed=random_range(5,7);
+                    snake.tag='s2_red_snake_spawner';
+                }
             }
         }
         with(objAvoidanceBullet) {
@@ -3695,8 +3736,8 @@ if t&gt;2135 and t&lt;2510 {
         
         rand_angle=star_prep_angle+t*8/25;
         distance=32*6.5;
-        scrMakeStar(400,304,objHappy_Bullet_01,distance,rand_angle,12,'s2_reanimate_star_prep');
-        scrMakeStar(400,304,objHappy_Bullet_01,distance,rand_angle+36,12,'s2_reanimate_star_prep');
+        scrMakeStar(400,304,objHappy_Bullet_01,distance,rand_angle,10,'s2_reanimate_star_prep');
+        scrMakeStar(400,304,objHappy_Bullet_01,distance,rand_angle+36,10,'s2_reanimate_star_prep');
         with(objHappy_Bullet_01) {
             if tag=='s2_reanimate_star_prep' {
                 var a = instance_create(0,0,objHappy_Bullet_trig);
@@ -3717,7 +3758,9 @@ if t&gt;2135 and t&lt;2510 {
     if t&gt;=2335 and t&lt;=2410+15 {
         with(objHappy_Bullet_trig) {
             if tag=='s2_reanimate_star_prep' {
-                image_alpha=lerp(image_alpha,0,0.1+0.025*(other.t&gt;=2410));
+                //image_alpha=lerp(image_alpha,0,0.1+0.025*(other.t&gt;=2410));
+                //^ idiot
+                image_alpha-=0.03
                 if image_alpha&lt;=0 instance_destroy();
             }
         }
@@ -3733,8 +3776,8 @@ if t&gt;2135 and t&lt;2510 {
         vx=view_xview[0];
         rand_angle=random(360);
         distance=32*6.5;
-        scrMakeStar(400,304,objHappy_Bullet_01,distance,rand_angle,12,'s2_reanimate_star');
-        scrMakeStar(400,304,objHappy_Bullet_01,distance,rand_angle+36,12,'s2_reanimate_star');
+        scrMakeStar(400,304,objHappy_Bullet_01,distance,rand_angle,10,'s2_reanimate_star');
+        scrMakeStar(400,304,objHappy_Bullet_01,distance,rand_angle+36,10,'s2_reanimate_star');
         with(objHappy_Bullet_01) {
             if tag=='s2_reanimate_star' {
                 var a = instance_create(0,0,objHappy_Bullet_trig);
@@ -3776,7 +3819,7 @@ if t&gt;2135 and t&lt;2510 {
                     dir_inc=EaseInSine(t,3,0,125);
                         //literally a EaseLinear
                 }
-                if t mod 4 == 0 {
+                if t mod (4+4*(global.LDM==0)) == 0 {
                     var a = instance_create(x,y,objHappy_Bullet_01);
                     a.sprite_index=sprite_index;
                     a.image_alpha=image_alpha/2;
@@ -3891,13 +3934,13 @@ if t==2510 {
     
     spawn_circle(400,304,random(360),90,128,objHappy_Bullet_01,'s2_penta');
     
-    spawn_shape(400,304,random(360),4,60,126,objHappy_Bullet_01,'s2_penta');    //angle=30
+    spawn_shape(400,304,random(360),4-global.LDM,60,126,objHappy_Bullet_01,'s2_penta');    //angle=30
     //spawn_shape(400,304,75,4,60,126,objHappy_Bullet_01,'s2_penta');
     
     //spawn_shape(400,304,30,4,40,96,objHappy_Bullet_01,'s2_penta');
-    spawn_shape(400,304,random(360),4,40,96,objHappy_Bullet_01,'s2_penta');     //angle=60
+    spawn_shape(400,304,random(360),4-global.LDM,40,96,objHappy_Bullet_01,'s2_penta');     //angle=60
     
-    spawn_shape(400,304,random(360),4,30,66,objHappy_Bullet_01,'s2_penta');     //angle=90
+    spawn_shape(400,304,random(360),4-global.LDM,30,66,objHappy_Bullet_01,'s2_penta');     //angle=90
     //spawn_shape(400,304,75,4,30,66,objHappy_Bullet_01,'s2_penta');
     with(objHappy_Bullet_01) {
         if tag=='s2_penta' {
@@ -4063,14 +4106,14 @@ if t==2510 {
     deco_miku.depth=100;
     deco_miku.additive=false;
     
-    var vortex = instance_create(410,152,objHappy_Vortex);
+    /*var vortex = instance_create(410,152,objHappy_Vortex);
     vortex.image_blend=c_black;
     vortex.sprite_index=sprHappy_Funny
     vortex.image_xscale=3;
     vortex.image_yscale=vortex.image_xscale;
     vortex.curve=2;
     vortex.tag='s3 vortex'
-    vortex.depth=500;
+    vortex.depth=500;*/
     
     for (var distance=80;distance&lt;80+164*8;distance+=164) {
         if (distance!=80) { /*var rand_angle=random(360);*/ angle_inc = choose(46-1,45,30,59+1,60); inc=random_range(-1,1)/15; }
@@ -4188,9 +4231,11 @@ if t==2535 {
         //if tag=='s3_miku' { instance_destroy(); }
     }
     
-    shader_transition = instance_create(0,0,objPShaderEffect);
-    shader_transition.shader = shEasyShaderExample;
-    shader_transition.intensity = 0.005;
+    if global.LDM==0 {
+        shader_transition = instance_create(0,0,objPShaderEffect);
+        shader_transition.shader = shEasyShaderExample;
+        shader_transition.intensity = 0.005;
+    }
     
     rand_dir_inc=choose(-1,1)/1.4;
     with(objHappy_Bullet_trig) {
@@ -4235,18 +4280,20 @@ if t&gt;2535 and t&lt;3230 {
                 image_xscale=max(0.4,len/190); 
             }
             if tag=='s3_sciurus_wb_circles' or tag=='s3_sciurus_wb_shape' { 
-                image_xscale=max(0.4,len/300); 
-                var a = instance_create(x,y,objHappy_Bullet_01);
-                a.direction=dir+dsin(t*(270/50))*8;
-                a.speed=1;
-                a.image_xscale=image_xscale
-                a.image_yscale=a.image_xscale;
-                a.image_alpha=image_alpha;
-                a.image_angle=image_angle;
-                a.killer=killer;
-                //if len&lt;128 { a.killer=false; }
-                a.Type="Low_damage"
-                a.tag='s3_sciurus_wb_circles_tail';
+                image_xscale=max(0.4,len/300);
+                if t mod 2 == 0 {
+                    var a = instance_create(x,y,objHappy_Bullet_01);
+                    a.direction=dir+dsin(t*(270/50))*8;
+                    a.speed=1;
+                    a.image_xscale=image_xscale
+                    a.image_yscale=a.image_xscale;
+                    a.image_alpha=image_alpha;
+                    a.image_angle=image_angle;
+                    a.killer=killer;
+                    //if len&lt;128 { a.killer=false; }
+                    a.Type="Low_damage"
+                    a.tag='s3_sciurus_wb_circles_tail';
+                }
             }
             if tag=='s3_gathering_spamming_circle' {
                 image_xscale=max(0.2,(len-32)/200); 
@@ -4289,16 +4336,15 @@ if t&gt;2535 and t&lt;3230 {
         }
     }
     if (t&gt;2535 and t&lt;2835)  {
-        if t mod 25 == 11 or t mod 25 == 23 {
+        if t mod 25 == 11 and global.LDM==0 {
             with(objHappy_Bullet_trig) {
                 if tag=='s3_sciurus_circles' {
-                    var a = instance_create(x,y,objHappy_Bullet_01);
+                    var a = instance_create(x,y,objLazyParticleReplacement);
                     a.sprite_index=sprite_index;
                     a.image_angle=image_angle;
                     a.image_xscale=image_xscale;
                     a.image_yscale=image_yscale;
                     a.image_alpha=0.15;
-                    a.killer=false;
                     a.direction=dir;
                     a.speed=random_range(2,5);
                     a.tag='s3_sciurus_circles_tail_deco'
@@ -4329,7 +4375,7 @@ if t&gt;2535 and t&lt;3230 {
                 }
                 if t mod 4 == 0 { trail=false; }
                 dir_inc=dsin(t*2)
-                if t mod 5 == 0 {
+                if t mod (5+4*global.LDM) == 0 {
                     var a = instance_create(x,y,objHappy_Bullet_01);
                     a.image_xscale=image_xscale;
                     a.image_yscale=image_yscale;
@@ -4352,16 +4398,15 @@ if t&gt;2535 and t&lt;3230 {
         }
     }
     if t&gt;2885 {
-        if t mod 25 == 11 or t mod 25 == 23 {
+        if t mod 25 == 11 and global.LDM==0 {
             with(objHappy_Bullet_trig) {
                 if tag=='s3_sciurus_shape' {
-                    var a = instance_create(x,y,objHappy_Bullet_01);
+                    var a = instance_create(x,y,objLazyParticleReplacement);
                     a.sprite_index=sprite_index;
                     a.image_angle=image_angle;
                     a.image_xscale=image_xscale;
                     a.image_yscale=image_yscale;
                     a.image_alpha=0.15;
-                    a.killer=false;
                     a.direction=dir;
                     a.speed=random_range(2,5);
                     a.tag='s3_sciurus_shapes_tail'
@@ -4381,19 +4426,19 @@ if t&gt;2535 and t&lt;3230 {
             if tag=='s3_sciurus_circles' {
                 len_inc+=0.5;
                 if dir_inc&lt;15 { dir_inc+=0.5; }
-                var a = instance_create(x,y,objHappy_Bullet_01);
-                a.sprite_index=sprite_index;
-                a.image_angle=image_angle;
-                a.image_xscale=image_xscale;
-                a.image_yscale=image_yscale;
-                a.direction=dir+dir_inc*18;
-                a.speed=1;
-                a.accel=0.1;
-                a.tag='s3_sciurus_circles_end';
-                
-                a.image_alpha=0.2;
-                a.killer=false;
-                
+                if t mod (1+2*global.LDM) == 0 {
+                    var a = instance_create(x,y,objLazyParticleReplacement);
+                    a.sprite_index=sprite_index;
+                    a.image_angle=image_angle;
+                    a.image_xscale=image_xscale;
+                    a.image_yscale=image_yscale;
+                    a.direction=dir+dir_inc*18;
+                    a.speed=1;
+                    a.gravity_direction=a.direction;
+                    a.gravity=0.1;
+                    a.tag='s3_sciurus_circles_end';
+                    a.image_alpha=0.2;
+                }
                 killer=false;
             }   
             if tag=='s3_sciurus_wb_circles' {
@@ -4412,6 +4457,10 @@ if t&gt;2535 and t&lt;3230 {
                 image_alpha-=0.05;
                 if image_alpha&lt;=0 { instance_destroy(); }
             }
+        }
+        with(objLazyParticleReplacement) {
+            image_alpha-=0.05
+            if image_alpha&lt;=0 { instance_destroy(); }
         }
     }
     if t==2884 {
@@ -4484,7 +4533,7 @@ if t&gt;2535 and t&lt;3230 {
                 if dir_inc&lt;0 { dir_inc-=0.2; }
                 else { dir_inc+=0.2; }
                 if other.t&lt;2885 {
-                    if t mod 2 == 0 {
+                    if t mod 3 == 0 {
                         var a = instance_create(x,y,objHappy_Bullet_01);
                         a.image_xscale=max(0.4,image_xscale-irandom(0.25));
                         a.image_yscale=a.image_xscale;
@@ -4561,7 +4610,7 @@ if t&gt;2535 and t&lt;3230 {
                 image_alpha=0;
                 len=EaseLinear(t,point_distance(410,152,800,608)+64,160,295);
                 dir_inc=dsin(t)*8;
-                if other.t&gt;2940 {
+                if other.t&gt;2940 and t mod 3 == 0 {
                     ang_shift=random_range(-15,15)
                     var a = instance_create(x,y,objHappy_Bullet_01);
                     a.sprite_index=sprite_index;
@@ -4872,7 +4921,7 @@ if t==3335 {
     draw_line_flag=true;
     line_color=c_white;
     
-    for (var xx=96;xx&lt;800-96;xx+=24) {
+    for (var xx=96;xx&lt;800-96;xx+=24+12*global.LDM) {
         var a = instance_create(0,0,objHappy_Bullet_trig);
         a.cen_x=xx;
         a.cen_y=336;
@@ -5481,7 +5530,14 @@ if t==4130 {
 //                  most likely will just add song lyrics in here and addictional
 //                  stuff for background/edges of the screen
 
-if t==3370 {
+if t&gt;3335 and t&lt;4130 and t mod 10 == 0 {
+    y1=random_range(2,6);
+    y2=random_range(2,6);
+    y3=random_range(2,6);
+    y4=random_range(2,6);
+}
+
+/*if t==3370 {
     lyrics_string_order=0;
     lyrics_string=lyrics_p2[lyrics_string_order];
     lyrics_flag=true;
@@ -5507,12 +5563,7 @@ if t==3529 or t==3776 or t==3924 or t==4130 {
     }
 }
 
-if t&gt;3335 and t&lt;4130 and t mod 10 == 0 {
-    y1=random_range(2,6);
-    y2=random_range(2,6);
-    y3=random_range(2,6);
-    y4=random_range(2,6);
-}
+*/
 
 
 
@@ -5572,7 +5623,7 @@ if t&gt;=4130 and t&lt;=4620 {
                 spin=2; 
                 rand_angle=point_direction(xx,yy,400,304)-10+random_range(-3,3);
             }
-            numbprojectiles = 11+irandom(2)
+            numbprojectiles = 12
             distance=384
             
             
@@ -5621,7 +5672,7 @@ if t&gt;=4130 and t&lt;=4620 {
                 spin=2; 
                 rand_angle=point_direction(xx,yy,400,304)-50//+random_range(45,60)+choose(25,30) 
             }
-            numbprojectiles = 12+irandom(2)
+            numbprojectiles = 12
             distance=384+32
             global.s5_inside_star=false;
             
@@ -5744,9 +5795,18 @@ if t&gt;=4130 and t&lt;=4620 {
                 if a.subtag==0 {
                     a.free_variable[0] = ((angle-rand_angle) mod density)+1;
                 }
+                if a.subtag==1 {
+                    what = (angle-rand_angle) div density
+                    if what mod 3 == 0 {
+                        a.sprite_index=sprHappy_MayuCherry;         //check line 659
+                    }
+                }
                 if (angle-rand_angle) mod density != 0 {
                     a.killer=false;
-                    a.image_alpha=0.1;
+                    a.image_alpha=0.1
+                    if global.LDM==1 and (angle-rand_angle) mod (density/2) != 0 {
+                        a.image_tag='kill'
+                    }
                 }
                 a.tag='s5_sliding_circles'
             }
@@ -5756,6 +5816,9 @@ if t&gt;=4130 and t&lt;=4620 {
     if t&gt;4333 and t&lt;4430 {
         with(objHappy_Bullet_trig) {
             if tag=='s5_sliding_circles' {
+                    if image_tag=='kill'
+                        instance_destroy()
+                
                 image_xscale=len/150;
                 image_yscale=image_xscale;
                 len=EaseOutQuart(t,point_distance(0,0,400,304),finlen,4430-4333);
@@ -6000,7 +6063,7 @@ if t&gt;=4130 and t&lt;=4620 {
         objHappy_Spotlight.x=view_xview[0]-12;
     }
     if t&lt;4430 {
-        if t mod 3 == 0 {//repeat(2) {
+        if t mod 4 == 0 {//repeat(2) {
             xx=random_range(edge_x1,edge_x2)
             var a = instance_create(xx,view_yview[0]-6,objHappy_Bullet_01);
             a.sprite_index=sprHappy_MayuCherry;
@@ -6046,7 +6109,7 @@ if t&gt;=4130 and t&lt;=4620 {
             a.tag='s5_spawner2'
         }
         if t&gt;4233 {
-            if t mod 3 == 0 {//repeat(2) {
+            if t mod 4 == 0 {//repeat(2) {
                 xx=random_range(edge_x3,edge_x4)
                 var a = instance_create(xx,view_yview[0]-6,objHappy_Bullet_01);
                 a.sprite_index=sprHappy_MayuCherry;
@@ -6172,16 +6235,33 @@ if t&gt;=4130 and t&lt;=4620 {
         with(objHappy_Bullet_trig) {
             if tag=='s5_sliding_circles' {
                 if subtag==1 {
-                    repeat(2) {
-                        var a = instance_create(x,y,objHappy_Bullet_01);
-                        a.direction=random(360);
-                        a.speed=random_range(4,6);
-                        a.friction=0.2;
-                        a.image_xscale=image_xscale;
-                        a.image_yscale=image_yscale;
-                        a.tag='s5_sliding_circles_rng'
-                        a.image_alpha=image_alpha;
-                        a.killer=killer;
+                    if sprite_index==sprHappy_WBCherry {
+                        repeat(2) {
+                            var a = instance_create(x,y,objHappy_Bullet_01);
+                            a.direction=point_direction(x,y,cen_x,cen_y)+random_range(45,90)*choose(-1,1)
+                            a.speed=random_range(4,6);
+                            a.friction=0.2;
+                            a.image_xscale=image_xscale;
+                            a.image_yscale=image_yscale;
+                            a.tag='s5_sliding_circles_rng'
+                            a.image_alpha=image_alpha;
+                            a.killer=killer;
+                        }
+                    }
+                    if sprite_index==sprHappy_MayuCherry {          //check line 207
+                        for (i=-60; i&lt;=60; i+=60) {
+                            var a = instance_create(x,y,objHappy_Bullet_01);
+                            a.direction=point_direction(x,y,cen_x,cen_y)+i
+                            a.speed=4.85           //random_range(4,6);
+                            a.friction=0.02      //2;
+                            a.image_xscale=image_xscale-0.1;
+                            a.image_yscale=image_yscale-0.1;
+                            a.tag='s5_sliding_circles_rng'
+                            a.image_alpha=image_alpha;
+                            a.sprite_index=sprite_index
+                            a.image_tag='small'
+                            a.killer=killer;
+                        }
                     }
                     instance_destroy();
                 }
@@ -6252,7 +6332,7 @@ if t&gt;=4130 and t&lt;=4620 {
             if tag=='s5_sliding_circles_end' {
                 image_xscale=point_distance(x,y,400,304)/150;
                 image_yscale=image_xscale;
-                if t mod 3 == 0 and other.t&lt;4535{
+                if t mod 3 == 0 and other.t&lt;4535 {
                     var a = instance_create(x,y,objHappy_Bullet_01);
                     a.image_xscale=image_xscale;
                     a.image_yscale=image_yscale;
@@ -6262,9 +6342,15 @@ if t&gt;=4130 and t&lt;=4620 {
                 }
             }
             if tag='s5_sliding_circles_rng' {
-                if t==1 { image_tag=image_xscale; }
-                if t&gt;1 and t&lt;20 { image_xscale=EaseOutCubic(t,image_tag,1,18); image_yscale=image_xscale; }
-                if speed&lt;3 { friction=0; speed=3; }
+                if sprite_index==sprHappy_MayuCherry {
+                    image_xscale=lerp(image_xscale,0.75,0.1)
+                    image_yscale=lerp(image_yscale,0.75,0.1)
+                }
+                else {
+                    if t==1 { image_tag=image_xscale; }
+                    if t&gt;1 and t&lt;20 { image_xscale=EaseOutCubic(t,image_tag,1,18); image_yscale=image_xscale; }
+                    if speed&lt;3 { friction=0; speed=3; }
+                }
             }
         }
     }
@@ -6289,6 +6375,7 @@ if t==4430 or t==4458 or t==4482 or t==4512-15 {
         transforming_circle.findir=rand_angle;
         transforming_circle.finlen=tc_distance;
     }
+    
     var rand_angle2=random(360);
     for (var angle=rand_angle2;angle&lt;rand_angle2+360;angle+=60) {
         var transforming_circle = instance_create(-400,-304,objHappy_Bullet_trig);
@@ -6335,7 +6422,7 @@ if t==4535 {
                 fork = instance_create(x,y,objHappy_Bullet_01);
                 fork.sprite_index=sprite_index;
                 fork.direction=dir+angle_shift;
-                fork.speed=-random_range(1,2.5);
+                fork.speed=-random_range(1,1.75);
                 fork.accel=random_range(0.1,0.3);
                 if angle_shift==-15 or angle_shift==15 { fork.tag='s5_warp'; /*fork.killer=false;*/ }
                 else { fork.tag='s5_fork'; fork.subtag=15}//random_range(10,40); }
@@ -6455,10 +6542,15 @@ if t==4720 {
 if t&gt;4535 and t&lt;4720 {
     with(objHappy_Bullet_01) {
         if tag=='s5_warp' {
-            if x&lt;view_xview[0] { x=view_xview[0]+view_wview[0]; image_alpha=0.2; killer=false; }
-            if x&gt;view_xview[0]+view_wview[0] { x=view_xview[0]; image_alpha=0.2; killer=false; }
-            if y&lt;view_yview[0] { y=view_yview[0]+view_hview[0]; image_alpha=0.2; killer=false; }
-            if y&gt;view_yview[0]+view_hview[0] { y=view_yview[0]; image_alpha=0.2; killer=false; }
+            if global.LDM==0 {
+                if x&lt;view_xview[0] { x=view_xview[0]+view_wview[0]; image_alpha=0.2; killer=false; }
+                if x&gt;view_xview[0]+view_wview[0] { x=view_xview[0]; image_alpha=0.2; killer=false; }
+                if y&lt;view_yview[0] { y=view_yview[0]+view_hview[0]; image_alpha=0.2; killer=false; }
+                if y&gt;view_yview[0]+view_hview[0] { y=view_yview[0]; image_alpha=0.2; killer=false; }
+            }
+            else {
+                persist=false;
+            }
         }
     }
 }
@@ -6490,30 +6582,30 @@ if t==4820 {
         spawn_circle(400,304,-15-distance*45/40,6,distance,objHappy_Bullet_01,'s5_penta3');
     }
     
-    spawn_circle(400,304,0,100,365,objHappy_Bullet_01,'s5_penta2');
+    spawn_circle(400,304,0,100-15*global.LDM,365,objHappy_Bullet_01,'s5_penta2');
     with(objHappy_Bullet_01) {
         if tag=='s5_penta' {
             image_xscale=0.75+random_range(-0.05,0.05);
             image_yscale=image_xscale;
         }
     }
-    spawn_shape(400,304,0,4,60,300,objHappy_Bullet_01,'s5_penta4');
-    spawn_shape(400,304,45,4,60,300,objHappy_Bullet_01,'s5_penta4');
+    spawn_shape(400,304,0,4,60-10*global.LDM,300,objHappy_Bullet_01,'s5_penta4');
+    spawn_shape(400,304,45,4,60-10*global.LDM,300,objHappy_Bullet_01,'s5_penta4');
     with(objHappy_Bullet_01) {
         if tag=='s5_penta' {
             image_xscale=0.65+random_range(-0.05,0.05);
             image_yscale=image_xscale;
         }
     }
-    spawn_shape(400,304,0,4,60,200,objHappy_Bullet_01,'s5_penta1');
-    spawn_shape(400,304,45,4,60,200,objHappy_Bullet_01,'s5_penta1');
+    spawn_shape(400,304,0,4,60-10*global.LDM,200,objHappy_Bullet_01,'s5_penta1');
+    spawn_shape(400,304,45,4,60-10*global.LDM,200,objHappy_Bullet_01,'s5_penta1');
     
     spawn_circle(400,304,0,100,210,objHappy_Bullet_01,'s5_penta2');
     
     spawn_circle(400,304,0,50,60,objHappy_Bullet_01,'s5_penta3');
     
-    spawn_shape(400,304,90,3,50,135,objHappy_Bullet_01,'s5_penta4');
-    spawn_shape(400,304,150,3,50,135,objHappy_Bullet_01,'s5_penta4');
+    spawn_shape(400,304,90,3,50-10*global.LDM,135,objHappy_Bullet_01,'s5_penta4');
+    spawn_shape(400,304,150,3,50-10*global.LDM,135,objHappy_Bullet_01,'s5_penta4');
     with(objHappy_Bullet_01) {
         if tag=='s5_penta1' or tag=='s5_penta2' or tag=='s5_penta3' or tag=='s5_penta4' {
             if subtag==0 { subtag=1; }
@@ -7019,11 +7111,11 @@ if t &gt;= 4940 and t &lt;= 5810 {
         var xx = irandom(400) + 400*(((t-20) div 80)mod 2 == 1)         //irandom(800);
         var yy = 608+distance+96;
         var xx2 = irandom(800);
-        var fall_speed=irandom_range(4.5,7);
+        var fall_speed=irandom_range(5.2,7);
         for (var circle_number = 0; circle_number &lt; circle_amount; circle_number++) {
             var random_angle = random(360);
             var angle_shift = 30 + 30*circle_number;
-            var trig_curve =0.4*choose(-1,1);
+            var trig_curve =0.3*choose(-1,1);
             for (var angle = random_angle; angle &lt; random_angle+360; angle += angle_shift) {
                 var circle = instance_create(-1000,-1000,objHappy_Bullet_trig_deco);
                 circle.cen_x = xx;
@@ -7070,14 +7162,16 @@ if t &gt;= 4940 and t &lt;= 5810 {
         sh.shader=shEasyShaderExample;
         sh.intensity=0.035
         instance_change_variable(sh,"intensity",0,60);
+        
+        s6_rng = rng_controller_create(5)
     }
     if t&gt;5340 and t&lt;5620 {
         with(objPShaderEffect) {
             if intensity&lt;=0
                 instance_destroy();
         }
-        if t mod 6 = 0 {
-            var reversed_rain = instance_create(view_xview[0]+random(view_wview[0]),608+10,objHappy_Bullet_01);
+        if t mod 7 = 0 {
+            var reversed_rain = instance_create(random_range_controlled(view_xview[0],view_xview[0]+view_wview[0],s6_rng),608+10,objHappy_Bullet_01);
             reversed_rain.direction=90+random_range(-15,15)
             reversed_rain.speed=random_range(3,7);
             reversed_rain.sprite_index=sprHappy_MayuCherry;
@@ -7086,6 +7180,7 @@ if t &gt;= 4940 and t &lt;= 5810 {
             reversed_rain.aimlock=false;
             reversed_rain.tag='S6_reversed_rain';
             reversed_rain.persist=true;
+            reversed_rain.Damage=1/5;
         }
         with(objHappy_Bullet_trig) {
             if tag=='S6_falling_circle' {
@@ -7178,6 +7273,10 @@ if t &gt;= 4940 and t &lt;= 5810 {
         with(objHappy_Darkness) {
             if tag=='s6_red_bg' { instance_destroy(); }
         }
+        with(objHappy_Bullet_trig_deco) {
+            if tag=='S6_falling_circle'
+                instance_destroy()
+        }
         spawn_shape(400,304,30,3,24,600-16,objHappy_Bullet_01,'S6_penta');
         spawn_shape(400,304,210,3,24,600-16,objHappy_Bullet_01,'S6_penta');
         with(objHappy_Bullet_01) {
@@ -7258,7 +7357,8 @@ if t &gt;= 4940 and t &lt;= 5810 {
         bottom_cherry.direction=90+random_range(-15,15);
         bottom_cherry.speed=3;
         bottom_cherry.gravity=0.1;
-        bottom_cherry.Type="Penalty"
+        bottom_cherry.Damage=1/6
+        //bottom_cherry.Type="Penalty"
         bottom_cherry.tag='S6_bottom_cherry';
         var bottom_cherry2 = instance_create(irandom_range(120,800-120),64,objHappy_Bullet_01);
         //bottom_cherry.sprite_index=sprHappy_MayuCherry;
@@ -7271,7 +7371,8 @@ if t &gt;= 4940 and t &lt;= 5810 {
         bottom_cherry2.direction=270+random_range(-15,15);
         bottom_cherry2.speed=3;
         bottom_cherry2.gravity=-0.1;
-        bottom_cherry2.Type="Penalty"
+        bottom_cherry.Damage=1/6
+        //bottom_cherry2.Type="Penalty"
         bottom_cherry2.tag='S6_bottom_cherry';
     }
     
@@ -7341,7 +7442,7 @@ if t==5835 {
                 s6_to_s7.curve=random_range(-1,1);
                 s6_to_s7.curve_real=s6_to_s7.curve;
                 s6_to_s7.accel=random_range(0.05,0.2);
-                s6_to_s7.trail=true;
+                s6_to_s7.trail=1-global.LDM;
                 s6_to_s7.killer=false;
             }
             instance_destroy();
@@ -7515,53 +7616,58 @@ if t&gt;5835 {
             <string>///Segment №7: 1:41 - 2:23 (frames: 5835 - 8200)
 
 if instance_exists(objPlayer) {
-if t==5835 {
-    shake = instance_create(0,0,objPShaderEffect);
-    shake.shader=shEasyShaderExample;
-    shake.intensity=0.1;
-    vx=random_range(-3,3);
-    vy=random_range(-3,3);
-    repeat(100) {
-        var a = instance_create(random(960),random(608),objHappy_Bullet_01);
-        //a.depth=objHappy_Miku.depth+1;
-        //a.sprite_index=sprHappy_MayuCherry;
-        a.aimlock=true;
-        a.image_xscale=max(0.1,2*(dsin(90)+0.25));
-        a.image_yscale=0.1;
-        a.persist=true;
-        a.direction=point_direction(1600,304,objPlayer.x,objPlayer.y)+random_range(-5,5);
-        a.speed=max(0.5,12*(dsin(90)+0.25));
-        a.tag='s7_wind_indicator'
-        a.image_alpha=0.075;
-        a.killer=false;
-    }
-}
-if t&gt;5835 and t&lt;=6930 {
-    
-    repeat(1) {
-        var a = instance_create(800,random(608),objHappy_Bullet_01);
-        //a.depth=objHappy_Miku.depth+1;
-        //a.sprite_index=sprHappy_MayuCherry;
-        a.aimlock=true;
-        a.image_xscale=max(0.1,2*(dsin(90)+0.25));
-        a.image_yscale=0.1
-        a.direction=point_direction(2400,304,objPlayer.x,objPlayer.y)+random_range(-3,5);
-        a.speed=max(0.5,12*(dsin(90)+0.25));
-        a.tag='s7_wind_indicator'
-        a.image_alpha=0.075;
-        a.killer=false;
-    }
-    
-    with(objHappy_Bullet_01) {
-        if tag=='s7_wind_indicator' {
-            if t&gt;=50 {
-                persist=false;
-            }
+if (global.LDM==0) {
+    if t==5835 {
+        shake = instance_create(0,0,objPShaderEffect);
+        shake.shader=shEasyShaderExample;
+        shake.intensity=0.1;
+        vx=random_range(-3,3);
+        vy=random_range(-3,3);
+        repeat(100) {
+            var a = instance_create(random(960),random(608),objHappy_Bullet_01);
+            //a.depth=objHappy_Miku.depth+1;
+            //a.sprite_index=sprHappy_MayuCherry;
+            a.aimlock=true;
+            a.image_xscale=max(0.1,2*(dsin(90)+0.25));
+            a.image_yscale=0.1;
+            a.persist=true;
+            a.direction=point_direction(1600,304,objPlayer.x,objPlayer.y)+random_range(-5,5);
+            a.speed=max(0.5,12*(dsin(90)+0.25));
+            a.tag='s7_wind_indicator'
+            a.image_alpha=0.075;
+            a.killer=false;
         }
     }
-    
-    //objPlayer.x-=max(0,(distance-544)/64);
+    if t&gt;5835 and t&lt;=6930 {
+        
+        repeat(1) {
+            var a = instance_create(800,random(608),objHappy_Bullet_01);
+            //a.depth=objHappy_Miku.depth+1;
+            //a.sprite_index=sprHappy_MayuCherry;
+            a.aimlock=true;
+            a.image_xscale=max(0.1,2*(dsin(90)+0.25));
+            a.image_yscale=0.1
+            a.direction=point_direction(2400,304,objPlayer.x,objPlayer.y)+random_range(-3,5);
+            a.speed=max(0.5,12*(dsin(90)+0.25));
+            a.tag='s7_wind_indicator'
+            a.image_alpha=0.075;
+            a.killer=false;
+        }
+        
+        with(objHappy_Bullet_01) {
+            if tag=='s7_wind_indicator' {
+                if t&gt;=50 {
+                    persist=false;
+                }
+            }
+        }
+        
+        //objPlayer.x-=max(0,(distance-544)/64);
+    }
 }
+    
+    
+    
 if t&gt;5835 and t&lt;6480 {
     if t&gt;5835 and t&lt;5885 {
         with(objPShaderEffect) {
@@ -7639,13 +7745,14 @@ if t&gt;5835 and t&lt;6480 {
                 for (var angle=rand_angle;angle&lt;rand_angle+360;angle+=increaser) {
                     var circle = instance_create(x,y,objHappy_Bullet_01);
                     circle.direction=angle;
-                    circle.speed=4+random_range(-0.2,0.2);
+                    circle.speed=4+random_range(-0.1,0.1);
                     circle.accel=0.1;
-                    circle.trail=true;
+                    circle.trail=1-global.LDM;
                     circle.killer=killer;
                     circle.sprite_index=sprite_index;
                     circle.image_alpha=image_alpha;
                     circle.tag='s7_circle'
+                    circle.Damage=1/6;
                 }
                 speed=0;
                 killer=false;
@@ -7657,8 +7764,10 @@ if t&gt;5835 and t&lt;6480 {
             if image_alpha&lt;=0 { instance_destroy(); }
         }
         if tag=='s7_circle' {
-            if t mod 6 != 0 { trail = false; }
-            else { trail=true; }
+            if global.LDM==0 {
+                if t mod 6 != 0 { trail = false; }
+                else { trail=true; }
+            }
         }
     }
     if t&gt;6130 and t&lt;6210 {
@@ -7726,7 +7835,7 @@ if t&gt;5835 and t&lt;6480 {
             burst.friction=0.05;
             burst.tag='s7_burst';
         }
-        repeat(120) {
+        repeat(120-20*global.LDM) {
             burst_deco = instance_create(objHappy_Miku.x+224,objHappy_Miku.y+316,objHappy_Bullet_01);
             burst_deco.sprite_index=sprHappy_MayuCherry;
             burst_deco.image_xscale=3;
@@ -7773,7 +7882,8 @@ if t&gt;5835 and t&lt;6480 {
         view_yview[0]=EaseOutSine(t-6210,vy+dsin(t)*2,0+dsin(t)*2,50);
         with(objHappy_Bullet_01) {
             if tag=='s7_burst_deco' {
-                image_alpha-=0.75/50;
+                image_alpha-=0.75/40;
+                if image_alpha&lt;=0 instance_destroy()
                 if image_alpha&lt;0.5 { killer=false; }
             }
         }
@@ -7878,10 +7988,12 @@ if t&gt;=6440 and t&lt;=6635 {
     }
     with(objHappy_Bullet_01) {
         if tag=='s7_end_circle' {
-            if t mod 5 != 0 
-                trail=false;
-            else
-                trail=true;
+            if global.LDM==0 {
+                if t mod 5 != 0 
+                    trail=false;
+                else
+                    trail=true;
+            }
         }
     }
     with(objHappy_Bullet_trig) {
@@ -8463,16 +8575,20 @@ if t&gt;=6635 and t&lt;=8200 {
         if tag=='s7_outro_spiral' {
             image_xscale=point_distance(xstart,ystart,x,y)/272
             image_yscale=image_xscale;
-            if t mod 5 == 0 
-                trail=true;
-            else trail=false;
+            if global.LDM==0 {
+                if t mod 5 == 0 
+                    trail=true;
+                else trail=false;
+            }
         }
         if tag=='s7_outro_spiral2' {
             image_xscale=point_distance(xstart,ystart,x,y)/328
             image_yscale=image_xscale;
-            if t mod 5 == 0 
-                trail=true;
-            else trail=false;
+            if global.LDM==0 {
+                if t mod 5 == 0 
+                    trail=true;
+                else trail=false;
+            }
         }
         if tag=='s7_outro_spiral_deco' {
             image_xscale=point_distance(xstart,ystart,x,y)/128
@@ -9125,6 +9241,7 @@ if(global.debugMode){
     draw_text(room_width-64,96,string(global.practiceSegment));
     draw_text(room_width-96,160,"side "+string(global.s5_side));
     draw_text(room_width-64,128,string(global.hitless));
+    draw_text(room_width-64,192,"LDM: "+string(global.LDM));
     //draw_text(room_width-144,96,"PB time: " + string(global.avoidance_pb));
     //draw_text(room_width-64,96,instance_count);
     var spacing=32;
@@ -9262,7 +9379,7 @@ draw_set_alpha(1);
             <kind>1</kind>
             <string>///draws lyrics
 
-if (lyrics_flag) {
+/*if (lyrics_flag) {
     draw_set_font(lyrics_font);
     draw_set_alpha(lyrics_alpha);
     draw_set_align(lyrics_halign,lyrics_valign);

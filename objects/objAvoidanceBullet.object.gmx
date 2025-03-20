@@ -54,6 +54,7 @@ trail=true;
 image_index=3;
 destroyOutside=false;
 
+Damage=1/4
 
 drawTag=false;
 scaleTag=false;
@@ -157,7 +158,7 @@ if(killer){
             break;
         default:
         case "Collect":
-            player_BLC_kill(1/4);
+            player_BLC_kill(Damage);
             break;
     }
     if(global.hitless) {

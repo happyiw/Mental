@@ -30,6 +30,7 @@
 global.practiceSegment=max(1,savedata_get("practiceSegment"));
 global.practiceOn=savedata_get("practiceOn");
 global.avoidance_pb=savedata_get("avoidance pb");
+global.LDM=savedata_get("LDMOn");
 
 pb_t = global.avoidance_pb;
 pb_max=1
@@ -199,7 +200,11 @@ if keyboard_check_pressed(ord("E")) {
     savedata_set_persistent("practiceOn",global.practiceOn);
     savedata_save(false);
 }
-
+if keyboard_check_pressed(ord("L")) {
+    global.LDM=abs(global.LDM-1);
+    savedata_set_persistent("LDMOn",global.LDM);
+    savedata_save(false);
+}
 if global.avoidance_pb&gt;1300 {
     pb_max=2
 }
@@ -360,6 +365,12 @@ draw_text(400,88,"Best time: " + string(strPb));
 draw_set_font(fDefault18_new);
 draw_text(400,136,"Practice: "+status)
 draw_text(400,176,"Press E to switch")
+
+if global.LDM==0
+    ldmstatus="OFF"
+else
+    ldmstatus="ON"
+draw_text(400,216,"Low Detail Mode (Press L): "+ldmstatus)
 </string>
           </argument>
         </arguments>

@@ -131,7 +131,7 @@ ds_list_add(ds_o,cre);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for(i=0; i&lt;sn; i+=1){
+            <string>/*for(i=0; i&lt;sn; i+=1){
     if (surface_get_width(sf[i])!=view_wview[view_current])||(surface_get_height(sf[i])!=view_hview[view_current]){
         surface_resize(sf[i], view_wview[view_current], view_hview[view_current])
     }
